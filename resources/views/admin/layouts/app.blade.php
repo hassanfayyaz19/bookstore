@@ -1,76 +1,95 @@
-<!doctype html>
-<html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
+<!DOCTYPE html>
+
+<html lang="en">
+<!--begin::Head-->
+<meta http-equiv="content-type" content="text/html;charset=UTF-8"/>
 <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Book Store</title>
+    <meta charset="utf-8"/>
 
-    <!-- CSRF Token -->
-    <meta name="csrf-token" content="{{ csrf_token() }}">
+    <meta name="viewport" content="width=device-width, initial-scale=1"/>
+    <title>{{ config('app.name', 'Laravel') }} || @yield('title')</title>
+    @include('admin.partials.css')
+    @stack('css')
 
-    <title>{{ config('app.name', 'Laravel') }}</title>
-
-    <!-- Fonts -->
-    <link rel="dns-prefetch" href="//fonts.gstatic.com">
-    <link href="https://fonts.bunny.net/css?family=Nunito" rel="stylesheet">
-
-    <!-- Scripts -->
-    @vite(['resources/sass/app.scss', 'resources/js/app.js'])
 </head>
-<body>
-<div id="app">
-    <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm">
-        <div class="container">
-            <a class="navbar-brand" href="{{ url('/') }}">
-                {{ config('app.name', 'Laravel') }}
-            </a>
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
-                    aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
-                <span class="navbar-toggler-icon"></span>
-            </button>
+<!--end::Head-->
 
-            <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                <!-- Left Side Of Navbar -->
-                <ul class="navbar-nav me-auto">
+<!--begin::Body-->
+<body id="kt_app_body" data-kt-app-layout="light-sidebar" data-kt-app-header-fixed="true"
+      data-kt-app-sidebar-enabled="true"
+      data-kt-app-sidebar-fixed="true" data-kt-app-sidebar-hoverable="true" data-kt-app-sidebar-push-header="true"
+      data-kt-app-sidebar-push-toolbar="true" data-kt-app-sidebar-push-footer="true" data-kt-app-toolbar-enabled="true"
+      class="app-default">
+<!--begin::Theme mode setup on page load-->
+<script>
+    var defaultThemeMode = 'light'
+    var themeMode
 
-                </ul>
+    if (document.documentElement) {
+        if (document.documentElement.hasAttribute('data-bs-theme-mode')) {
+            themeMode = document.documentElement.getAttribute('data-bs-theme-mode')
+        } else {
+            if (localStorage.getItem('data-bs-theme') !== null) {
+                themeMode = localStorage.getItem('data-bs-theme')
+            } else {
+                themeMode = defaultThemeMode
+            }
+        }
 
-                <!-- Right Side Of Navbar -->
-                <ul class="navbar-nav ms-auto">
-                    <!-- Authentication Links -->
-                    @guest('admin')
-                        @if (Route::has('admin.login'))
-                            <li class="nav-item">
-                                <a class="nav-link" href="{{ route('admin.login') }}">{{ __('Login') }}</a>
-                            </li>
-                        @endif
-                    @else
-                        <li class="nav-item dropdown">
-                            <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
-                               aria-haspopup="true" aria-expanded="false" v-pre>
-                                {{ Auth::guard('admin')->user()->name }} testing
-                            </a>
+        if (themeMode === 'system') {
+            themeMode = window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light'
+        }
 
-                            <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
-                                <a class="dropdown-item" href="{{ route('admin.logout') }}"
-                                   onclick="event.preventDefault();
-                                                     document.getElementById('logout-form').submit();">
-                                    {{ __('Logout') }}
-                                </a>
+        document.documentElement.setAttribute('data-bs-theme', themeMode)
+    }
+</script>
+<!--begin::App-->
+<div class="d-flex flex-column flex-root app-root" id="kt_app_root">
+    <!--begin::Page-->
+    <div class="app-page  flex-column flex-column-fluid " id="kt_app_page">
 
-                                <form id="logout-form" action="{{ route('admin.logout') }}" method="POST" class="d-none">
-                                    @csrf
-                                </form>
-                            </div>
-                        </li>
-                    @endguest
-                </ul>
+        <!--begin::Header-->
+        @include('admin.partials.header')
+        <!--end::Header-->
+        <!--begin::Wrapper-->
+        <div class="app-wrapper  flex-column flex-row-fluid " id="kt_app_wrapper">
+
+
+            <!--begin::Sidebar-->
+            @include('admin.partials.sidebar')
+            <!--end::Sidebar-->
+
+
+            <!--begin::Main-->
+            <div class="app-main flex-column flex-row-fluid" id="kt_app_main">
+                @yield('content')
+                <!--begin::Footer-->
+                @include('admin.partials.footer')
             </div>
         </div>
-    </nav>
-
-    <main class="py-4">
-        @yield('content')
-    </main>
+    </div>
+    <!--end::Page-->
 </div>
+<!--end::App-->
+
+
+<!--begin::Scrolltop-->
+<div id="kt_scrolltop" class="scrolltop" data-kt-scrolltop="true">
+    <!--begin::Svg Icon | path: icons/duotune/arrows/arr066.svg-->
+    <span class="svg-icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none"
+                                xmlns="http://www.w3.org/2000/svg">
+<rect opacity="0.5" x="13" y="6" width="13" height="2" rx="1" transform="rotate(90 13 6)" fill="currentColor"/>
+<path
+    d="M12.5657 8.56569L16.75 12.75C17.1642 13.1642 17.8358 13.1642 18.25 12.75C18.6642 12.3358 18.6642 11.6642 18.25 11.25L12.7071 5.70711C12.3166 5.31658 11.6834 5.31658 11.2929 5.70711L5.75 11.25C5.33579 11.6642 5.33579 12.3358 5.75 12.75C6.16421 13.1642 6.83579 13.1642 7.25 12.75L11.4343 8.56569C11.7467 8.25327 12.2533 8.25327 12.5657 8.56569Z"
+    fill="currentColor"/>
+</svg>
+</span>
+</div>
+
+
+@include('admin.partials.js')
+@stack('js')
 </body>
+<!--end::Body-->
 </html>
