@@ -16,7 +16,7 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return view('user.welcome');
 });
 
 
@@ -31,6 +31,7 @@ Route::prefix('admin')->as('admin.')->middleware(['auth:admin'])->group(function
     Route::post('/logout', [LoginController::class, 'adminLogout'])->name('logout');
     Route::resource('book', \App\Http\Controllers\Admin\BookController::class);
     Route::resource('category', \App\Http\Controllers\Admin\CategoryController::class);
+    Route::resource('user', \App\Http\Controllers\Admin\UserController::class);
     Route::get('/dashboard', function () {
         return redirect()->route('admin.book.index');
     })->name('home');
