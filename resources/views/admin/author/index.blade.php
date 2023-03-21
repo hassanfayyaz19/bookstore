@@ -1,5 +1,5 @@
 @extends('admin.layouts.app')
-@section('title', 'Books List')
+@section('title', 'Author List')
 @push('css')
     <link href="{{asset('assets/plugins/custom/datatables/datatables.bundle.css')}}" rel="stylesheet" type="text/css"/>
 @endpush
@@ -15,7 +15,7 @@
                 <div class="page-title d-flex flex-column justify-content-center flex-wrap me-3 ">
                     <!--begin::Title-->
                     <h1 class="page-heading d-flex text-dark fw-bold fs-3 flex-column justify-content-center my-0">
-                        Books List
+                        Author List
                     </h1>
                 </div>
             </div>
@@ -54,7 +54,7 @@
                                                               rx="1" transform="rotate(-90 11.364 20.364)"
                                                               fill="currentColor"/>
                                                         <rect x="4.36396" y="11.364" width="16" height="2" rx="1"
-                                                              fill="currentColor"/></svg></span>Add Book
+                                                              fill="currentColor"/></svg></span>Add Author
                                 </button>
                                 <!--end::Add user-->
                             </div>
@@ -78,14 +78,12 @@
                             <!--begin::Table head-->
                             <thead>
                             <!--begin::Table row-->
-                            <tr class="text-start text-muted fw-bold fs-7 text-uppercase gs-0">
-                                <th class="min-w-125px">Id</th>
-                                <th class="min-w-125px">title</th>
-                                <th class="min-w-125px">Author</th>
-                                <th class="min-w-125px">Genre</th>
-                                <th class="min-w-125px">price</th>
-                                <th class="min-w-125px">publisher</th>
-                                <th class="text-end min-w-100px">Actions</th>
+                            <tr>
+                                <th>Id</th>
+                                <th>Profile</th>
+                                <th>First Name</th>
+                                <th>Last Name</th>
+                                <th>Actions</th>
                             </tr>
                             <!--end::Table row-->
                             </thead>
@@ -118,7 +116,7 @@
                 <!--begin::Modal header-->
                 <div class="modal-header" id="kt_modal_add_user_header">
                     <!--begin::Modal title-->
-                    <h2 class="fw-bold">Add Book Details</h2>
+                    <h2 class="fw-bold">Add Author Details</h2>
                     <!--end::Modal title-->
 
                     <!--begin::Close-->
@@ -154,100 +152,27 @@
                              data-kt-scroll-wrappers="#kt_modal_add_user_scroll"
                              data-kt-scroll-offset="300px">
 
-                            <div class="fv-row mb-7">
-                                <label class="required fw-semibold fs-6 mb-2">Categories</label>
-                                <select class="form-select mb-2" name="categories" data-control="select2"
-                                        data-hide-search="true" required multiple data-placeholder="Select an option">
-                                    @foreach($categories as $category)
-                                        <option
-                                            value="{{$category->id}}">{{$category->name}}</option>
-                                    @endforeach
-                                </select>
-                            </div>
 
                             <div class="fv-row mb-7">
-                                <label class="required fw-semibold fs-6 mb-2">Title</label>
-                                <input type="text" name="title" class="form-control mb-3 mb-lg-0"
+                                <label class="required fw-semibold fs-6 mb-2">First Name</label>
+                                <input type="text" name="first_name" class="form-control mb-3 mb-lg-0"
                                        required/>
                             </div>
-
                             <div class="fv-row mb-7">
-                                <label class="required fw-semibold fs-6 mb-2">Author</label>
-                                <select class="form-select mb-2" name="author_id" data-control="select2"
-                                        data-hide-search="true" required>
-                                    <option value="" selected disabled>Select an option</option>
-                                    @foreach($authors as $author)
-                                        <option
-                                            value="{{$author->id}}">{{$author->first_name.' '.$author->last_name}}</option>
-                                    @endforeach
-                                </select>
+                                <label class="required fw-semibold fs-6 mb-2">Last Name</label>
+                                <input type="text" name="last_name" class="form-control mb-3 mb-lg-0"
+                                       required/>
                             </div>
-                            <!--end::Input group-->
-                            <div class="row">
-                                <div class="col-md-6">
-                                    <div class="fv-row mb-7">
-                                        <label class="required fw-semibold fs-6 mb-2">Genre</label>
-                                        <input type="text" name="genre" class="form-control mb-3 mb-lg-0"
-                                               required/>
-                                    </div>
-                                </div>
-                                <div class="col-md-6">
-                                    <div class="fv-row mb-7">
-                                        <label class="required fw-semibold fs-6 mb-2">price</label>
-                                        <input type="number" name="price" class="form-control mb-3 mb-lg-0"
-                                               min="0" step=".5"
-                                               required/>
-                                    </div>
-                                </div>
-                                <div class="col-md-4">
-                                    <div class="fv-row mb-7">
-                                        <label class="required fw-semibold fs-6 mb-2">Publisher</label>
-                                        <select class="form-select mb-2" name="publisher_id" data-control="select2"
-                                                data-hide-search="true" required>
-                                            <option value="" selected disabled>Select an option</option>
-                                            @foreach($publishers as $publisher)
-                                                <option
-                                                    value="{{$publisher->id}}">{{$publisher->name}}</option>
-                                            @endforeach
-                                        </select>
-                                    </div>
-                                </div>
-                                <div class="col-md-4">
-                                    <div class="fv-row mb-7">
-                                        <label class="required fw-semibold fs-6 mb-2">Publication Date</label>
-                                        <input type="date" name="publication_date" class="form-control mb-3 mb-lg-0"
-                                               required/>
-                                    </div>
-                                </div>
-                                <div class="col-md-4">
-                                    <div class="fv-row mb-7">
-                                        <label class="required fw-semibold fs-6 mb-2">Page Count</label>
-                                        <input type="number" name="page_count" class="form-control mb-3 mb-lg-0" min="0"
-                                               required/>
-                                    </div>
-                                </div>
-                                <div class="col-md-12">
-                                    <div class="fv-row mb-7">
-                                        <label class="required fw-semibold fs-6 mb-2">Description</label>
-                                        <textarea name="description" class="form-control" cols="30"
-                                                  rows="10" required></textarea>
-                                    </div>
-                                </div>
-                                <div class="col-md-12">
-                                    <div class="fv-row mb-7">
-                                        <label class="required fw-semibold fs-6 mb-2">Image</label>
-                                        <input name="image_url" class="form-control" type="file" required>
-                                    </div>
-                                </div>
-                                <div class="col-md-12">
-                                    <div class="fv-row mb-7">
-                                        <label class="required fw-semibold fs-6 mb-2">File</label>
-                                        <input name="file_path" class="form-control" type="file" required>
-                                    </div>
+                            <div class="fv-row mb-7">
+                                <label class="required fw-semibold fs-6 mb-2">Bio</label>
+                                <textarea name="bio" id="" cols="30" rows="10" class="form-control"></textarea>
+                            </div>
+                            <div class="col-md-12">
+                                <div class="fv-row mb-7">
+                                    <label class="required fw-semibold fs-6 mb-2">Image</label>
+                                    <input name="image_url" class="form-control" type="file">
                                 </div>
                             </div>
-
-
                         </div>
                         <!--end::Scroll-->
 
@@ -289,7 +214,7 @@
                 <!--begin::Modal header-->
                 <div class="modal-header" id="kt_modal_edit_user_header">
                     <!--begin::Modal title-->
-                    <h2 class="fw-bold">Update Book Details</h2>
+                    <h2 class="fw-bold">Update Author Details</h2>
                     <!--end::Modal title-->
 
                     <!--begin::Close-->
@@ -326,104 +251,27 @@
                              data-kt-scroll-wrappers="#kt_modal_edit_user_scroll"
                              data-kt-scroll-offset="300px">
 
-                            <div class="fv-row mb-7">
-                                <label class="required fw-semibold fs-6 mb-2">Categories</label>
-                                <select class="form-select mb-2" name="categories" id="categories"
-                                        data-control="select2"
-                                        data-hide-search="true" required multiple
-                                        data-placeholder="Select an option">
-                                    @foreach($categories as $category)
-                                        <option
-                                            value="{{$category->id}}">{{$category->name}}</option>
-                                    @endforeach
-                                </select>
-                            </div>
 
                             <div class="fv-row mb-7">
-                                <label class="required fw-semibold fs-6 mb-2">Title</label>
-                                <input type="text" name="title" id="title" class="form-control mb-3 mb-lg-0"
+                                <label class="required fw-semibold fs-6 mb-2">First Name</label>
+                                <input type="text" name="first_name" id="first_name" class="form-control mb-3 mb-lg-0"
                                        required/>
                             </div>
-
                             <div class="fv-row mb-7">
-                                <label class="required fw-semibold fs-6 mb-2">Author</label>
-                                <select class="form-select mb-2" name="author_id" id="author_id" data-control="select2"
-                                        data-hide-search="true" required>
-                                    <option value="" selected disabled>Select an option</option>
-                                    @foreach($authors as $author)
-                                        <option
-                                            value="{{$author->id}}">{{$author->first_name.' '.$author->last_name}}</option>
-                                    @endforeach
-                                </select>
+                                <label class="required fw-semibold fs-6 mb-2">Last Name</label>
+                                <input type="text" name="last_name" id="last_name" class="form-control mb-3 mb-lg-0"
+                                       required/>
                             </div>
-                            <!--end::Input group-->
-                            <div class="row">
-                                <div class="col-md-6">
-                                    <div class="fv-row mb-7">
-                                        <label class="required fw-semibold fs-6 mb-2">Genre</label>
-                                        <input type="text" name="genre" id="genre" class="form-control mb-3 mb-lg-0"
-                                               required/>
-                                    </div>
-                                </div>
-                                <div class="col-md-6">
-                                    <div class="fv-row mb-7">
-                                        <label class="required fw-semibold fs-6 mb-2">price</label>
-                                        <input type="number" name="price" id="price" class="form-control mb-3 mb-lg-0"
-                                               min="0" step=".5"
-                                               required/>
-                                    </div>
-                                </div>
-                                <div class="col-md-4">
-                                    <div class="fv-row mb-7">
-                                        <label class="required fw-semibold fs-6 mb-2">Publisher</label>
-                                        <select class="form-select mb-2" name="publisher_id" id="publisher_id"
-                                                data-control="select2"
-                                                data-hide-search="true" required>
-                                            <option value="" selected disabled>Select an option</option>
-                                            @foreach($publishers as $publisher)
-                                                <option
-                                                    value="{{$publisher->id}}">{{$publisher->name}}</option>
-                                            @endforeach
-                                        </select>
-                                    </div>
-                                </div>
-                                <div class="col-md-4">
-                                    <div class="fv-row mb-7">
-                                        <label class="required fw-semibold fs-6 mb-2">Publication Date</label>
-                                        <input type="date" name="publication_date" id="publication_date"
-                                               class="form-control mb-3 mb-lg-0"
-                                               required/>
-                                    </div>
-                                </div>
-                                <div class="col-md-4">
-                                    <div class="fv-row mb-7">
-                                        <label class="required fw-semibold fs-6 mb-2">Page Count</label>
-                                        <input type="number" name="page_count" id="page_count"
-                                               class="form-control mb-3 mb-lg-0" min="0"
-                                               required/>
-                                    </div>
-                                </div>
-                                <div class="col-md-12">
-                                    <div class="fv-row mb-7">
-                                        <label class="required fw-semibold fs-6 mb-2">Description</label>
-                                        <textarea name="description" id="description" class="form-control" cols="30"
-                                                  rows="10" required></textarea>
-                                    </div>
-                                </div>
-                                <div class="col-md-12">
-                                    <div class="fv-row mb-7">
-                                        <label class="required fw-semibold fs-6 mb-2">Image</label>
-                                        <input name="image_url" class="form-control" type="file">
-                                    </div>
-                                </div>
-                                <div class="col-md-12">
-                                    <div class="fv-row mb-7">
-                                        <label class="required fw-semibold fs-6 mb-2">File</label>
-                                        <input name="file_path" class="form-control" type="file">
-                                    </div>
+                            <div class="fv-row mb-7">
+                                <label class="required fw-semibold fs-6 mb-2">Bio</label>
+                                <textarea name="bio" id="bio" cols="30" rows="10" class="form-control"></textarea>
+                            </div>
+                            <div class="col-md-12">
+                                <div class="fv-row mb-7">
+                                    <label class="required fw-semibold fs-6 mb-2">Image</label>
+                                    <input name="image_url" class="form-control" type="file">
                                 </div>
                             </div>
-
 
                         </div>
                         <!--end::Scroll-->
@@ -469,7 +317,7 @@
                 'processing': true,
                 'serverSide': true,
                 'ajax': {
-                    'url': "{{ route('admin.book.index') }}",
+                    'url': "{{ route('admin.author.index') }}",
                     'dataType': 'json',
                     'type': 'GET',
                     'data': {
@@ -478,11 +326,9 @@
                 },
                 'columns': [
                     { 'data': 'id' },
-                    { 'data': 'title' },
-                    { 'data': 'author_id' },
-                    { 'data': 'genre' },
-                    { 'data': 'price' },
-                    { 'data': 'publisher_id' },
+                    { 'data': 'image', orderable: false, searchable: false },
+                    { 'data': 'first_name' },
+                    { 'data': 'last_name' },
                     { 'data': 'options', orderable: false, searchable: false }
                 ],
                 'order': [0, 'desc'],
@@ -493,7 +339,7 @@
                 e.preventDefault()
                 $.ajax({
                     type: 'POST',
-                    url: '{{route('admin.book.store')}}',
+                    url: '{{route('admin.author.store')}}',
                     data: new FormData(this),
                     contentType: false,
                     data_type: 'json',
@@ -520,8 +366,8 @@
             $('#edit_form').on('submit', function (e) {
                 e.preventDefault()
                 var id = $('#hidden_id').val()
-                var route = "{{route('admin.book.update',['book'=>':book'])}}"
-                route = route.replace(':book', id)
+                var route = "{{route('admin.author.update',['author'=>':author'])}}"
+                route = route.replace(':author', id)
                 $.ajax({
                     type: 'POST',
                     url: route,
@@ -551,23 +397,13 @@
         $(document).on('click', '.edit_data', function () {
             const data = $(this).data('params')
             console.log(data)
-            var categories = []
-            data.categories.forEach(function (row) {
-                categories.push(row.pivot.category_id)
-            })
-            $('#author_id').val(data.author_id).trigger('change')
-            $('#publisher_id').val(data.publisher_id).trigger('change')
-            $('#categories').val(categories).trigger('change')
-            $('#title').val(data.title)
-            $('#description').text(data.description)
-            $('#genre').val(data.genre)
-            $('#page_count').val(data.page_count)
-            $('#price').val(data.price)
-            $('#publication_date').val(data.publication_date)
-
+            $('#first_name').val(data.first_name)
+            $('#last_name').val(data.last_name)
+            $('#bio').text(data.bio)
             $('#hidden_id').val(data.id)
             $('#edit_modal').modal('show')
         })
+
 
     </script>
 @endpush

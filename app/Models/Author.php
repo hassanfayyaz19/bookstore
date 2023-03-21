@@ -10,4 +10,11 @@ class Author extends Model
     use HasFactory;
 
     protected $guarded = [];
+
+    protected function image_url(): Attribute
+    {
+        return Attribute::make(
+            get: fn(string $value) => asset($value),
+        );
+    }
 }

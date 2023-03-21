@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Models\Author;
 use App\Models\Book;
+use App\Models\Category;
 use App\Models\Publisher;
 use Illuminate\Http\Request;
 
@@ -22,7 +23,8 @@ class BookController extends Controller
         }
         $authors = Author::all();
         $publishers = Publisher::all();
-        return view('admin.books.index', compact('authors', 'publishers'));
+        $categories = Category::all();
+        return view('admin.books.index', compact('authors', 'publishers', 'categories'));
     }
 
     protected function showData($request)
@@ -35,7 +37,7 @@ class BookController extends Controller
             4 => 'price',
             5 => 'publisher_id',
         );
-        $totalData = Book::count();
+        $totalData = Book::with('author', 'publisher', 'categories')->count();
         $totalFiltered = $totalData;
         $limit = $request->input('length');
         $start = $request->input('start');
@@ -43,14 +45,15 @@ class BookController extends Controller
         $dir = $request->input('order.0.dir');
 
         if (empty($request->input('search.value'))) {
-            $results = Book::offset($start)
+            $results = Book::with('author', 'publisher', 'categories')->offset($start)
                 ->limit($limit)
                 ->orderBy($order, $dir)
                 ->get();
         } else {
             $search = $request->input('search.value');
 
-            $query = Book::where('title', 'LIKE', "%{$search}%")
+            $query = Book::with('author', 'publisher', 'categories')
+                ->where('title', 'LIKE', "%{$search}%")
                 ->orWhere('genre', 'LIKE', "%{$search}%")
                 ->orWhere('language', 'LIKE', "%{$search}%");
             $results = $query
@@ -123,6 +126,18 @@ class BookController extends Controller
         $book->page_count = $request->page_count;
         $book->description = $request->description;
         $book->save();
+        $book->categories()->sync($request->categories);
+
+        if ($request->hasFile('image_url')) {
+            $path = 'books/' . $book->id . '/image';
+            $book->image_url = $this->uploadFile($request->image_url, $path);
+            $book->save();
+        }
+        if ($request->hasFile('file_path')) {
+            $path = 'books/' . $book->id . '/file';
+            $book->file_path = $this->uploadFile($request->file_path, $path);
+            $book->save();
+        }
         return response()->json(['status' => 'success', 'message' => 'Data Inserted Successful']);
 
     }
@@ -157,6 +172,19 @@ class BookController extends Controller
         $book->page_count = $request->page_count;
         $book->description = $request->description;
         $book->save();
+        $book->categories()->sync($request->categories);
+
+        if ($request->hasFile('image_url')) {
+            $path = 'books/' . $book->id . '/image';
+            $book->image_url = $this->uploadFile($request->image_url, $path);
+            $book->save();
+        }
+        if ($request->hasFile('file_path')) {
+            $path = 'books/' . $book->id . '/file';
+            $book->file_path = $this->uploadFile($request->file_path, $path);
+            $book->save();
+        }
+
         return response()->json(['status' => 'success', 'message' => 'Data Updated Successful']);
     }
 
@@ -172,5 +200,11 @@ class BookController extends Controller
 
         $response = array('status' => 'error', 'message' => 'Data Not Deleted Successful');
         return response()->json($response, 403);
+    }
+
+    protected function uploadFile($file, $path)
+    {
+        $filePath = $file->store($path, 'public');
+        return asset('/storage/' . $filePath);
     }
 }
