@@ -16,7 +16,6 @@ return new class extends Migration {
             $table->id();
             $table->string('title');
             $table->foreignIdFor(Author::class)->constrained()->cascadeOnDelete();
-            $table->string('genre')->nullable();
             $table->decimal('price', 10, 2);
             $table->foreignIdFor(Publisher::class)->constrained()->cascadeOnDelete();
             $table->date('publication_date')->nullable();

@@ -66,122 +66,20 @@
                                     <div id="collapseOne" class="accordion-collapse collapse show accordion-body"
                                          aria-labelledby="headingOne" data-bs-parent="#accordionExample">
                                         <div class="widget dz-widget_services d-flex justify-content-between">
-                                            <div class="">
-                                                <div class="form-check search-content">
-                                                    <input class="form-check-input" type="checkbox" value=""
-                                                           id="productCheckBox-01">
-                                                    <label class="form-check-label" for="productCheckBox-01">
-                                                        Action
-                                                    </label>
+                                            @foreach($categories as $chunk)
+                                                <div class="">
+                                                    @foreach($chunk as $row)
+                                                        <div class="form-check search-content">
+                                                            <input class="form-check-input" type="checkbox"
+                                                                   value="{{$row->id}}"
+                                                                   id="category-{{$row->id}}">
+                                                            <label class="form-check-label" for="category-{{$row->id}}">
+                                                                {{$row->name}}
+                                                            </label>
+                                                        </div>
+                                                    @endforeach
                                                 </div>
-                                                <div class="form-check search-content">
-                                                    <input class="form-check-input" type="checkbox" value=""
-                                                           id="productCheckBox-02">
-                                                    <label class="form-check-label" for="productCheckBox-02">
-                                                        Advanture
-                                                    </label>
-                                                </div>
-                                                <div class="form-check search-content">
-                                                    <input class="form-check-input" type="checkbox" value=""
-                                                           id="productCheckBox-03">
-                                                    <label class="form-check-label" for="productCheckBox-03">
-                                                        Animation
-                                                    </label>
-                                                </div>
-                                                <div class="form-check search-content">
-                                                    <input class="form-check-input" type="checkbox" value=""
-                                                           id="productCheckBox-04">
-                                                    <label class="form-check-label" for="productCheckBox-04">
-                                                        Biography
-                                                    </label>
-                                                </div>
-                                                <div class="form-check search-content">
-                                                    <input class="form-check-input" type="checkbox" value=""
-                                                           id="productCheckBox-05">
-                                                    <label class="form-check-label" for="productCheckBox-05">
-                                                        Comedy
-                                                    </label>
-                                                </div>
-                                                <div class="form-check search-content">
-                                                    <input class="form-check-input" type="checkbox" value=""
-                                                           id="productCheckBox-06">
-                                                    <label class="form-check-label" for="productCheckBox-06">
-                                                        Crime
-                                                    </label>
-                                                </div>
-                                                <div class="form-check search-content">
-                                                    <input class="form-check-input" type="checkbox" value=""
-                                                           id="productCheckBox-07">
-                                                    <label class="form-check-label" for="productCheckBox-07">
-                                                        Documentary
-                                                    </label>
-                                                </div>
-                                                <div class="form-check search-content">
-                                                    <input class="form-check-input" type="checkbox" value=""
-                                                           id="productCheckBox-016">
-                                                    <label class="form-check-label" for="productCheckBox-014">
-                                                        Design
-                                                    </label>
-                                                </div>
-                                            </div>
-                                            <div class="">
-                                                <div class="form-check search-content">
-                                                    <input class="form-check-input" type="checkbox" value=""
-                                                           id="productCheckBox-08">
-                                                    <label class="form-check-label" for="productCheckBox-08">
-                                                        Fantasy
-                                                    </label>
-                                                </div>
-                                                <div class="form-check search-content">
-                                                    <input class="form-check-input" type="checkbox" value=""
-                                                           id="productCheckBox-09">
-                                                    <label class="form-check-label" for="productCheckBox-09">
-                                                        History
-                                                    </label>
-                                                </div>
-                                                <div class="form-check search-content">
-                                                    <input class="form-check-input" type="checkbox" value=""
-                                                           id="productCheckBox-010">
-                                                    <label class="form-check-label" for="productCheckBox-010">
-                                                        Horror
-                                                    </label>
-                                                </div>
-                                                <div class="form-check search-content">
-                                                    <input class="form-check-input" type="checkbox" value=""
-                                                           id="productCheckBox-011">
-                                                    <label class="form-check-label" for="productCheckBox-011">
-                                                        Mystery
-                                                    </label>
-                                                </div>
-                                                <div class="form-check search-content">
-                                                    <input class="form-check-input" type="checkbox" value=""
-                                                           id="productCheckBox-012">
-                                                    <label class="form-check-label" for="productCheckBox-012">
-                                                        Romance
-                                                    </label>
-                                                </div>
-                                                <div class="form-check search-content">
-                                                    <input class="form-check-input" type="checkbox" value=""
-                                                           id="productCheckBox-013">
-                                                    <label class="form-check-label" for="productCheckBox-013">
-                                                        Sci-fi
-                                                    </label>
-                                                </div>
-                                                <div class="form-check search-content">
-                                                    <input class="form-check-input" type="checkbox" value=""
-                                                           id="productCheckBox-014">
-                                                    <label class="form-check-label" for="productCheckBox-014">
-                                                        Sport
-                                                    </label>
-                                                </div>
-                                                <div class="form-check search-content">
-                                                    <input class="form-check-input" type="checkbox" value=""
-                                                           id="productCheckBox-015">
-                                                    <label class="form-check-label" for="productCheckBox-014">
-                                                        Science
-                                                    </label>
-                                                </div>
-                                            </div>
+                                            @endforeach
                                         </div>
                                     </div>
                                 </div>
@@ -194,333 +92,20 @@
                                     <div id="collapseTwo" class="accordion-collapse collapse accordion-body"
                                          aria-labelledby="headingTwo" data-bs-parent="#accordionExample">
                                         <div class="widget dz-widget_services">
-                                            <div class="form-check search-content">
-                                                <input class="form-check-input" type="checkbox" value=""
-                                                       id="productCheckBox15">
-                                                <label class="form-check-label" for="productCheckBox15">
-                                                    Action
-                                                </label>
-                                            </div>
-                                            <div class="form-check search-content">
-                                                <input class="form-check-input" type="checkbox" value=""
-                                                       id="productCheckBox16">
-                                                <label class="form-check-label" for="productCheckBox16">
-                                                    Advanture
-                                                </label>
-                                            </div>
-                                            <div class="form-check search-content">
-                                                <input class="form-check-input" type="checkbox" value=""
-                                                       id="productCheckBox17">
-                                                <label class="form-check-label" for="productCheckBox17">
-                                                    Animation
-                                                </label>
-                                            </div>
-                                            <div class="form-check search-content">
-                                                <input class="form-check-input" type="checkbox" value=""
-                                                       id="productCheckBox18">
-                                                <label class="form-check-label" for="productCheckBox18">
-                                                    Biography
-                                                </label>
-                                            </div>
-                                            <div class="form-check search-content">
-                                                <input class="form-check-input" type="checkbox" value=""
-                                                       id="productCheckBox19">
-                                                <label class="form-check-label" for="productCheckBox19">
-                                                    Comedy
-                                                </label>
-                                            </div>
-                                            <div class="form-check search-content">
-                                                <input class="form-check-input" type="checkbox" value=""
-                                                       id="productCheckBox20">
-                                                <label class="form-check-label" for="productCheckBox20">
-                                                    Crime
-                                                </label>
-                                            </div>
-                                            <div class="form-check search-content">
-                                                <input class="form-check-input" type="checkbox" value=""
-                                                       id="productCheckBox21">
-                                                <label class="form-check-label" for="productCheckBox21">
-                                                    Documentary
-                                                </label>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="accordion-item">
-                                    <button class="accordion-button collapsed" id="headingThree" type="button"
-                                            data-bs-toggle="collapse" data-bs-target="#collapseThree"
-                                            aria-expanded="false" aria-controls="collapseThree">
-                                        Select Year
-                                    </button>
-                                    <div id="collapseThree" class="accordion-collapse collapse accordion-body"
-                                         aria-labelledby="headingThree" data-bs-parent="#accordionExample">
-                                        <div class="widget dz-widget_services col d-flex justify-content-between">
-                                            <div class="">
+                                            @foreach($publishers as $publisher)
                                                 <div class="form-check search-content">
-                                                    <input class="form-check-input" type="checkbox" value=""
-                                                           id="productCheckBox22">
-                                                    <label class="form-check-label" for="productCheckBox22">
-                                                        2020
+                                                    <input class="form-check-input" type="checkbox"
+                                                           value="{{$publisher->id}}"
+                                                           id="publisher-{{$publisher->id}}">
+                                                    <label class="form-check-label" for="publisher-{{$publisher->id}}">
+                                                        {{$publisher->name}}
                                                     </label>
                                                 </div>
-                                                <div class="form-check search-content">
-                                                    <input class="form-check-input" type="checkbox" value=""
-                                                           id="productCheckBox23">
-                                                    <label class="form-check-label" for="productCheckBox23">
-                                                        2021
-                                                    </label>
-                                                </div>
-                                                <div class="form-check search-content">
-                                                    <input class="form-check-input" type="checkbox" value=""
-                                                           id="productCheckBox24">
-                                                    <label class="form-check-label" for="productCheckBox24">
-                                                        2022
-                                                    </label>
-                                                </div>
-                                                <div class="form-check search-content">
-                                                    <input class="form-check-input" type="checkbox" value=""
-                                                           id="productCheckBox25">
-                                                    <label class="form-check-label" for="productCheckBox25">
-                                                        2019
-                                                    </label>
-                                                </div>
-                                                <div class="form-check search-content">
-                                                    <input class="form-check-input" type="checkbox" value=""
-                                                           id="productCheckBox26">
-                                                    <label class="form-check-label" for="productCheckBox26">
-                                                        2018
-                                                    </label>
-                                                </div>
-                                                <div class="form-check search-content">
-                                                    <input class="form-check-input" type="checkbox" value=""
-                                                           id="productCheckBox27">
-                                                    <label class="form-check-label" for="productCheckBox27">
-                                                        2017
-                                                    </label>
-                                                </div>
-                                                <div class="form-check search-content">
-                                                    <input class="form-check-input" type="checkbox" value=""
-                                                           id="productCheckBox28">
-                                                    <label class="form-check-label" for="productCheckBox28">
-                                                        2016
-                                                    </label>
-                                                </div>
-                                                <div class="form-check search-content">
-                                                    <input class="form-check-input" type="checkbox" value=""
-                                                           id="productCheckBox29">
-                                                    <label class="form-check-label" for="productCheckBox29">
-                                                        2015
-                                                    </label>
-                                                </div>
-                                                <div class="form-check search-content">
-                                                    <input class="form-check-input" type="checkbox" value=""
-                                                           id="productCheckBox30">
-                                                    <label class="form-check-label" for="productCheckBox30">
-                                                        2014
-                                                    </label>
-                                                </div>
-                                                <div class="form-check search-content">
-                                                    <input class="form-check-input" type="checkbox" value=""
-                                                           id="productCheckBox31">
-                                                    <label class="form-check-label" for="productCheckBox31">
-                                                        2013
-                                                    </label>
-                                                </div>
-                                                <div class="form-check search-content">
-                                                    <input class="form-check-input" type="checkbox" value=""
-                                                           id="productCheckBox32">
-                                                    <label class="form-check-label" for="productCheckBox32">
-                                                        2012
-                                                    </label>
-                                                </div>
-                                            </div>
-                                            <div class="">
-                                                <div class="form-check search-content">
-                                                    <input class="form-check-input" type="checkbox" value=""
-                                                           id="productCheckBox33">
-                                                    <label class="form-check-label" for="productCheckBox33">
-                                                        2011
-                                                    </label>
-                                                </div>
-                                                <div class="form-check search-content">
-                                                    <input class="form-check-input" type="checkbox" value=""
-                                                           id="productCheckBox34">
-                                                    <label class="form-check-label" for="productCheckBox34">
-                                                        2010
-                                                    </label>
-                                                </div>
-                                                <div class="form-check search-content">
-                                                    <input class="form-check-input" type="checkbox" value=""
-                                                           id="productCheckBox35">
-                                                    <label class="form-check-label" for="productCheckBox35">
-                                                        2009
-                                                    </label>
-                                                </div>
-                                                <div class="form-check search-content">
-                                                    <input class="form-check-input" type="checkbox" value=""
-                                                           id="productCheckBox36">
-                                                    <label class="form-check-label" for="productCheckBox36">
-                                                        2008
-                                                    </label>
-                                                </div>
-                                                <div class="form-check search-content">
-                                                    <input class="form-check-input" type="checkbox" value=""
-                                                           id="productCheckBox37">
-                                                    <label class="form-check-label" for="productCheckBox37">
-                                                        2007
-                                                    </label>
-                                                </div>
-                                                <div class="form-check search-content">
-                                                    <input class="form-check-input" type="checkbox" value=""
-                                                           id="productCheckBox38">
-                                                    <label class="form-check-label" for="productCheckBox38">
-                                                        2006
-                                                    </label>
-                                                </div>
-                                                <div class="form-check search-content">
-                                                    <input class="form-check-input" type="checkbox" value=""
-                                                           id="productCheckBox39">
-                                                    <label class="form-check-label" for="productCheckBox39">
-                                                        2005
-                                                    </label>
-                                                </div>
-                                                <div class="form-check search-content">
-                                                    <input class="form-check-input" type="checkbox" value=""
-                                                           id="productCheckBox40">
-                                                    <label class="form-check-label" for="productCheckBox40">
-                                                        2004
-                                                    </label>
-                                                </div>
-                                                <div class="form-check search-content">
-                                                    <input class="form-check-input" type="checkbox" value=""
-                                                           id="productCheckBox41">
-                                                    <label class="form-check-label" for="productCheckBox41">
-                                                        2003
-                                                    </label>
-                                                </div>
-                                                <div class="form-check search-content">
-                                                    <input class="form-check-input" type="checkbox" value=""
-                                                           id="productCheckBox42">
-                                                    <label class="form-check-label" for="productCheckBox42">
-                                                        2002
-                                                    </label>
-                                                </div>
-                                                <div class="form-check search-content">
-                                                    <input class="form-check-input" type="checkbox" value=""
-                                                           id="productCheckBox43">
-                                                    <label class="form-check-label" for="productCheckBox43">
-                                                        2001
-                                                    </label>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="accordion accordion-inner" id="filter-inner">
-                                    <div class="accordion-item">
-                                        <button class="accordion-button" id="headingOne_inner" type="button"
-                                                data-bs-toggle="collapse" data-bs-target="#collapseOne_inner"
-                                                aria-expanded="true" aria-controls="collapseOne_inner">Best Sales (105)
-                                        </button>
-                                        <div id="collapseOne_inner"
-                                             class="accordion-collapse collapse show accordion-body"
-                                             aria-labelledby="headingOne_inner" data-bs-parent="#filter-inner">
-                                            <ul>
-                                                <li><a href="javascript:void(0);">Alone Here</a></li>
-                                                <li><a href="javascript:void(0);">Alien Invassion</a></li>
-                                                <li><a href="javascript:void(0);">Bullo The Cat</a></li>
-                                                <li><a href="javascript:void(0);">Cut That Hair!</a></li>
-                                                <li><a href="javascript:void(0);">Dragon Of The King</a></li>
-                                            </ul>
-                                        </div>
-                                    </div>
-                                    <div class="accordion-item">
-                                        <button class="accordion-button collapsed" id="headingTwo_inner" type="button"
-                                                data-bs-toggle="collapse" data-bs-target="#collapseTwo_inner"
-                                                aria-expanded="false" aria-controls="collapseTwo_inner">
-                                            Most Commented (21)
-                                        </button>
-                                        <div id="collapseTwo_inner" class="accordion-collapse collapse accordion-body"
-                                             aria-labelledby="headingTwo_inner" data-bs-parent="#filter-inner">
-                                            <ul>
-                                                <li><a href="javascript:void(0);">Alone Here</a></li>
-                                                <li><a href="javascript:void(0);">Alien Invassion</a></li>
-                                                <li><a href="javascript:void(0);">Bullo The Cat</a></li>
-                                                <li><a href="javascript:void(0);">Cut That Hair!</a></li>
-                                                <li><a href="javascript:void(0);">Dragon Of The King</a></li>
-                                            </ul>
-                                        </div>
-                                    </div>
-                                    <div class="accordion-item">
-                                        <button class="accordion-button collapsed" id="headingThree_inner" type="button"
-                                                data-bs-toggle="collapse" data-bs-target="#collapseThree_inner"
-                                                aria-expanded="false" aria-controls="collapseThree_inner">
-                                            Newest Books (32)
-                                        </button>
-                                        <div id="collapseThree_inner" class="accordion-collapse collapse accordion-body"
-                                             aria-labelledby="headingThree_inner" data-bs-parent="#filter-inner">
-                                            <ul>
-                                                <li><a href="javascript:void(0);">Alone Here</a></li>
-                                                <li><a href="javascript:void(0);">Alien Invassion</a></li>
-                                                <li><a href="javascript:void(0);">Bullo The Cat</a></li>
-                                                <li><a href="javascript:void(0);">Cut That Hair!</a></li>
-                                                <li><a href="javascript:void(0);">Dragon Of The King</a></li>
-                                            </ul>
-                                        </div>
-                                    </div>
-                                    <div class="accordion-item">
-                                        <button class="accordion-button collapsed" id="headingFour_inner" type="button"
-                                                data-bs-toggle="collapse" data-bs-target="#collapseFour_inner"
-                                                aria-expanded="false" aria-controls="collapseFour_inner">
-                                            Featured (129)
-                                        </button>
-                                        <div id="collapseFour_inner" class="accordion-collapse collapse accordion-body"
-                                             aria-labelledby="headingFour_inner" data-bs-parent="#filter-inner">
-                                            <ul>
-                                                <li><a href="javascript:void(0);">Alone Here</a></li>
-                                                <li><a href="javascript:void(0);">Alien Invassion</a></li>
-                                                <li><a href="javascript:void(0);">Bullo The Cat</a></li>
-                                                <li><a href="javascript:void(0);">Cut That Hair!</a></li>
-                                                <li><a href="javascript:void(0);">Dragon Of The King</a></li>
-                                            </ul>
-                                        </div>
-                                    </div>
-                                    <div class="accordion-item">
-                                        <button class="accordion-button collapsed" id="headingFive_inner" type="button"
-                                                data-bs-toggle="collapse" data-bs-target="#collapseFive_inner"
-                                                aria-expanded="false" aria-controls="collapseFive_inner">
-                                            Watch History (21)
-                                        </button>
-                                        <div id="collapseFive_inner" class="accordion-collapse collapse accordion-body"
-                                             aria-labelledby="headingFive_inner" data-bs-parent="#filter-inner">
-                                            <ul>
-                                                <li><a href="javascript:void(0);">Alone Here</a></li>
-                                                <li><a href="javascript:void(0);">Alien Invassion</a></li>
-                                                <li><a href="javascript:void(0);">Bullo The Cat</a></li>
-                                                <li><a href="javascript:void(0);">Cut That Hair!</a></li>
-                                                <li><a href="javascript:void(0);">Dragon Of The King</a></li>
-                                            </ul>
-                                        </div>
-                                    </div>
-                                    <div class="accordion-item">
-                                        <button class="accordion-button collapsed" id="headingSix_inner" type="button"
-                                                data-bs-toggle="collapse" data-bs-target="#collapseSix_inner"
-                                                aria-expanded="false" aria-controls="collapseSix_inner">
-                                            Best Books (44)
-                                        </button>
-                                        <div id="collapseSix_inner" class="accordion-collapse collapse accordion-body"
-                                             aria-labelledby="headingSix_inner" data-bs-parent="#filter-inner">
-                                            <ul>
-                                                <li><a href="javascript:void(0);">Alone Here</a></li>
-                                                <li><a href="javascript:void(0);">Alien Invassion</a></li>
-                                                <li><a href="javascript:void(0);">Bullo The Cat</a></li>
-                                                <li><a href="javascript:void(0);">Cut That Hair!</a></li>
-                                                <li><a href="javascript:void(0);">Dragon Of The King</a></li>
-                                            </ul>
-                                        </div>
-                                    </div>
-                                </div>
+                                            @endforeach
 
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
                             <div class="row filter-buttons">
                                 <div>
@@ -538,7 +123,7 @@
                             <a href="javascript:void(0);" class="btn btn-primary panel-btn">Filter</a>
                         </div>
                         <div class="filter-area m-b30">
-                            <div class="grid-area">
+                            {{--<div class="grid-area">
                                 <div class="shop-tab">
                                     <ul class="nav text-center product-filter justify-content-end" role="tablist">
                                         <li class="nav-item">
@@ -588,17 +173,10 @@
                                         </li>
                                     </ul>
                                 </div>
-                            </div>
+                            </div>--}}
                             <div class="category">
-                                <div class="filter-category">
-                                    <a data-bs-toggle="collapse" href="#collapseExample" role="button"
-                                       aria-expanded="false" aria-controls="collapseExample">
-                                        <i class="fas fa-list me-2"></i>
-                                        Categories
-                                    </a>
-                                </div>
                                 <div class="form-group">
-                                    <i class="fas fa-sort-amount-down me-2 text-secondary"></i>
+                                    <i class="fas fa-sort-amount-down me-2 ml-2 text-secondary"></i>
                                     <select class="default-select">
                                         <option>Newest</option>
                                         <option>1 Day</option>
@@ -607,160 +185,6 @@
                                         <option>1 Month</option>
                                         <option>3 Months</option>
                                     </select>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="acod-content collapse " id="collapseExample">
-                            <div class="widget widget_services style-2">
-                                <div class="form-check search-content">
-                                    <input class="form-check-input" type="checkbox" value="" id="productCheckBox01">
-                                    <label class="form-check-label" for="productCheckBox01">
-                                        Architecture
-                                    </label>
-                                </div>
-                                <div class="form-check search-content">
-                                    <input class="form-check-input" type="checkbox" value="" id="productCheckBox02">
-                                    <label class="form-check-label" for="productCheckBox02">
-                                        Art
-                                    </label>
-                                </div>
-                                <div class="form-check search-content">
-                                    <input class="form-check-input" type="checkbox" value="" id="productCheckBox03">
-                                    <label class="form-check-label" for="productCheckBox03">
-                                        Action
-                                    </label>
-                                </div>
-                                <div class="form-check search-content">
-                                    <input class="form-check-input" type="checkbox" value="" id="productCheckBox04">
-                                    <label class="form-check-label" for="productCheckBox04">
-                                        Biography & Autobiography
-                                    </label>
-                                </div>
-                                <div class="form-check search-content">
-                                    <input class="form-check-input" type="checkbox" value="" id="productCheckBox05">
-                                    <label class="form-check-label" for="productCheckBox05">
-                                        Body, Mind & Spirit
-                                    </label>
-                                </div>
-                                <div class="form-check search-content">
-                                    <input class="form-check-input" type="checkbox" value="" id="productCheckBox06">
-                                    <label class="form-check-label" for="productCheckBox06">
-                                        Business & Economics
-                                    </label>
-                                </div>
-                                <div class="form-check search-content">
-                                    <input class="form-check-input" type="checkbox" value="" id="productCheckBox07">
-                                    <label class="form-check-label" for="productCheckBox07">
-                                        Children Fiction
-                                    </label>
-                                </div>
-                                <div class="form-check search-content">
-                                    <input class="form-check-input" type="checkbox" value="" id="productCheckBox08">
-                                    <label class="form-check-label" for="productCheckBox08">
-                                        Children Non-Fiction
-                                    </label>
-                                </div>
-                                <div class="form-check search-content">
-                                    <input class="form-check-input" type="checkbox" value="" id="productCheckBox09">
-                                    <label class="form-check-label" for="productCheckBox09">
-                                        Comics & Graphic Novels
-                                    </label>
-                                </div>
-                                <div class="form-check search-content">
-                                    <input class="form-check-input" type="checkbox" value="" id="productCheckBox010">
-                                    <label class="form-check-label" for="productCheckBox010">
-                                        Cooking
-                                    </label>
-                                </div>
-                                <div class="form-check search-content">
-                                    <input class="form-check-input" type="checkbox" value="" id="productCheckBox011">
-                                    <label class="form-check-label" for="productCheckBox011">
-                                        Crafts & Hobbies
-                                    </label>
-                                </div>
-                                <div class="form-check search-content">
-                                    <input class="form-check-input" type="checkbox" value="" id="productCheckBox012">
-                                    <label class="form-check-label" for="productCheckBox012">
-                                        Design
-                                    </label>
-                                </div>
-                                <div class="form-check search-content">
-                                    <input class="form-check-input" type="checkbox" value="" id="productCheckBox013">
-                                    <label class="form-check-label" for="productCheckBox013">
-                                        Drama
-                                    </label>
-                                </div>
-                                <div class="form-check search-content">
-                                    <input class="form-check-input" type="checkbox" value="" id="productCheckBox014">
-                                    <label class="form-check-label" for="productCheckBox014">
-                                        Education
-                                    </label>
-                                </div>
-                                <div class="form-check search-content">
-                                    <input class="form-check-input" type="checkbox" value="" id="productCheckBox015">
-                                    <label class="form-check-label" for="productCheckBox015">
-                                        Family & Relationships
-                                    </label>
-                                </div>
-                                <div class="form-check search-content">
-                                    <input class="form-check-input" type="checkbox" value="" id="productCheckBox016">
-                                    <label class="form-check-label" for="productCheckBox016">
-                                        Fiction
-                                    </label>
-                                </div>
-                                <div class="form-check search-content">
-                                    <input class="form-check-input" type="checkbox" value="" id="productCheckBox017">
-                                    <label class="form-check-label" for="productCheckBox017">
-                                        Foreign Language Study
-                                    </label>
-                                </div>
-                                <div class="form-check search-content">
-                                    <input class="form-check-input" type="checkbox" value="" id="productCheckBox018">
-                                    <label class="form-check-label" for="productCheckBox018">
-                                        Games
-                                    </label>
-                                </div>
-                                <div class="form-check search-content">
-                                    <input class="form-check-input" type="checkbox" value="" id="productCheckBox019">
-                                    <label class="form-check-label" for="productCheckBox019">
-                                        Gardening
-                                    </label>
-                                </div>
-                                <div class="form-check search-content">
-                                    <input class="form-check-input" type="checkbox" value="" id="productCheckBox020">
-                                    <label class="form-check-label" for="productCheckBox020">
-                                        Health & Fitness
-                                    </label>
-                                </div>
-                                <div class="form-check search-content">
-                                    <input class="form-check-input" type="checkbox" value="" id="productCheckBox021">
-                                    <label class="form-check-label" for="productCheckBox021">
-                                        History
-                                    </label>
-                                </div>
-                                <div class="form-check search-content">
-                                    <input class="form-check-input" type="checkbox" value="" id="productCheckBox022">
-                                    <label class="form-check-label" for="productCheckBox022">
-                                        House & Home
-                                    </label>
-                                </div>
-                                <div class="form-check search-content">
-                                    <input class="form-check-input" type="checkbox" value="" id="productCheckBox023">
-                                    <label class="form-check-label" for="productCheckBox023">
-                                        Humor
-                                    </label>
-                                </div>
-                                <div class="form-check search-content">
-                                    <input class="form-check-input" type="checkbox" value="" id="productCheckBox024">
-                                    <label class="form-check-label" for="productCheckBox024">
-                                        Literary Collections
-                                    </label>
-                                </div>
-                                <div class="form-check search-content">
-                                    <input class="form-check-input" type="checkbox" value="" id="productCheckBox025">
-                                    <label class="form-check-label" for="productCheckBox025">
-                                        Mathematics
-                                    </label>
                                 </div>
                             </div>
                         </div>
@@ -793,7 +217,7 @@
                                             </ul>
                                             <div class="book-footer">
                                                 <div class="price">
-                                                    <span class="price-num">$ {{$category->price}}</span>
+                                                    <span class="price-num">$ {{$book->price}}</span>
                                                     {{--                                                    <del>$12.0</del>--}}
                                                 </div>
                                                 <a href="shop-cart.html"
@@ -807,6 +231,7 @@
 
                         </div>
                         <div class="row page mt-0">
+                            {{ $books->links() }}
                             <div class="col-md-6">
                                 <p class="page-text">Showing 12 from 50 data</p>
                             </div>
