@@ -13,6 +13,7 @@ return new class extends Migration {
         Schema::create('publishers', function (Blueprint $table) {
             $table->id();
             $table->string('name');
+            $table->string('slug')->unique();
             $table->text('description')->nullable();
             $table->string('website')->nullable();
             $table->timestamps();

@@ -185,20 +185,9 @@
                 <form class="header-item-search">
                     <div class="input-group search-input">
                         <select class="default-select">
-                            <option>Category</option>
-                            <option>Photography</option>
-                            <option>Arts</option>
-                            <option>Adventure</option>
-                            <option>Action</option>
-                            <option>Games</option>
-                            <option>Movies</option>
-                            <option>Comics</option>
-                            <option>Biographies</option>
-                            <option>Children’s Books</option>
-                            <option>Historical</option>
-                            <option>Contemporary</option>
-                            <option>Classics</option>
-                            <option>Education</option>
+                            @foreach($categories as $category)
+                                <option value="{{$category->slug}}">{{$category->name}}</option>
+                            @endforeach
                         </select>
                         <input type="text" class="form-control" aria-label="Text input with dropdown button"
                                placeholder="Search Books Here">

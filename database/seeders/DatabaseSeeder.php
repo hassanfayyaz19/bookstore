@@ -17,13 +17,9 @@ class DatabaseSeeder extends Seeder
         $this->call([
             UserSeeder::class,
             CategorySeeder::class,
-            PublisherSeeder::class
+            PublisherSeeder::class,
+            BookSeeder::class,
+            BookCategorySeeder::class,
         ]);
-
-        \App\Models\Book::factory(100)->create();
-        // \App\Models\User::factory()->create([
-        //     'name' => 'Test User',
-        //     'email' => 'test@example.com',
-        // ]);
     }
 }

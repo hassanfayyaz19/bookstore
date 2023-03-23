@@ -39,83 +39,97 @@
             <div class="container">
                 <div class="row">
                     <div class="col-xl-3">
-                        <div class="shop-filter">
-                            <div class="d-flex justify-content-between">
-                                <h4 class="title">Filter Option</h4>
-                                <a href="javascript:void(0);" class="panel-close-btn"><i class="flaticon-close"></i></a>
-                            </div>
-                            <div class="accordion accordion-filter" id="accordionExample">
-                                <div class="accordion-item">
-                                    <button class="accordion-button" id="headingFive" type="button"
-                                            data-bs-toggle="collapse" data-bs-target="#collapseFive"
-                                            aria-expanded="false" aria-controls="collapseFive">
-                                        Price Range
-                                    </button>
-                                    <div id="collapseFive" class="accordion-collapse collapse accordion-body show"
-                                         aria-labelledby="headingFive" data-bs-parent="#accordionExample">
-                                        <div class="range-slider style-1">
-                                            <div id="slider-tooltips"></div>
+                        <form action="{{route('book.index')}}" method="get">
+                            <div class="shop-filter">
+                                <div class="d-flex justify-content-between">
+                                    <h4 class="title">Filter Option</h4>
+                                    <a href="javascript:void(0);" class="panel-close-btn"><i class="flaticon-close"></i></a>
+                                </div>
+                                <div class="accordion accordion-filter" id="accordionExample">
+                                    {{-- <div class="accordion-item">
+                                         <button class="accordion-button" id="headingFive" type="button"
+                                                 data-bs-toggle="collapse" data-bs-target="#collapseFive"
+                                                 aria-expanded="false" aria-controls="collapseFive">
+                                             Price Range
+                                         </button>
+                                         <div id="collapseFive" class="accordion-collapse collapse accordion-body show"
+                                              aria-labelledby="headingFive" data-bs-parent="#accordionExample">
+                                             <div class="range-slider style-1">
+                                                 <div id="slider-tooltips"></div>
+                                             </div>
+                                         </div>
+                                     </div>--}}
+                                    <div class="accordion-item">
+                                        <button class="accordion-button" id="headingOne" type="button"
+                                                data-bs-toggle="collapse" data-bs-target="#collapseOne"
+                                                aria-expanded="true"
+                                                aria-controls="collapseOne">Shop by Category
+                                        </button>
+                                        <div id="collapseOne" class="accordion-collapse collapse show accordion-body"
+                                             aria-labelledby="headingOne" data-bs-parent="#accordionExample">
+                                            <div class="widget dz-widget_services d-flex justify-content-between">
+                                                @foreach($categories as $chunk)
+                                                    <div class="">
+                                                        @foreach($chunk as $row)
+                                                            <div class="form-check search-content">
+                                                                <input class="form-check-input category-checkbox"
+                                                                       type="checkbox"
+                                                                       value="{{$row->slug}}"
+                                                                       id="category-{{$row->id}}"
+                                                                       name="category[]"
+                                                                       @if(request()->get('category')!==null && in_array($row->slug,request()->get('category'))) checked @endif
+                                                                >
+                                                                <label class="form-check-label"
+                                                                       for="category-{{$row->id}}">
+                                                                    {{$row->name}}
+                                                                </label>
+                                                            </div>
+                                                        @endforeach
+                                                    </div>
+                                                @endforeach
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="accordion-item">
+                                        <button class="accordion-button collapsed" id="headingTwo" type="button"
+                                                data-bs-toggle="collapse" data-bs-target="#collapseTwo"
+                                                aria-expanded="false" aria-controls="collapseTwo">
+                                            Choose Publisher
+                                        </button>
+                                        <div id="collapseTwo" class="accordion-collapse collapse accordion-body"
+                                             aria-labelledby="headingTwo" data-bs-parent="#accordionExample">
+                                            <div class="widget dz-widget_services">
+                                                @foreach($publishers as $publisher)
+                                                    <div class="form-check search-content">
+                                                        <input class="form-check-input publisher-checkbox"
+                                                               type="checkbox"
+                                                               value="{{$publisher->slug}}"
+                                                               id="publisher-{{$publisher->id}}"
+                                                               name="publisher[]"
+                                                               @if(request()->get('publisher')!==null && in_array($publisher->slug,request()->get('publisher'))) checked @endif
+                                                        >
+                                                        <label class="form-check-label"
+                                                               for="publisher-{{$publisher->id}}">
+                                                            {{$publisher->name}}
+                                                        </label>
+                                                    </div>
+                                                @endforeach
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
-                                <div class="accordion-item">
-                                    <button class="accordion-button" id="headingOne" type="button"
-                                            data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true"
-                                            aria-controls="collapseOne">Shop by Category
-                                    </button>
-                                    <div id="collapseOne" class="accordion-collapse collapse show accordion-body"
-                                         aria-labelledby="headingOne" data-bs-parent="#accordionExample">
-                                        <div class="widget dz-widget_services d-flex justify-content-between">
-                                            @foreach($categories as $chunk)
-                                                <div class="">
-                                                    @foreach($chunk as $row)
-                                                        <div class="form-check search-content">
-                                                            <input class="form-check-input" type="checkbox"
-                                                                   value="{{$row->id}}"
-                                                                   id="category-{{$row->id}}">
-                                                            <label class="form-check-label" for="category-{{$row->id}}">
-                                                                {{$row->name}}
-                                                            </label>
-                                                        </div>
-                                                    @endforeach
-                                                </div>
-                                            @endforeach
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="accordion-item">
-                                    <button class="accordion-button collapsed" id="headingTwo" type="button"
-                                            data-bs-toggle="collapse" data-bs-target="#collapseTwo"
-                                            aria-expanded="false" aria-controls="collapseTwo">
-                                        Choose Publisher
-                                    </button>
-                                    <div id="collapseTwo" class="accordion-collapse collapse accordion-body"
-                                         aria-labelledby="headingTwo" data-bs-parent="#accordionExample">
-                                        <div class="widget dz-widget_services">
-                                            @foreach($publishers as $publisher)
-                                                <div class="form-check search-content">
-                                                    <input class="form-check-input" type="checkbox"
-                                                           value="{{$publisher->id}}"
-                                                           id="publisher-{{$publisher->id}}">
-                                                    <label class="form-check-label" for="publisher-{{$publisher->id}}">
-                                                        {{$publisher->name}}
-                                                    </label>
-                                                </div>
-                                            @endforeach
-
-                                        </div>
+                                <div class="row filter-buttons">
+                                    <div>
+                                        <button type="submit" class="btn btn-secondary btnhover mt-4 col-md-12"
+                                                id="search_btn_">Refine
+                                            Search
+                                        </button>
+                                        <a href="{{route('book.index')}}"
+                                           class="btn btn-outline-secondary btnhover mt-3 d-block">Reset Filter</a>
                                     </div>
                                 </div>
                             </div>
-                            <div class="row filter-buttons">
-                                <div>
-                                    <a href="javascript:void(0);" class="btn btn-secondary btnhover mt-4 d-block">Refine
-                                        Search</a>
-                                    <a href="javascript:void(0);"
-                                       class="btn btn-outline-secondary btnhover mt-3 d-block">Reset Filter</a>
-                                </div>
-                            </div>
-                        </div>
+                        </form>
                     </div>
                     <div class="col-xl-9">
                         <div class="d-flex justify-content-between align-items-center">
@@ -231,25 +245,9 @@
 
                         </div>
                         <div class="row page mt-0">
-                            {{ $books->links() }}
-                            <div class="col-md-6">
-                                <p class="page-text">Showing 12 from 50 data</p>
-                            </div>
-                            <div class="col-md-6">
-                                <nav aria-label="Blog Pagination">
-                                    <ul class="pagination style-1 p-t20">
-                                        <li class="page-item"><a class="page-link prev"
-                                                                 href="javascript:void(0);">Prev</a></li>
-                                        <li class="page-item"><a class="page-link active"
-                                                                 href="javascript:void(0);">1</a></li>
-                                        <li class="page-item"><a class="page-link" href="javascript:void(0);">2</a></li>
-                                        <li class="page-item"><a class="page-link" href="javascript:void(0);">3</a></li>
-                                        <li class="page-item"><a class="page-link next"
-                                                                 href="javascript:void(0);">Next</a></li>
-                                    </ul>
-                                </nav>
-                            </div>
+                            {{ $books->links('vendor.pagination.book-list') }}
                         </div>
+
                     </div>
                 </div>
             </div>
@@ -388,6 +386,10 @@
 <script src="{{asset('user/js/dz.carousel.js')}}"></script><!-- DZ CAROUSEL JS -->
 <script src="{{asset('user/js/dz.ajax.js')}}"></script><!-- AJAX -->
 <script src="{{asset('user/js/custom.js')}}"></script><!-- CUSTOM JS -->
+<script>
+    $(document).ready(function () {
 
+    })
+</script>
 </body>
 </html>
