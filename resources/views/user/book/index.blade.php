@@ -234,8 +234,9 @@
                                                     <span class="price-num">$ {{$book->price}}</span>
                                                     {{--                                                    <del>$12.0</del>--}}
                                                 </div>
-                                                <a href="shop-cart.html"
-                                                   class="btn btn-secondary box-btn btnhover btnhover2"><i
+                                                <a href="javascript:;"
+                                                   class="btn btn-secondary box-btn btnhover btnhover2 add-to-cart"
+                                                   data-book="{{$book}}"><i
                                                         class="flaticon-shopping-cart-1 m-r10"></i> Add to cart</a>
                                             </div>
                                         </div>

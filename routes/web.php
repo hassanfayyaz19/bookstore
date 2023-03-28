@@ -52,3 +52,6 @@ Route::get('/contact-us', function () {
 })->name('contact_us');
 
 Route::resource('book', \App\Http\Controllers\User\BookController::class);
+Route::get('cart', [\App\Http\Controllers\User\BookController::class, 'showCartPage'])->name('book.cart');
+Route::get('checkout', [\App\Http\Controllers\User\BookController::class, 'showCheckoutPage'])->name('book.checkout');
+Route::post('stripe', [\App\Http\Controllers\User\BookController::class, 'stripePost'])->name('stripe.post');
