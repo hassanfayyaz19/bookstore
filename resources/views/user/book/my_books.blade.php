@@ -8,7 +8,7 @@
          style="background-image:url({{asset('user/images/background/bg3.jpg')}});">
         <div class="container">
             <div class="dz-bnr-inr-entry">
-                <h1>Checkout</h1>
+                <h1>Purchased Books </h1>
                 <nav aria-label="breadcrumb" class="breadcrumb-row">
                     <ul class="breadcrumb">
                         <li class="breadcrumb-item"><a href="{{ route('welcome') }}"> Home</a></li>
@@ -27,7 +27,7 @@
             <div class="row">
                 <div class="col-lg-12">
                     <div class="widget">
-                        <h4 class="widget-title">Your Order</h4>
+                        <h4 class="widget-title">Your Books</h4>
                         <table class="table-bordered check-tbl">
                             <thead class="text-center">
                             <tr>
