@@ -107,7 +107,12 @@ class BookController extends Controller
             new \Exception('Invalid URL');
         }
 
-        return Storage::download($book->file_path);
+        if (Storage::exists($book->file_path)) {
+            return Storage::download($book->file_path);
+        }
+
+        return response()->download(public_path($book->file_path));
+
     }
 
     public function purchasedBook()

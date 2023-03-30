@@ -32,24 +32,24 @@
                                                href="books-detail.html">See Details</a>
                                         </div>
                                     </div>
-                                    <div class="partner">
-                                        <p>Our partner</p>
-                                        <div class="brand-logo">
-                                            <img src="{{asset('user/images/partner/partner-1.png')}}"
-                                                 alt="client">
-                                            <img class="mid-logo"
-                                                 src="{{asset('user/images/partner/partner-2.png')}}"
-                                                 alt="client">
-                                            <img src="{{asset('user/images/partner/partner-3.png')}}"
-                                                 alt="client">
-                                        </div>
-                                    </div>
+                                    {{--                                    <div class="partner">--}}
+                                    {{--                                        <p>Our partner</p>--}}
+                                    {{--                                        <div class="brand-logo">--}}
+                                    {{--                                            <img src="{{asset('user/images/partner/partner-1.png')}}"--}}
+                                    {{--                                                 alt="client">--}}
+                                    {{--                                            <img class="mid-logo"--}}
+                                    {{--                                                 src="{{asset('user/images/partner/partner-2.png')}}"--}}
+                                    {{--                                                 alt="client">--}}
+                                    {{--                                            <img src="{{asset('user/images/partner/partner-3.png')}}"--}}
+                                    {{--                                                 alt="client">--}}
+                                    {{--                                        </div>--}}
+                                    {{--                                    </div>--}}
                                 </div>
                             </div>
                             <div class="col-md-6">
                                 <div class="banner-media" data-swiper-parallax="-100">
-                                    <img src="{{asset('user/images/banner/banner-media.png')}}"
-                                         alt="banner-media">
+                                    {{--                                    <img src="{{asset('user/images/banner/banner-media.png')}}"--}}
+                                    {{--                                         alt="banner-media">--}}
                                 </div>
                                 <img class="pattern" src="{{asset('user/images/Group.png')}}"
                                      data-swiper-parallax="-100"
@@ -89,7 +89,7 @@
                                                href="books-detail.html">See Details</a>
                                         </div>
                                     </div>
-                                    <div class="partner">
+                                    {{--<div class="partner">
                                         <p>Our partner</p>
                                         <div class="brand-logo">
                                             <img src="{{asset('user/images/partner/partner-1.png')}}"
@@ -100,13 +100,13 @@
                                             <img src="{{asset('user/images/partner/partner-3.png')}}"
                                                  alt="client">
                                         </div>
-                                    </div>
+                                    </div>--}}
                                 </div>
                             </div>
                             <div class="col-md-6">
                                 <div class="banner-media" data-swiper-parallax="-100">
-                                    <img src="{{asset('user/images/banner/banner-media2.png')}}"
-                                         alt="banner-media1">
+                                    {{--                                    <img src="{{asset('user/images/banner/banner-media2.png')}}"--}}
+                                    {{--                                         alt="banner-media1">--}}
                                 </div>
                                 <img class="pattern" src="{{asset('user/images/Group.png')}}"
                                      data-swiper-parallax="-100"

@@ -20,6 +20,13 @@ class Book extends Model
         );
     }
 
+    protected function file_path(): Attribute
+    {
+        return Attribute::make(
+            get: fn(string $value) => asset($value),
+        );
+    }
+
     public function author(): BelongsTo
     {
         return $this->belongsTo(Author::class);

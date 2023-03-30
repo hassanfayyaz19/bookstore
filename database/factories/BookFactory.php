@@ -26,7 +26,7 @@ class BookFactory extends Factory
             'page_count' => fake()->numberBetween($min = 10, $max = 6000),
             'description' => fake()->paragraphs(10, true),
             'image_url' => fake()->imageUrl(),
-            'file_path' => fake()->filePath(),
+            'file_path' => 'sample.pdf',
         ];
     }
 }
