@@ -33,7 +33,6 @@
                                 <th>Product</th>
                                 <th>Product name</th>
                                 <th>Unit Price</th>
-                                <th>Quantity</th>
                                 <th>Total</th>
                                 <th class="text-end">Close</th>
                             </tr>

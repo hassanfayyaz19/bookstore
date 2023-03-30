@@ -33,6 +33,7 @@ Route::prefix('admin')->as('admin.')->middleware(['auth:admin'])->group(function
     Route::resource('category', \App\Http\Controllers\Admin\CategoryController::class);
     Route::resource('user', \App\Http\Controllers\Admin\UserController::class);
     Route::resource('author', \App\Http\Controllers\Admin\AuthorController::class);
+    Route::resource('purchase', \App\Http\Controllers\Admin\PurchaseController::class);
     Route::get('/dashboard', function () {
         return redirect()->route('admin.book.index');
     })->name('home');
@@ -42,7 +43,10 @@ Auth::routes();
 
 Route::middleware(['auth:web'])->group(function () {
     Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+    Route::get('/book/download/{book}', [\App\Http\Controllers\User\BookController::class, 'downloadBook'])->name('book.download');
+    Route::get('/book/purchased', [\App\Http\Controllers\User\BookController::class, 'purchasedBook'])->name('book.purchased');
 });
+
 Route::get('/about-us', function () {
     return view('user.about_us');
 })->name('about_us');

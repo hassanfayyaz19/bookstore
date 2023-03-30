@@ -11,7 +11,7 @@
                 <h1>Checkout</h1>
                 <nav aria-label="breadcrumb" class="breadcrumb-row">
                     <ul class="breadcrumb">
-                        <li class="breadcrumb-item"><a href="index.html"> Home</a></li>
+                        <li class="breadcrumb-item"><a href="{{route('welcome')}}"> Home</a></li>
                         <li class="breadcrumb-item">Checkout</li>
                     </ul>
                 </nav>
@@ -37,12 +37,6 @@
                             </tr>
                             </thead>
                             <tbody id="checkout_list">
-                            <tr>
-                                <td class="product-item-img"><img src="{{asset('user/images/books/grid/book3.jpg')}}"
-                                                                  alt=""></td>
-                                <td class="product-item-name">Prduct Item 5</td>
-                                <td class="product-price">$28.00</td>
-                            </tr>
                             </tbody>
                         </table>
                     </div>
@@ -50,7 +44,6 @@
                 <div class="col-lg-6">
                     @if (Session::has('success'))
                         <div class="alert alert-success text-center">
-                            <a href="#" class="close" data-dismiss="alert" aria-label="close">×</a>
                             <p>{{ Session::get('success') }}</p><br>
                         </div>
                     @endif
@@ -109,7 +102,9 @@
                         </div>
                         <input type="hidden" id="cart" name="cart">
                         <div class="form-group">
-                            <button class="btn btn-primary btnhover" type="submit">Place Order Now</button>
+                            <button class="btn btn-primary btnhover" type="submit" id="place_order_btn">Place Order
+                                Now
+                            </button>
                         </div>
                     </form>
                 </div>
@@ -179,6 +174,7 @@
                     const token = response['id']
                     $form.find('input[type=text]').empty()
                     $form.append('<input type=\'hidden\' name=\'stripeToken\' value=\'' + token + '\'/>')
+                    $('#place_order_btn').attr('disabled', true)
                     $form.get(0).submit()
 
                 }

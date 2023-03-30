@@ -26,7 +26,6 @@ var shoppingCart = (function () {
 
     function saveCart () {
         localStorage.setItem('shoppingCart', JSON.stringify(cart))
-        console.log(JSON.parse(localStorage.getItem('shoppingCart')))
     }
 
     // Load cart
@@ -136,11 +135,9 @@ var shoppingCart = (function () {
     // Clear cart
 
     obj.clearCart = function () {
-
         cart = []
-
         saveCart()
-
+        displayHeaderCart()
     }
 
     // Count cart
@@ -261,6 +258,8 @@ $(document).on('click', '.clear-cart', function () {
     //  $('.total-cart').html('0.00');
 
     displayHeaderCart()
+    displayCartPage()
+    displayCartOutPage()
 
     window.location.reload()
 
@@ -338,12 +337,6 @@ function displayCartPage () {
             '<td class="product-item-img"><img src="' + book.image_url + '" alt=""></td>' +
             '<td class="product-item-name">' + book.title + '</td>' +
             '<td class="product-item-price">$ ' + book.price + '</td>' +
-            '<td class="product-item-quantity">' +
-            '<div class="btn-group" role="group" aria-label="Basic outlined example">' +
-            '  <button type="button" class="btn btn-outline-primary minus-item" data-id="' + book.id + '">-</button>' +
-            '  <button class="btn btn-outline-primary text-center" disabled>' + book.count + '</button>' +
-            '  <button type="button" class="btn btn-outline-primary text-center plus-item" data-id="' + book.id + '">+</button>' +
-            '</div>' +
             '</td>' +
             '<td class="product-item-totle">$ ' + book.total_price + '</td>' +
             '<td class="product-item-close"><a href="javascript:;" data-id="' + book.id + '" class="ti-close item_remove"></a></td>' +

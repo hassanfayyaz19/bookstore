@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\User;
 
 use App\Http\Controllers\Controller;
+use App\Mail\PurchaseConfirmed;
 use App\Models\Book;
 use App\Models\Category;
 use App\Models\Payment;
@@ -11,7 +12,9 @@ use App\Models\Purchase;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Session;
+use Illuminate\Support\Facades\Storage;
 use Stripe\Charge;
 use Stripe\Stripe;
 
@@ -86,9 +89,32 @@ class BookController extends Controller
                 }
                 Purchase::insert($purchase);
             }
+
+            $payment->refresh();
+            $payment->load('purchases');
+            Mail::to(Auth::user()->email)->send(new PurchaseConfirmed($payment));
+
         }
         Session::flash('success', "Book Purchased Successfully");
         return back();
+    }
+
+    public function downloadBook($book)
+    {
+        $id = decrypt($book);
+        $book = Book::find($id);
+        if (!$book) {
+            new \Exception('Invalid URL');
+        }
+
+        return Storage::download($book->file_path);
+    }
+
+    public function purchasedBook()
+    {
+        $user = Auth::user();
+        $purchases = $user->purchases;
+        return view('user.book.my_books', compact('purchases'));
     }
 
 }
