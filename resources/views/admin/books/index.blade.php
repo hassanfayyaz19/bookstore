@@ -2,6 +2,7 @@
 @section('title', 'Books List')
 @push('css')
     <link href="{{asset('assets/plugins/custom/datatables/datatables.bundle.css')}}" rel="stylesheet" type="text/css"/>
+    <x-head.tinymce-config/>
 @endpush
 @section('content')
     <!--begin::Content wrapper-->
@@ -229,8 +230,9 @@
                                 <div class="col-md-12">
                                     <div class="fv-row mb-7">
                                         <label class="required fw-semibold fs-6 mb-2">Description</label>
-                                        <textarea name="description" class="form-control" cols="30"
+                                        <textarea name="description" class="form-control tinymce-editor" cols="30"
                                                   rows="10" required></textarea>
+                                        <x-forms.tinymce-editor name="description" :content="$ship->description??''"/>
                                     </div>
                                 </div>
                                 <div class="col-md-12">
