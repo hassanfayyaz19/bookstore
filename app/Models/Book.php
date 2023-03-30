@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
@@ -13,20 +14,31 @@ class Book extends Model
 
     protected $guarded = [];
 
-    protected function image_url(): Attribute
+//   Mutators
+    protected function price(): Attribute
+    {
+        return Attribute::make(
+            get: fn(string $value) => "$ $value",
+        );
+    }
+
+    protected function imageUrl(): Attribute
     {
         return Attribute::make(
             get: fn(string $value) => asset($value),
         );
     }
 
-    protected function file_path(): Attribute
+    protected function filePath(): Attribute
     {
         return Attribute::make(
             get: fn(string $value) => asset($value),
         );
     }
 
+// End  Mutators
+
+// Start  Relations
     public function author(): BelongsTo
     {
         return $this->belongsTo(Author::class);
@@ -41,4 +53,18 @@ class Book extends Model
     {
         return $this->belongsToMany(Category::class, 'book_categories');
     }
+// End  Relations
+
+//start Scope
+    public function scopeRecommended($query)
+    {
+        return $query->where('is_recommended', 1);
+    }
+
+    public function scopeFeatured($query)
+    {
+        return $query->where('is_featured', 1);
+    }
+// End  Scope
+
 }

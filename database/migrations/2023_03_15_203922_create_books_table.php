@@ -20,13 +20,14 @@ return new class extends Migration {
             $table->foreignIdFor(Publisher::class)->constrained()->cascadeOnDelete();
             $table->date('publication_date')->nullable();
             $table->string('language')->nullable();
-//            $table->string('cover_type')->nullable();
             $table->integer('page_count')->nullable();
             $table->longText('description')->nullable();;
             $table->decimal('rating', 2, 1)->nullable();
             $table->integer('num_ratings')->default(0);
             $table->string('image_url')->nullable();
             $table->text('file_path')->nullable();
+            $table->boolean('is_recommended')->default(0);
+            $table->boolean('is_featured')->default(0);
             $table->timestamps();
         });
     }

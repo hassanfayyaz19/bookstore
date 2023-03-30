@@ -2,7 +2,6 @@
 @section('title', 'Books List')
 @push('css')
     <link href="{{asset('assets/plugins/custom/datatables/datatables.bundle.css')}}" rel="stylesheet" type="text/css"/>
-    <x-head.tinymce-config/>
 @endpush
 @section('content')
     <!--begin::Content wrapper-->
@@ -83,7 +82,6 @@
                                 <th class="min-w-125px">Id</th>
                                 <th class="min-w-125px">title</th>
                                 <th class="min-w-125px">Author</th>
-                                <th class="min-w-125px">Genre</th>
                                 <th class="min-w-125px">price</th>
                                 <th class="min-w-125px">publisher</th>
                                 <th class="text-end min-w-100px">Actions</th>
@@ -187,13 +185,6 @@
                             <div class="row">
                                 <div class="col-md-6">
                                     <div class="fv-row mb-7">
-                                        <label class="required fw-semibold fs-6 mb-2">Genre</label>
-                                        <input type="text" name="genre" class="form-control mb-3 mb-lg-0"
-                                               required/>
-                                    </div>
-                                </div>
-                                <div class="col-md-6">
-                                    <div class="fv-row mb-7">
                                         <label class="required fw-semibold fs-6 mb-2">price</label>
                                         <input type="number" name="price" class="form-control mb-3 mb-lg-0"
                                                min="0" step=".5"
@@ -230,9 +221,7 @@
                                 <div class="col-md-12">
                                     <div class="fv-row mb-7">
                                         <label class="required fw-semibold fs-6 mb-2">Description</label>
-                                        <textarea name="description" class="form-control tinymce-editor" cols="30"
-                                                  rows="10" required></textarea>
-                                        <x-forms.tinymce-editor name="description" :content="$ship->description??''"/>
+                                        <textarea name="description" class="tinymce-editor"></textarea>
                                     </div>
                                 </div>
                                 <div class="col-md-12">
@@ -245,6 +234,22 @@
                                     <div class="fv-row mb-7">
                                         <label class="required fw-semibold fs-6 mb-2">File</label>
                                         <input name="file_path" class="form-control" type="file" required>
+                                    </div>
+                                </div>
+                                <div class="col-md-12">
+                                    <div class="fv-row mb-7">
+                                        <label class=" fw-semibold fs-6 mb-2">Recommended</label>
+                                        <div class="form-check form-check-solid form-switch form-check-custom fv-row">
+                                            <input class="form-check-input w-45px h-30px" type="checkbox" name="is_recommended" value="1">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-12">
+                                    <div class="fv-row mb-7">
+                                        <label class=" fw-semibold fs-6 mb-2">Featured</label>
+                                        <div class="form-check form-check-solid form-switch form-check-custom fv-row">
+                                            <input class="form-check-input w-45px h-30px" type="checkbox" name="is_featured" value="1">
+                                        </div>
                                     </div>
                                 </div>
                             </div>
@@ -362,13 +367,6 @@
                             <div class="row">
                                 <div class="col-md-6">
                                     <div class="fv-row mb-7">
-                                        <label class="required fw-semibold fs-6 mb-2">Genre</label>
-                                        <input type="text" name="genre" id="genre" class="form-control mb-3 mb-lg-0"
-                                               required/>
-                                    </div>
-                                </div>
-                                <div class="col-md-6">
-                                    <div class="fv-row mb-7">
                                         <label class="required fw-semibold fs-6 mb-2">price</label>
                                         <input type="number" name="price" id="price" class="form-control mb-3 mb-lg-0"
                                                min="0" step=".5"
@@ -408,8 +406,7 @@
                                 <div class="col-md-12">
                                     <div class="fv-row mb-7">
                                         <label class="required fw-semibold fs-6 mb-2">Description</label>
-                                        <textarea name="description" id="description" class="form-control" cols="30"
-                                                  rows="10" required></textarea>
+                                        <textarea name="description" id="description" class="tinymce-editor"></textarea>
                                     </div>
                                 </div>
                                 <div class="col-md-12">
@@ -422,6 +419,24 @@
                                     <div class="fv-row mb-7">
                                         <label class="required fw-semibold fs-6 mb-2">File</label>
                                         <input name="file_path" class="form-control" type="file">
+                                    </div>
+                                </div>
+                                <div class="col-md-12">
+                                    <div class="fv-row mb-7">
+                                        <label class=" fw-semibold fs-6 mb-2">Recommended</label>
+                                        <div class="form-check form-check-solid form-switch form-check-custom fv-row">
+                                            <input class="form-check-input w-45px h-30px" type="checkbox" name="is_recommended" id="is_recommended"
+                                                   value="1">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-12">
+                                    <div class="fv-row mb-7">
+                                        <label class=" fw-semibold fs-6 mb-2">Featured</label>
+                                        <div class="form-check form-check-solid form-switch form-check-custom fv-row">
+                                            <input class="form-check-input w-45px h-30px" type="checkbox" name="is_featured" id="is_featured"
+                                                   value="1">
+                                        </div>
                                     </div>
                                 </div>
                             </div>
@@ -475,20 +490,19 @@
                     'dataType': 'json',
                     'type': 'GET',
                     'data': {
-                        _token: "{{csrf_token()}}"
-                    }
+                        _token: "{{csrf_token()}}",
+                    },
                 },
                 'columns': [
                     { 'data': 'id' },
                     { 'data': 'title' },
                     { 'data': 'author_id' },
-                    { 'data': 'genre' },
                     { 'data': 'price' },
                     { 'data': 'publisher_id' },
-                    { 'data': 'options', orderable: false, searchable: false }
+                    { 'data': 'options', orderable: false, searchable: false },
                 ],
                 'order': [0, 'desc'],
-                'bDestroy': true
+                'bDestroy': true,
             })
 
             $('#add_form').on('submit', function (e) {
@@ -515,7 +529,7 @@
                         swal.close()
                         var response = xhr.responseJSON
                         alertMsg(response.message, 'error')
-                    }
+                    },
                 })
             })
 
@@ -545,7 +559,7 @@
                         swal.close()
                         var response = xhr.responseJSON
                         alertMsg(response.message, 'error')
-                    }
+                    },
                 })
             })
         })
@@ -561,13 +575,20 @@
             $('#publisher_id').val(data.publisher_id).trigger('change')
             $('#categories').val(categories).trigger('change')
             $('#title').val(data.title)
-            $('#description').text(data.description)
-            $('#genre').val(data.genre)
+            // $('#description').text(data.description)
             $('#page_count').val(data.page_count)
             $('#price').val(data.price)
             $('#publication_date').val(data.publication_date)
-
+            tinyMCE.get('description').setContent(data.description)
             $('#hidden_id').val(data.id)
+
+            if (data.is_recommended == 1) {
+                $('#is_recommended').attr('checked', true)
+            }
+            if (data.is_featured == 1) {
+                $('#is_featured').attr('checked', true)
+            }
+
             $('#edit_modal').modal('show')
         })
 

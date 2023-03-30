@@ -106,7 +106,7 @@
 
                 <div data-kt-menu-trigger="click"
                      class="menu-item menu-accordion
-                 {{request()->route()->getName()=='admin.category.index' || request()->route()->getName()=='admin.book.index' ? 'show' : ''}}
+                 {{request()->route()->getName()=='admin.category.index' || request()->route()->getName()=='admin.book.index' || request()->route()->getName()=='admin.recommended_book.index' || request()->route()->getName()=='admin.featured_book.index' ? 'show' : ''}}
                  ">
                     <!--begin:Menu link-->
                     <span class="menu-link"><span
@@ -138,7 +138,19 @@
                             <a class="menu-link {{request()->route()->getName()=='admin.book.index'?'active':''}}"
                                href="{{route('admin.book.index')}}">
                                 <span class="menu-bullet"><span class="bullet bullet-dot"></span></span><span
-                                    class="menu-title">List</span></a>
+                                    class="menu-title">Book List</span></a>
+                        </div>
+                        <div class="menu-item">
+                            <a class="menu-link {{request()->route()->getName()=='admin.recommended_book.index'?'active':''}}"
+                               href="{{route('admin.recommended_book.index')}}">
+                                <span class="menu-bullet"><span class="bullet bullet-dot"></span></span><span
+                                    class="menu-title">Recommended Books</span></a>
+                        </div>
+                        <div class="menu-item">
+                            <a class="menu-link {{request()->route()->getName()=='admin.featured_book.index'?'active':''}}"
+                               href="{{route('admin.featured_book.index')}}">
+                                <span class="menu-bullet"><span class="bullet bullet-dot"></span></span><span
+                                    class="menu-title">Featured Books</span></a>
                         </div>
 
                     </div>

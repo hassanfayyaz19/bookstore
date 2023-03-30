@@ -33,9 +33,8 @@ class BookController extends Controller
             0 => 'id',
             1 => 'title',
             2 => 'author_id',
-            3 => 'genre',
-            4 => 'price',
-            5 => 'publisher_id',
+            3 => 'price',
+            4 => 'publisher_id',
         );
         $totalData = Book::with('author', 'publisher', 'categories')->count();
         $totalFiltered = $totalData;
@@ -54,7 +53,6 @@ class BookController extends Controller
 
             $query = Book::with('author', 'publisher', 'categories')
                 ->where('title', 'LIKE', "%{$search}%")
-                ->orWhere('genre', 'LIKE', "%{$search}%")
                 ->orWhere('language', 'LIKE', "%{$search}%");
             $results = $query
                 ->offset($start)
@@ -72,7 +70,6 @@ class BookController extends Controller
                 $nestedData['id'] = $row->id;
                 $nestedData['title'] = $row->title;
                 $nestedData['author_id'] = $row->author_id;
-                $nestedData['genre'] = $row->genre;
                 $nestedData['price'] = $row->price;
                 $nestedData['publisher_id'] = $row->publisher_id;
 
@@ -119,12 +116,13 @@ class BookController extends Controller
         $book = new Book();
         $book->title = $request->title;
         $book->author_id = $request->author_id;
-        $book->genre = $request->genre;
         $book->price = $request->price;
         $book->publisher_id = $request->publisher_id;
         $book->publication_date = $request->publication_date;
         $book->page_count = $request->page_count;
         $book->description = $request->description;
+        $book->is_featured = $request->is_featured == 1 ? 1 : 0;
+        $book->is_recommended = $request->is_recommended == 1 ? 1 : 0;
         $book->save();
         $book->categories()->sync($request->categories);
 
@@ -139,7 +137,6 @@ class BookController extends Controller
             $book->save();
         }
         return response()->json(['status' => 'success', 'message' => 'Data Inserted Successful']);
-
     }
 
     /**
@@ -165,12 +162,13 @@ class BookController extends Controller
     {
         $book->title = $request->title;
         $book->author_id = $request->author_id;
-        $book->genre = $request->genre;
         $book->price = $request->price;
         $book->publisher_id = $request->publisher_id;
         $book->publication_date = $request->publication_date;
         $book->page_count = $request->page_count;
         $book->description = $request->description;
+        $book->is_featured = $request->is_featured == 1 ? 1 : 0;
+        $book->is_recommended = $request->is_recommended == 1 ? 1 : 0;
         $book->save();
         $book->categories()->sync($request->categories);
 
@@ -205,6 +203,6 @@ class BookController extends Controller
     protected function uploadFile($file, $path)
     {
         $filePath = $file->store($path, 'public');
-        return asset('/storage/' . $filePath);
+        return '/storage/' . $filePath;
     }
 }

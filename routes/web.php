@@ -16,20 +16,22 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return view('user.welcome');
+    $recommended_books = \App\Models\Book::with('categories')->recommended()->get();
+    $featured_books = \App\Models\Book::with('categories')->featured()->get();
+    return view('user.welcome', get_defined_vars());
 })->name('welcome');
 
 
 Route::prefix('admin')->as('admin.')->middleware(['guest:admin'])->group(function () {
     Route::get('/', [LoginController::class, 'showAdminLoginForm'])->name('login-view');
     Route::post('/', [LoginController::class, 'adminLogin'])->name('login');
-
-
 });
 
 Route::prefix('admin')->as('admin.')->middleware(['auth:admin'])->group(function () {
     Route::post('/logout', [LoginController::class, 'adminLogout'])->name('logout');
     Route::resource('book', \App\Http\Controllers\Admin\BookController::class);
+    Route::resource('recommended_book', \App\Http\Controllers\Admin\RecommendedBookController::class);
+    Route::resource('featured_book', \App\Http\Controllers\Admin\FeaturedBookController::class);
     Route::resource('category', \App\Http\Controllers\Admin\CategoryController::class);
     Route::resource('user', \App\Http\Controllers\Admin\UserController::class);
     Route::resource('author', \App\Http\Controllers\Admin\AuthorController::class);
