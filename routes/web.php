@@ -18,6 +18,7 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     $recommended_books = \App\Models\Book::with('categories')->recommended()->get();
     $featured_books = \App\Models\Book::with('categories')->featured()->get();
+    $banner_books = \App\Models\Book::with('categories')->banner()->get();
     return view('user.welcome', get_defined_vars());
 })->name('welcome');
 
@@ -32,6 +33,7 @@ Route::prefix('admin')->as('admin.')->middleware(['auth:admin'])->group(function
     Route::resource('book', \App\Http\Controllers\Admin\BookController::class);
     Route::resource('recommended_book', \App\Http\Controllers\Admin\RecommendedBookController::class);
     Route::resource('featured_book', \App\Http\Controllers\Admin\FeaturedBookController::class);
+    Route::resource('banner_book', \App\Http\Controllers\Admin\BannerBookController::class);
     Route::resource('category', \App\Http\Controllers\Admin\CategoryController::class);
     Route::resource('user', \App\Http\Controllers\Admin\UserController::class);
     Route::resource('author', \App\Http\Controllers\Admin\AuthorController::class);
@@ -57,7 +59,22 @@ Route::get('/contact-us', function () {
     return view('user.contact_us');
 })->name('contact_us');
 
+Route::get('/privacy-policy', function () {
+    return view('user.contact_us');
+})->name('privacy_policy');
+
+Route::get('/faq', function () {
+    return view('user.contact_us');
+})->name('faq');
+
+Route::get('/services', function () {
+    return view('user.contact_us');
+})->name('services');
+
 Route::resource('book', \App\Http\Controllers\User\BookController::class);
+Route::resource('contact_us', \App\Http\Controllers\User\ContactUsController::class);
+
+
 Route::get('cart', [\App\Http\Controllers\User\BookController::class, 'showCartPage'])->name('book.cart');
 Route::get('checkout', [\App\Http\Controllers\User\BookController::class, 'showCheckoutPage'])->name('book.checkout');
 Route::post('stripe', [\App\Http\Controllers\User\BookController::class, 'stripePost'])->name('stripe.post');

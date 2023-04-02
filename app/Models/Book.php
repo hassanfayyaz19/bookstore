@@ -18,7 +18,7 @@ class Book extends Model
     protected function price(): Attribute
     {
         return Attribute::make(
-            get: fn(string $value) => "$ $value",
+            get: fn(string $value) => $value,
         );
     }
 
@@ -64,6 +64,11 @@ class Book extends Model
     public function scopeFeatured($query)
     {
         return $query->where('is_featured', 1);
+    }
+
+    public function scopeBanner($query)
+    {
+        return $query->where('is_banner', 1);
     }
 // End  Scope
 

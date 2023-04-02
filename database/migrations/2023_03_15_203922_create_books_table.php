@@ -28,6 +28,7 @@ return new class extends Migration {
             $table->text('file_path')->nullable();
             $table->boolean('is_recommended')->default(0);
             $table->boolean('is_featured')->default(0);
+            $table->boolean('is_banner')->default(0);
             $table->timestamps();
         });
     }

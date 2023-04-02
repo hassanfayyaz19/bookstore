@@ -7,36 +7,9 @@
                 <div class="toggle-items row">
                     <div class="footer-col-book">
                         <ul>
-                            <li><a href="books-grid-view.html">Architecture</a></li>
-                            <li><a href="books-grid-view.html">Art</a></li>
-                            <li><a href="books-grid-view.html">Action</a></li>
-                            <li><a href="books-grid-view.html">Biography</a></li>
-                            <li><a href="books-grid-view.html">Body, Mind & Spirit</a></li>
-                            <li><a href="books-grid-view.html">Business & Economics</a></li>
-                            <li><a href="books-grid-view.html">Children Fiction</a></li>
-                            <li><a href="books-grid-view.html">Children Non-Fiction</a></li>
-                            <li><a href="books-grid-view.html">Comics & Graphics</a></li>
-                            <li><a href="books-grid-view.html">Cooking</a></li>
-                            <li><a href="books-grid-view.html">Crafts & Hobbies</a></li>
-                            <li><a href="books-grid-view.html">Design</a></li>
-                            <li><a href="books-grid-view.html">Drama</a></li>
-                            <li><a href="books-grid-view.html">Education</a></li>
-                            <li><a href="books-grid-view.html">Family & Relationships</a></li>
-                            <li><a href="books-grid-view.html">Fiction</a></li>
-                            <li><a href="books-grid-view.html">Foreign Language</a></li>
-                            <li><a href="books-grid-view.html">Games</a></li>
-                            <li><a href="books-grid-view.html">Gardening</a></li>
-                            <li><a href="books-grid-view.html">Health & Fitness</a></li>
-                            <li><a href="books-grid-view.html">History</a></li>
-                            <li><a href="books-grid-view.html">House & Home</a></li>
-                            <li><a href="books-grid-view.html">Humor</a></li>
-                            <li><a href="books-grid-view.html">Literary Collections</a></li>
-                            <li><a href="books-grid-view.html">Mathematics</a></li>
-                            <li><a href="books-grid-view.html">Medical</a></li>
-                            <li><a href="books-grid-view.html">Nature</a></li>
-                            <li><a href="books-grid-view.html">Performing Arts</a></li>
-                            <li><a href="books-grid-view.html">Pets</a></li>
-                            <li><a href="books-grid-view.html">Show others</a></li>
+                            @foreach($header_categories as $category)
+                                <li><a href="{{route('book.index',['category'=>$category->slug])}}">{{$category->name}}</a></li>
+                            @endforeach
                         </ul>
                     </div>
                 </div>
@@ -52,7 +25,7 @@
                 <div class="col-xl-3 col-lg-12 wow fadeInUp" data-wow-delay="0.1s">
                     <div class="widget widget_about">
                         <div class="footer-logo logo-white">
-                            <a href="index.html"><img src="{{asset('user/images/logo.png')}}" alt=""></a>
+                            <a href="{{route('welcome')}}"><img src="{{asset('user/images/logo.png')}}" alt=""></a>
                         </div>
                         <p class="text">Bookland is a Book Store Ecommerce Website Template by DexignZone lorem
                             ipsum dolor sit</p>
@@ -74,27 +47,26 @@
                     <div class="widget widget_services">
                         <h5 class="footer-title">Our Links</h5>
                         <ul>
-                            <li><a href="about-us.html">About us</a></li>
-                            <li><a href="contact-us.html">Contact us</a></li>
-                            <li><a href="privacy-policy.html">Privacy Policy</a></li>
-                            <li><a href="pricing.html">Pricing Table</a></li>
-                            <li><a href="faq.html">FAQ</a></li>
+                            <li><a href="{{route('about_us')}}">About us</a></li>
+                            <li><a href="{{route('contact_us')}}">Contact us</a></li>
+                            <li><a href="{{route('privacy_policy')}}">Privacy Policy</a></li>
+                            <li><a href="{{route('faq')}}">FAQ</a></li>
                         </ul>
                     </div>
                 </div>
                 <div class="col-xl-2 col-lg-3 col-sm-4 col-4 wow fadeInUp" data-wow-delay="0.3s">
                     <div class="widget widget_services">
-                        <h5 class="footer-title">Bookland ?</h5>
+                        <h5 class="footer-title">{{config('app.name')}} ?</h5>
                         <ul>
-                            <li><a href="index.html">Bookland</a></li>
-                            <li><a href="services.html">Services</a></li>
-                            <li><a href="books-detail.html">Book Details</a></li>
-                            <li><a href="blog-detail.html">Blog Details</a></li>
-                            <li><a href="books-grid-view.html">Shop</a></li>
+                            <li><a href="{{route('welcome')}}">{{config('app.name')}}</a></li>
+                            <li><a href="{{route('services')}}">Services</a></li>
+                            <li><a href="{{route('book.index')}}">Books</a></li>
+                            {{--                            <li><a href="blog-detail.html">Blog Details</a></li>--}}
+                            {{--                            <li><a href="books-grid-view.html">Shop</a></li>--}}
                         </ul>
                     </div>
                 </div>
-                <div class="col-xl-2 col-lg-3 col-md-4 col-sm-4 col-4 wow fadeInUp" data-wow-delay="0.4s">
+                {{--<div class="col-xl-2 col-lg-3 col-md-4 col-sm-4 col-4 wow fadeInUp" data-wow-delay="0.4s">
                     <div class="widget widget_services">
                         <h5 class="footer-title">Resources</h5>
                         <ul>
@@ -105,7 +77,7 @@
                             <li><a href="about-us.html">Partner</a></li>
                         </ul>
                     </div>
-                </div>
+                </div>--}}
                 <div class="col-xl-3 col-lg-3 col-md-12 col-sm-12 wow fadeInUp" data-wow-delay="0.5s">
                     <div class="widget widget_getintuch">
                         <h5 class="footer-title">Get in Touch With Us</h5>
@@ -137,10 +109,10 @@
         <div class="container">
             <div class="row fb-inner">
                 <div class="col-lg-6 col-md-12 text-start">
-                    <p class="copyright-text">Bookland Book Store Ecommerce Website - © 2022 All Rights Reserved</p>
+                    <p class="copyright-text">{{config('app.name')}} - © 2022 All Rights Reserved</p>
                 </div>
                 <div class="col-lg-6 col-md-12 text-end">
-                    <p>Made with <span class="heart"></span> by <a href="https://dexignzone.com/">DexignZone</a></p>
+                    <p>Made with <span class="heart"></span> by <a href="#">{{config('app.name')}}</a></p>
                 </div>
             </div>
         </div>

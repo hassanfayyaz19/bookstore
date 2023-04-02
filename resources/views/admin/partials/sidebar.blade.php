@@ -106,7 +106,12 @@
 
                 <div data-kt-menu-trigger="click"
                      class="menu-item menu-accordion
-                 {{request()->route()->getName()=='admin.category.index' || request()->route()->getName()=='admin.book.index' || request()->route()->getName()=='admin.recommended_book.index' || request()->route()->getName()=='admin.featured_book.index' ? 'show' : ''}}
+                 {{request()->route()->getName()=='admin.category.index'
+                    || request()->route()->getName()=='admin.book.index'
+                    || request()->route()->getName()=='admin.recommended_book.index'
+                    || request()->route()->getName()=='admin.featured_book.index'
+                    || request()->route()->getName()=='admin.banner_book.index'
+                    ? 'show' : ''}}
                  ">
                     <!--begin:Menu link-->
                     <span class="menu-link"><span
@@ -151,6 +156,10 @@
                                href="{{route('admin.featured_book.index')}}">
                                 <span class="menu-bullet"><span class="bullet bullet-dot"></span></span><span
                                     class="menu-title">Featured Books</span></a>
+                            <a class="menu-link {{request()->route()->getName()=='admin.banner_book.index'?'active':''}}"
+                               href="{{route('admin.banner_book.index')}}">
+                                <span class="menu-bullet"><span class="bullet bullet-dot"></span></span><span
+                                    class="menu-title">Banner Books</span></a>
                         </div>
 
                     </div>
