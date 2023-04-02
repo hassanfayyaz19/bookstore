@@ -20,6 +20,9 @@ class DatabaseSeeder extends Seeder
             PublisherSeeder::class,
             BookSeeder::class,
             BookCategorySeeder::class,
+            BannerBookSeeder::class,
+            RecommendedBookSeeder::class,
+            FeaturedBookSeeder::class,
         ]);
     }
 }

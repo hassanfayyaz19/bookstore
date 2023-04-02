@@ -29,6 +29,8 @@ return new class extends Migration {
             $table->boolean('is_recommended')->default(0);
             $table->boolean('is_featured')->default(0);
             $table->boolean('is_banner')->default(0);
+            $table->boolean('is_on_sale')->default(0);
+            $table->integer('discount_percentage')->default(0);
             $table->timestamps();
         });
     }

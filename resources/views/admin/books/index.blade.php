@@ -191,7 +191,7 @@
                                                required/>
                                     </div>
                                 </div>
-                                <div class="col-md-4">
+                                <div class="col-md-6">
                                     <div class="fv-row mb-7">
                                         <label class="required fw-semibold fs-6 mb-2">Publisher</label>
                                         <select class="form-select mb-2" name="publisher_id" data-control="select2"
@@ -221,7 +221,8 @@
                                 <div class="col-md-12">
                                     <div class="fv-row mb-7">
                                         <label class="required fw-semibold fs-6 mb-2">Description</label>
-                                        <textarea name="description" class="form-control" cols="30" rows="10"></textarea>
+                                        <textarea name="description" class="form-control" cols="30"
+                                                  rows="10"></textarea>
                                     </div>
                                 </div>
                                 <div class="col-md-12">
@@ -236,20 +237,38 @@
                                         <input name="file_path" class="form-control" type="file" required>
                                     </div>
                                 </div>
-                                <div class="col-md-12">
+                                <div class="col-md-4">
                                     <div class="fv-row mb-7">
                                         <label class=" fw-semibold fs-6 mb-2">Recommended</label>
                                         <div class="form-check form-check-solid form-switch form-check-custom fv-row">
-                                            <input class="form-check-input w-45px h-30px" type="checkbox" name="is_recommended" value="1">
+                                            <input class="form-check-input w-45px h-30px" type="checkbox"
+                                                   name="is_recommended" value="1">
                                         </div>
                                     </div>
                                 </div>
-                                <div class="col-md-12">
+                                <div class="col-md-4">
                                     <div class="fv-row mb-7">
                                         <label class=" fw-semibold fs-6 mb-2">Featured</label>
                                         <div class="form-check form-check-solid form-switch form-check-custom fv-row">
-                                            <input class="form-check-input w-45px h-30px" type="checkbox" name="is_featured" value="1">
+                                            <input class="form-check-input w-45px h-30px" type="checkbox"
+                                                   name="is_featured" value="1">
                                         </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="fv-row mb-7">
+                                        <label class=" fw-semibold fs-6 mb-2">On Sale</label>
+                                        <div class="form-check form-check-solid form-switch form-check-custom fv-row">
+                                            <input class="form-check-input w-45px h-30px" type="checkbox"
+                                                   name="is_on_sale" id="add_is_on_sale" value="1">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-12" id="add_discount_percentage_div" style="display: none">
+                                    <div class="fv-row mb-7">
+                                        <label class=" fw-semibold fs-6 mb-2">Discount Percentage</label>
+                                        <input class="form-control" type="number"
+                                               name="discount_percentage" value="0" min="0" max="100">
                                     </div>
                                 </div>
                             </div>
@@ -373,7 +392,7 @@
                                                required/>
                                     </div>
                                 </div>
-                                <div class="col-md-4">
+                                <div class="col-md-6">
                                     <div class="fv-row mb-7">
                                         <label class="required fw-semibold fs-6 mb-2">Publisher</label>
                                         <select class="form-select mb-2" name="publisher_id" id="publisher_id"
@@ -406,7 +425,8 @@
                                 <div class="col-md-12">
                                     <div class="fv-row mb-7">
                                         <label class="required fw-semibold fs-6 mb-2">Description</label>
-                                        <textarea name="description" id="description" class="form-control" cols="30" rows="10"></textarea>
+                                        <textarea name="description" id="description" class="form-control" cols="30"
+                                                  rows="10"></textarea>
                                     </div>
                                 </div>
                                 <div class="col-md-12">
@@ -425,7 +445,8 @@
                                     <div class="fv-row mb-7">
                                         <label class=" fw-semibold fs-6 mb-2">Recommended</label>
                                         <div class="form-check form-check-solid form-switch form-check-custom fv-row">
-                                            <input class="form-check-input w-45px h-30px" type="checkbox" name="is_recommended" id="is_recommended"
+                                            <input class="form-check-input w-45px h-30px" type="checkbox"
+                                                   name="is_recommended" id="is_recommended"
                                                    value="1">
                                         </div>
                                     </div>
@@ -434,9 +455,27 @@
                                     <div class="fv-row mb-7">
                                         <label class=" fw-semibold fs-6 mb-2">Featured</label>
                                         <div class="form-check form-check-solid form-switch form-check-custom fv-row">
-                                            <input class="form-check-input w-45px h-30px" type="checkbox" name="is_featured" id="is_featured"
+                                            <input class="form-check-input w-45px h-30px" type="checkbox"
+                                                   name="is_featured" id="is_featured"
                                                    value="1">
                                         </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-12">
+                                    <div class="fv-row mb-7">
+                                        <label class=" fw-semibold fs-6 mb-2">On Sale</label>
+                                        <div class="form-check form-check-solid form-switch form-check-custom fv-row">
+                                            <input class="form-check-input w-45px h-30px" type="checkbox"
+                                                   name="is_on_sale" id="edit_is_on_sale" value="1">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-12" id="edit_discount_percentage_div" style="display: none">
+                                    <div class="fv-row mb-7">
+                                        <label class=" fw-semibold fs-6 mb-2">Discount Percentage</label>
+                                        <input class="form-control" type="number"
+                                               name="discount_percentage" id="discount_percentage" min="0"
+                                               max="100">
                                     </div>
                                 </div>
                             </div>
@@ -562,6 +601,20 @@
                     },
                 })
             })
+
+            $('#add_is_on_sale').on('change', function () {
+                $('#add_discount_percentage_div').hide()
+                if (this.checked) {
+                    $('#add_discount_percentage_div').show()
+                }
+            })
+
+            $('#edit_is_on_sale').on('change', function () {
+                $('#edit_discount_percentage_div').hide()
+                if (this.checked) {
+                    $('#edit_discount_percentage_div').show()
+                }
+            })
         })
 
         $(document).on('click', '.edit_data', function () {
@@ -587,6 +640,11 @@
             }
             if (data.is_featured == 1) {
                 $('#is_featured').attr('checked', true)
+            }
+
+            if (data.is_on_sale == 1) {
+                $('#edit_is_on_sale').attr('checked', true)
+                $('#edit_discount_percentage_div').show()
             }
 
             $('#edit_modal').modal('show')

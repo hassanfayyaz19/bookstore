@@ -1,4 +1,4 @@
-<footer class="site-footer style-1">
+<footer class="site-footer footer-dark">
     <!-- Footer Category -->
     <div class="footer-category">
         <div class="container">
@@ -8,7 +8,9 @@
                     <div class="footer-col-book">
                         <ul>
                             @foreach($header_categories as $category)
-                                <li><a href="{{route('book.index',['category'=>$category->slug])}}">{{$category->name}}</a></li>
+                                <li>
+                                    <a href="{{route('book.index',['category'=>$category->slug])}}">{{$category->name}}</a>
+                                </li>
                             @endforeach
                         </ul>
                     </div>
@@ -25,7 +27,7 @@
                 <div class="col-xl-3 col-lg-12 wow fadeInUp" data-wow-delay="0.1s">
                     <div class="widget widget_about">
                         <div class="footer-logo logo-white">
-                            <a href="{{route('welcome')}}"><img src="{{asset('user/images/logo.png')}}" alt=""></a>
+                            <a href="{{route('welcome')}}">{{config('app.name')}}</a>
                         </div>
                         <p class="text">Bookland is a Book Store Ecommerce Website Template by DexignZone lorem
                             ipsum dolor sit</p>

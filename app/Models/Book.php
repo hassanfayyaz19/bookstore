@@ -14,6 +14,10 @@ class Book extends Model
 
     protected $guarded = [];
 
+    protected $appends = [
+        'sale_price'
+    ];
+
 //   Mutators
     protected function price(): Attribute
     {
@@ -33,6 +37,13 @@ class Book extends Model
     {
         return Attribute::make(
             get: fn(string $value) => asset($value),
+        );
+    }
+
+    protected function salePrice(): Attribute
+    {
+        return Attribute::make(
+            get: fn() => $this->price - ($this->price * ($this->discount_percentage / 100)),
         );
     }
 
@@ -69,6 +80,11 @@ class Book extends Model
     public function scopeBanner($query)
     {
         return $query->where('is_banner', 1);
+    }
+
+    public function scopeOnSale($query)
+    {
+        return $query->where('is_on_sale', 1);
     }
 // End  Scope
 

@@ -1,11 +1,23 @@
-<div id="loading-area" class="preloader-wrapper-1">
+{{--<div id="loading-area" class="preloader-wrapper-1">--}}
+{{--    <div class="preloader-inner">--}}
+{{--        <div class="preloader-shade"></div>--}}
+{{--        <div class="preloader-wrap"></div>--}}
+{{--        <div class="preloader-wrap wrap2"></div>--}}
+{{--        <div class="preloader-wrap wrap3"></div>--}}
+{{--        <div class="preloader-wrap wrap4"></div>--}}
+{{--        <div class="preloader-wrap wrap5"></div>--}}
+{{--    </div>--}}
+{{--</div>--}}
+<div id="loading-area" class="preloader-wrapper-2">
     <div class="preloader-inner">
-        <div class="preloader-shade"></div>
-        <div class="preloader-wrap"></div>
-        <div class="preloader-wrap wrap2"></div>
-        <div class="preloader-wrap wrap3"></div>
-        <div class="preloader-wrap wrap4"></div>
-        <div class="preloader-wrap wrap5"></div>
+        <span></span>
+        <span></span>
+        <span></span>
+        <span></span>
+        <span></span>
+        <span></span>
+        <span></span>
+        <span></span>
     </div>
 </div>
 
@@ -30,7 +42,7 @@
                     @else
                         <ul class="navbar-nav header-right">
                             <li class="nav-item">
-                                <a class="nav-link" href="wishlist.html">
+                                <a class="nav-link" href="javascript:">
                                     <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 0 24 24"
                                          width="24px" fill="#000000">
                                         <path d="M0 0h24v24H0V0z" fill="none"/>
@@ -68,7 +80,7 @@
                                         <span>{{auth()->guard('web')->user()->email}}</span>
                                     </div>
                                     <div class="dropdown-body">
-                                        <a href="my-profile.html"
+                                        <a href="javascript:"
                                            class="dropdown-item d-flex justify-content-between align-items-center ai-icon">
                                             <div>
                                                 <svg xmlns="http://www.w3.org/2000/svg" height="20px"
@@ -92,7 +104,7 @@
                                                 <span class="ms-2">My Books</span>
                                             </div>
                                         </a>
-                                        <a href="shop-cart.html"
+                                        <a href="javascript:"
                                            class="dropdown-item d-flex justify-content-between align-items-center ai-icon">
                                             <div>
                                                 <svg xmlns="http://www.w3.org/2000/svg" height="20px"
@@ -104,7 +116,7 @@
                                                 <span class="ms-2">My Order</span>
                                             </div>
                                         </a>
-                                        <a href="wishlist.html"
+                                        <a href="javascript:"
                                            class="dropdown-item d-flex justify-content-between align-items-center ai-icon">
                                             <div>
                                                 <svg xmlns="http://www.w3.org/2000/svg" height="20px"
@@ -174,7 +186,7 @@
                 <!-- EXTRA NAV -->
                 <div class="extra-nav">
                     <div class="extra-cell">
-                        <a href="contact-us.html" class="btn btn-primary btnhover">Get In Touch</a>
+                        <a href="javascript:" class="btn btn-primary btnhover">Get In Touch</a>
                     </div>
                 </div>
 

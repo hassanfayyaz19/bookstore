@@ -19,6 +19,7 @@ Route::get('/', function () {
     $recommended_books = \App\Models\Book::with('categories')->recommended()->get();
     $featured_books = \App\Models\Book::with('categories')->featured()->get();
     $banner_books = \App\Models\Book::with('categories')->banner()->get();
+    $on_sale_books = \App\Models\Book::with('categories')->onSale()->get();
     return view('user.welcome', get_defined_vars());
 })->name('welcome');
 
@@ -38,6 +39,7 @@ Route::prefix('admin')->as('admin.')->middleware(['auth:admin'])->group(function
     Route::resource('user', \App\Http\Controllers\Admin\UserController::class);
     Route::resource('author', \App\Http\Controllers\Admin\AuthorController::class);
     Route::resource('purchase', \App\Http\Controllers\Admin\PurchaseController::class);
+    Route::resource('project_setting', \App\Http\Controllers\Admin\ProjectSettingController::class);
     Route::get('/dashboard', function () {
         return redirect()->route('admin.book.index');
     })->name('home');
