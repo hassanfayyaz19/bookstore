@@ -15,7 +15,8 @@ class Book extends Model
     protected $guarded = [];
 
     protected $appends = [
-        'sale_price'
+        'sale_price',
+        'discounted_price',
     ];
 
 //   Mutators
@@ -44,6 +45,13 @@ class Book extends Model
     {
         return Attribute::make(
             get: fn() => $this->price - ($this->price * ($this->discount_percentage / 100)),
+        );
+    }
+
+    protected function discountedPrice(): Attribute
+    {
+        return Attribute::make(
+            get: fn() => $this->price - $this->sale_price,
         );
     }
 

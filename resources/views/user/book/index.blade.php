@@ -132,7 +132,7 @@
                         </form>
                     </div>
                     <div class="col-xl-9">
-                        <div class="d-flex justify-content-between align-items-center">
+                        <div class="d-flex justify-content-between align-items-center p-2">
                             <h4 class="title">Books</h4>
                             <a href="javascript:void(0);" class="btn btn-primary panel-btn">Filter</a>
                         </div>
@@ -207,7 +207,9 @@
                                 <div class="col-book style-2">
                                     <div class="dz-shop-card style-1">
                                         <div class="dz-media">
-                                            <img src="{{$book->image_url}}" alt="book">
+                                            <a href="{{route('book.show',['book'=>$book->id])}}">
+                                                <img src="{{$book->image_url}}" alt="book">
+                                            </a>
                                         </div>
                                         <div class="bookmark-btn style-2">
                                             <input class="form-check-input" type="checkbox" id="flexCheckDefault1">
@@ -216,7 +218,9 @@
                                             </label>
                                         </div>
                                         <div class="dz-content">
-                                            <h5 class="title"><a href="javascript:;">{{$book->title}}</a></h5>
+                                            <h5 class="title"><a
+                                                    href="{{route('book.show',['book'=>$book->id])}}">{{$book->title}}</a>
+                                            </h5>
                                             <ul class="dz-tags">
                                                 @foreach($book->categories as $category)
                                                     <li><a href="javascript:;">{{$category->name}}</a></li>
@@ -231,8 +235,8 @@
                                             </ul>
                                             <div class="book-footer">
                                                 <div class="price">
-                                                    <span class="price-num">$ {{$book->price}}</span>
-                                                    {{--                                                    <del>$12.0</del>--}}
+                                                    <span class="price-num">$ {{$book->sale_price}}</span>
+                                                    <del>$ {{$book->price}}</del>
                                                 </div>
                                                 <a href="javascript:;"
                                                    class="btn btn-secondary box-btn btnhover btnhover2 add-to-cart"

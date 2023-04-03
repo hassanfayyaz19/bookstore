@@ -10,7 +10,7 @@
                             <div class="col-md-6">
                                 <div class="swiper-content">
                                     <div class="content-info">
-                                        {{--                                    <h6 class="sub-title" data-swiper-parallax="-10">BEST MANAGEMENT </h6>--}}
+                                        <h6 class="sub-title" data-swiper-parallax="-10">BEST SELLER</h6>
                                         <h1 class="title mb-0" data-swiper-parallax="-20">{{$book->title}}</h1>
                                         <ul class="dz-tags" data-swiper-parallax="-30">
                                             @foreach($book->categories as $category)
@@ -20,15 +20,25 @@
                                         <p class="text mb-0"
                                            data-swiper-parallax="-40">{{str()->words($book->description,25,'....')}}</p>
                                         <div class="price" data-swiper-parallax="-50">
-                                            <span class="price-num">$ {{$book->price}}</span>
-                                            {{--                                        <del>$15.25</del>--}}
-                                            {{--                                        <span class="badge badge-danger">15% OFF</span>--}}
+                                            <span class="price-num">$ {{$book->sale_price}}</span>
+                                            <del>$ {{$book->price}}</del>
+                                            <span
+                                                class="badge badge-danger">{{$book->discount_percentage}}% OFF</span>
                                         </div>
                                         <div class="content-btn" data-swiper-parallax="-60">
                                             <a class="btn btn-primary btnhover add-to-cart" data-book="{{$book}}"
-                                               href="javascript:">Add To
-                                                Cart</a>
-                                            {{--                                        <a class="btn btn-outline-secondary btnhover ms-4" href="books-detail.html">See Details</a>--}}
+                                               href="javascript:">Add To Cart</a>
+                                            <a class="btn btn-outline-secondary btnhover ms-4"
+                                               href="{{route('book.show',['book'=>$book->id])}}">See Details</a>
+                                        </div>
+                                    </div>
+                                    <div class="partner">
+                                        <p>Our partner</p>
+                                        <div class="brand-logo">
+                                            <img src="{{asset('user/images/partner/partner-1.png')}}" alt="client">
+                                            <img class="mid-logo" src="{{asset('user/images/partner/partner-2.png')}}"
+                                                 alt="client">
+                                            <img src="{{asset('user/images/partner/partner-3.png')}}" alt="client">
                                         </div>
                                     </div>
                                 </div>

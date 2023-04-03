@@ -17,4 +17,11 @@ class Author extends Model
             get: fn(string $value) => asset($value),
         );
     }
+
+    protected function fullName(): Attribute
+    {
+        return Attribute::make(
+            get: fn() => $this->first_name . ' ' . $this->last_name,
+        );
+    }
 }

@@ -4,7 +4,67 @@
     <!--Swiper Banner Start -->
     @include('user.partials.banner')
     <!--Swiper Banner End-->
-
+    <section class="content-inner-1 overlay-white-middle">
+        <div class="container">
+            <div class="row about-style1 align-items-center">
+                <div class="col-lg-6 m-b30 wow fadeInUp" data-wow-delay="0.1s">
+                    <div class="row sp10 about-thumb">
+                        <div class="col-sm-6 aos-item ">
+                            <div class="split-box">
+                                <div>
+                                    <img class="m-b30" src="{{asset('user/images/about/about1.jpg')}}" alt="/">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-sm-6">
+                            <div class="split-box ">
+                                <div>
+                                    <img class="m-b20 aos-item" src="{{asset('user/images/about/about2.jpg')}}" alt="/">
+                                </div>
+                            </div>
+                            <div class="exp-bx aos-item">
+                                <div class="exp-head">
+                                    <div class="counter-num">
+                                        <h2><span class="counter">50</span><small>+</small></h2>
+                                    </div>
+                                    <h6 class="title">Years of Experience</h6>
+                                </div>
+                                <div class="exp-info">
+                                    <ul class="list-check primary">
+                                        <li>Comics & Graphics</li>
+                                        <li>Biography</li>
+                                        <li>Literary Collections</li>
+                                        <li>Children Fiction</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-6 m-b30 wow fadeInUp" data-wow-delay="0.2s">
+                    <div class="about-content px-lg-4">
+                        <div class="section-head style-1">
+                            <h2 class="title">Bookland Is Best Choice For Learners</h2>
+                            <p>There are many variations of passages of Lorem Ipsum available, but the majority have
+                                suffered alteration which don’t look even slightly believable. It Is A Long Established
+                                Fact That A Reader Will Be Distracted</p>
+                        </div>
+                        <a href="{{route('contact_us')}}" class="btn btn-primary shadow-primary btnhover">Contact Us</a>
+                    </div>
+                </div>
+            </div>
+            <!--Client Swiper -->
+            <div class="swiper client-swiper mt-5">
+                <div class="swiper-wrapper">
+                    <div class="swiper-slide"><img src="{{asset('user/images/client/client1.svg')}}" alt="client"></div>
+                    <div class="swiper-slide"><img src="{{asset('user/images/client/client2.svg')}}" alt="client"></div>
+                    <div class="swiper-slide"><img src="{{asset('user/images/client/client3.svg')}}" alt="client"></div>
+                    <div class="swiper-slide"><img src="{{asset('user/images/client/client4.svg')}}" alt="client"></div>
+                    <div class="swiper-slide"><img src="{{asset('user/images/client/client5.svg')}}" alt="client"></div>
+                </div>
+            </div>
+        </div>
+    </section>
     <section class="content-inner-1 bg-grey reccomend ">
         <div class="container">
             <div class="section-head text-center">
@@ -20,7 +80,9 @@
                         <div class="swiper-slide">
                             <div class="books-card style-1 wow fadeInUp" data-wow-delay="0.1s">
                                 <div class="dz-media">
-                                    <img src="{{$book->image_url}}" alt="book">
+                                    <a href="{{route('book.show',['book'=>$book->id])}}">
+                                        <img src="{{$book->image_url}}" alt="book">
+                                    </a>
                                 </div>
                                 <div class="dz-content">
                                     <h4 class="title">{{$book->title}}</h4>
@@ -163,10 +225,13 @@
                         <div class="swiper-slide">
                             <div class="books-card style-3 wow fadeInUp" data-wow-delay="0.1s">
                                 <div class="dz-media">
-                                    <img src="{{$book->image_url}}" alt="book">
+                                    <a href="{{route('book.show',['book'=>$book->id])}}">
+                                        <img src="{{$book->image_url}}" alt="book">
+                                    </a>
                                 </div>
                                 <div class="dz-content">
-                                    <h5 class="title"><a href="javascript:">{{$book->title}}</a></h5>
+                                    <h5 class="title"><a
+                                            href="{{route('book.show',['book'=>$book->id])}}">{{$book->title}}</a></h5>
                                     <ul class="dz-tags">
                                         @foreach($book->categories as $category)
                                             <li><a href="javascript:">{{$category->name}},</a></li>
@@ -178,7 +243,7 @@
                                         </div>
                                         <div class="price">
                                             <span class="price-num">$ {{$book->sale_price}}</span>
-                                            <del>$ {{$book->price-$book->sale_price}}</del>
+                                            <del>$ {{$book->price}}</del>
                                         </div>
                                     </div>
                                 </div>
@@ -207,11 +272,15 @@
                         <div class="swiper-slide">
                             <div class="dz-card style-2 wow fadeInUp" data-wow-delay="0.1s">
                                 <div class="dz-media">
-                                    <a href="javascript:"><img src="{{ $book->image_url }}"
-                                                               alt="/"></a>
+                                    <a href="{{route('book.show',['book'=>$book->id])}}">
+                                        <img src="{{ $book->image_url }}"
+                                             alt="/">
+                                    </a>
                                 </div>
                                 <div class="dz-info">
-                                    <h4 class="dz-title"><a href="javascript:">{{ $book->title }}</a></h4>
+                                    <h4 class="dz-title"><a
+                                            href="{{route('book.show',['book'=>$book->id])}}">{{ $book->title }}</a>
+                                    </h4>
                                     <div class="dz-meta">
                                         <ul class="dz-tags">
                                             @foreach($book->categories as $category)
@@ -227,8 +296,8 @@
                                                 class="flaticon-shopping-cart-1 m-r10 add-to-cart"
                                                 data-book="{{$book}}"></i> Add to cart</a>
                                         <div class="price-details">
-                                            $ {{$book->price}}
-                                            {{--                                                <del>$25</del>--}}
+                                            $ {{$book->sale_price}}
+                                            <del>$ {{$book->price}}</del>
                                         </div>
                                     </div>
                                 </div>
@@ -251,7 +320,9 @@
                     et dolore magna aliqua</p>
             </div>
             <div class="row pricingtable-wraper">
-                <div class="col-lg-6 col-md-6 wow fadeInUp" data-wow-delay="0.1s">
+                <div class="col-md-1">
+                </div>
+                <div class="col-lg-5 col-md-5 wow fadeInUp" data-wow-delay="0.1s">
                     <div class="pricingtable-wrapper mt-0 style-1 m-b30">
                         <div class="pricingtable-inner">
                             <div class="pricingtable-title">
@@ -276,7 +347,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="col-lg-6 col-md-6 wow fadeInUp" data-wow-delay="0.2s">
+                <div class="col-lg-5 col-md-5 wow fadeInUp" data-wow-delay="0.2s">
                     <div class="pricingtable-wrapper  mt-0 style-1 m-b30">
                         <div class="pricingtable-inner">
                             <div class="pricingtable-title">
@@ -300,6 +371,8 @@
                             </div>
                         </div>
                     </div>
+                </div>
+                <div class="col-md-1">
                 </div>
             </div>
         </div>

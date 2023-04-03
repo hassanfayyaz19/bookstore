@@ -122,4 +122,12 @@ class BookController extends Controller
         return view('user.book.my_books', compact('purchases'));
     }
 
+    public function show(Book $book)
+    {
+        $book->load(['author', 'publisher', 'categories']);
+
+        $books = Book::limit(3)->get();
+        return view('user.book.detail', get_defined_vars());
+    }
+
 }
