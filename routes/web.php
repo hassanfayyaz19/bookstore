@@ -51,6 +51,7 @@ Route::middleware(['auth:web'])->group(function () {
     Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
     Route::get('/book/download/{book}', [\App\Http\Controllers\User\BookController::class, 'downloadBook'])->name('book.download');
     Route::get('/book/purchased', [\App\Http\Controllers\User\BookController::class, 'purchasedBook'])->name('book.purchased');
+    Route::get('checkout', [\App\Http\Controllers\User\BookController::class, 'showCheckoutPage'])->name('book.checkout');
 });
 
 Route::get('/about-us', function () {
@@ -78,5 +79,5 @@ Route::resource('contact_us', \App\Http\Controllers\User\ContactUsController::cl
 
 
 Route::get('cart', [\App\Http\Controllers\User\BookController::class, 'showCartPage'])->name('book.cart');
-Route::get('checkout', [\App\Http\Controllers\User\BookController::class, 'showCheckoutPage'])->name('book.checkout');
+
 Route::post('stripe', [\App\Http\Controllers\User\BookController::class, 'stripePost'])->name('stripe.post');
