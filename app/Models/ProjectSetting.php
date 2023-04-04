@@ -15,14 +15,14 @@ class ProjectSetting extends Model
     protected function profile(): Attribute
     {
         return Attribute::make(
-            get: fn(string $value) => asset($value),
+            get: fn($value) => asset($value),
         );
     }
 
     protected function logo(): Attribute
     {
         return Attribute::make(
-            get: fn(string $value) => asset($value),
+            get: fn($value) => asset($value),
         );
     }
 

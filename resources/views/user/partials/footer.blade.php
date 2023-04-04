@@ -94,7 +94,7 @@
                             </li>
                             <li>
                                 <i class="flaticon-email"></i>
-                                <span>{{$header_project_settings->email}}<br></span>
+                                <span>{{$header_project_settings->email??''}}<br></span>
                             </li>
                         </ul>
                     </div>
