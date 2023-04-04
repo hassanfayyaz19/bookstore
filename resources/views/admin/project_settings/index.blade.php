@@ -349,6 +349,58 @@
                                 <div class="row mb-6">
                                     <!--begin::Label-->
                                     <label class="col-lg-4 col-form-label fw-semibold fs-6">
+                                        <span class="">Email</span>
+                                    </label>
+                                    <!--end::Label-->
+
+                                    <!--begin::Col-->
+                                    <div class="col-lg-8 fv-row">
+                                        <input type="email" name="email"
+                                               class="form-control form-control-lg form-control-solid"
+                                               placeholder="Email"
+                                               value="{{$project_setting->email??''}}"/>
+                                    </div>
+                                    <!--end::Col-->
+                                </div>
+                                <!--end::Input group-->
+
+                                <!--begin::Input group-->
+                                <div class="row mb-6">
+                                    <!--begin::Label-->
+                                    <label class="col-lg-4 col-form-label fw-semibold fs-6">
+                                        <span class="">Address</span>
+                                    </label>
+                                    <!--end::Label-->
+
+                                    <!--begin::Col-->
+                                    <div class="col-lg-8 fv-row">
+                                        <input type="text" name="address"
+                                               class="form-control form-control-lg form-control-solid"
+                                               placeholder="Address"
+                                               value="{{$project_setting->address??''}}"/>
+                                    </div>
+                                    <!--end::Col-->
+                                </div>
+                                <!--end::Input group-->
+
+                                <div class="row mb-6">
+                                    <!--begin::Label-->
+                                    <label
+                                        class="col-lg-4 col-form-label fw-semibold fs-6">Description</label>
+                                    <!--end::Label-->
+
+                                    <!--begin::Col-->
+                                    <div class="col-lg-8 fv-row">
+                                        <textarea class="form-control form-control-lg form-control-solid mb-3 mb-lg-0" name="description"
+                                                  id="" cols="30" rows="10">{{$project_setting->description??''}}</textarea>
+                                    </div>
+                                    <!--end::Col-->
+                                </div>
+
+                                <!--begin::Input group-->
+                                <div class="row mb-6">
+                                    <!--begin::Label-->
+                                    <label class="col-lg-4 col-form-label fw-semibold fs-6">
                                         <span class="">Logo</span>
                                     </label>
                                     <!--end::Label-->
@@ -446,6 +498,89 @@
                     <!--end::Content-->
                 </div>
                 <!--end::Basic info-->
+
+
+                <div class="card mb-5 mb-xl-10">
+                    <!--begin::Card header-->
+                    <div class="card-header border-0 cursor-pointer" role="button"
+                         data-bs-toggle="collapse" data-bs-target="#kt_account_profile_details"
+                         aria-expanded="true" aria-controls="kt_account_profile_details">
+                        <!--begin::Card title-->
+                        <div class="card-title m-0">
+                            <h3 class="fw-bold m-0">Contact Us</h3>
+                        </div>
+                        <!--end::Card title-->
+                    </div>
+                    <!--begin::Card header-->
+
+                    <!--begin::Content-->
+                    <div class="collapse show">
+
+                        <!--begin::Form-->
+                        <form class="form" method="post"
+                              action="{{route('admin.project_setting.store')}}" enctype="multipart/form-data">
+                            @csrf
+                            <!--begin::Card body-->
+                            <div class="card-body border-top p-9">
+
+                                <!--begin::Input group-->
+                                <div class="row mb-6">
+                                    <!--begin::Label-->
+                                    <label
+                                        class="col-lg-4 col-form-label fw-semibold fs-6">Headline</label>
+                                    <!--end::Label-->
+
+                                    <!--begin::Col-->
+                                    <div class="col-lg-8">
+                                        <!--begin::Row-->
+                                        <div class="row">
+                                            <!--begin::Col-->
+                                            <div class="col-lg-12 fv-row">
+                                                <input type="text" name="contact_us_headline"
+                                                       class="form-control form-control-lg form-control-solid mb-3 mb-lg-0"
+                                                       placeholder="Headline"
+                                                       value="{{$project_setting->details->contact_us_headline??''}}"/>
+                                            </div>
+                                            <!--end::Col-->
+                                        </div>
+                                        <!--end::Row-->
+                                    </div>
+                                    <!--end::Col-->
+                                </div>
+                                <!--end::Input group-->
+
+                                <!--begin::Input group-->
+                                <div class="row mb-6">
+                                    <!--begin::Label-->
+                                    <label
+                                        class="col-lg-4 col-form-label fw-semibold fs-6">Description</label>
+                                    <!--end::Label-->
+
+                                    <!--begin::Col-->
+                                    <div class="col-lg-8 fv-row">
+                                        <textarea class="form-control form-control-lg form-control-solid mb-3 mb-lg-0" name="contact_us_description"
+                                                  id="" cols="30" rows="10">{{$project_setting->details->contact_us_description??''}}</textarea>
+                                    </div>
+                                    <!--end::Col-->
+                                </div>
+                                <!--end::Input group-->
+                            </div>
+                            <!--end::Card body-->
+
+                            <!--begin::Actions-->
+                            <div class="card-footer d-flex justify-content-end py-6 px-9">
+                                <button type="reset"
+                                        class="btn btn-light btn-active-light-primary me-2">Discard
+                                </button>
+                                <input type="hidden" name="contact_us">
+                                <button type="submit" class="btn btn-primary">Save Changes</button>
+                            </div>
+                            <!--end::Actions-->
+                        </form>
+                        <!--end::Form-->
+                    </div>
+                    <!--end::Content-->
+                </div>
 
             </div>
             <!--end::Content container-->

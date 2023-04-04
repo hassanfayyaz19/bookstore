@@ -34,11 +34,25 @@ class ProjectSettingController extends Controller
 //        dd($request->all());
         $project_setting = ProjectSetting::first() ?? new ProjectSetting();
 //        $project_setting = new ProjectSetting();
+
+
+        if ($request->has('contact_us')) {
+            $project_setting->details = json_encode([
+                'contact_us_headline' => $request->contact_us_headline ?? '',
+                'contact_us_description' => $request->contact_us_description ?? '',
+            ]);
+            $project_setting->save();
+            return back()->withSuccess('Settings Save Successfully');
+        }
+
         $project_setting->first_name = $request->first_name;
         $project_setting->last_name = $request->last_name;
         $project_setting->company_name = $request->company_name;
         $project_setting->mobile_number = $request->mobile_number;
         $project_setting->phone_number = $request->phone_number;
+        $project_setting->email = $request->email;
+        $project_setting->address = $request->address;
+        $project_setting->description = $request->description;
         $project_setting->timezone = $request->timezone;
         $project_setting->currency = $request->currency;
         $project_setting->save();

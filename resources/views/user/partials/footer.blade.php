@@ -29,8 +29,7 @@
                         <div class="footer-logo logo-white">
                             <a href="{{route('welcome')}}">{{config('app.name')}}</a>
                         </div>
-                        <p class="text">Bookland is a Book Store Ecommerce Website Template by DexignZone lorem
-                            ipsum dolor sit</p>
+                        <p class="text">{{$header_project_settings->description??''}}</p>
                         <div class="dz-social-icon style-1">
                             <ul>
                                 <li><a href="https://www.facebook.com/dexignzone" target="_blank"><i
@@ -86,17 +85,16 @@
                         <ul>
                             <li>
                                 <i class="flaticon-placeholder"></i>
-                                <span>832  Thompson Drive, San Fransisco CA 94107,US</span>
+                                <span>{{$header_project_settings->address??''}}</span>
                             </li>
                             <li>
                                 <i class="flaticon-phone"></i>
-                                <span>+123 345123 556<br>
-									+123 345123 556</span>
+                                <span>{{$header_project_settings->mobile_number??''}}<br>
+									{{$header_project_settings->phone_number??''}}</span>
                             </li>
                             <li>
                                 <i class="flaticon-email"></i>
-                                <span>support@bookland.id<br>
-									info@bookland.id</span>
+                                <span>{{$header_project_settings->email}}<br></span>
                             </li>
                         </ul>
                     </div>
@@ -114,7 +112,7 @@
                     <p class="copyright-text">{{config('app.name')}} - © 2022 All Rights Reserved</p>
                 </div>
                 <div class="col-lg-6 col-md-12 text-end">
-                    <p>Made with <span class="heart"></span> by <a href="#">{{config('app.name')}}</a></p>
+                    <p>Made with <span class="heart"></span> by <a href="#">{{$header_project_settings->company_name??''}}</a></p>
                 </div>
             </div>
         </div>

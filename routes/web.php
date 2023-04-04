@@ -20,6 +20,7 @@ Route::get('/', function () {
     $featured_books = \App\Models\Book::with('categories')->featured()->get();
     $banner_books = \App\Models\Book::with('categories')->banner()->get();
     $on_sale_books = \App\Models\Book::with('categories')->onSale()->get();
+    $settings = \App\Models\ProjectSetting::first();
     return view('user.welcome', get_defined_vars());
 })->name('welcome');
 

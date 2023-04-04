@@ -44,10 +44,8 @@
                 <div class="col-lg-6 m-b30 wow fadeInUp" data-wow-delay="0.2s">
                     <div class="about-content px-lg-4">
                         <div class="section-head style-1">
-                            <h2 class="title">Bookland Is Best Choice For Learners</h2>
-                            <p>There are many variations of passages of Lorem Ipsum available, but the majority have
-                                suffered alteration which don’t look even slightly believable. It Is A Long Established
-                                Fact That A Reader Will Be Distracted</p>
+                            <h2 class="title">{{$header_project_settings->details->contact_us_headline ?? ''}}</h2>
+                            <p>{{$header_project_settings->details->contact_us_description ?? ''}}</p>
                         </div>
                         <a href="{{route('contact_us')}}" class="btn btn-primary shadow-primary btnhover">Contact Us</a>
                     </div>

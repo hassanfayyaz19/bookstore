@@ -95,11 +95,6 @@
             <div class="card rounded-3 w-md-550px">
                 <!--begin::Card body-->
                 <div class="card-body d-flex flex-column p-10 p-lg-20 pb-lg-10">
-                    @if ($errors->any())
-                        @foreach ($errors->all() as $error)
-                            <div>{{$error}}</div>
-                        @endforeach
-                    @endif
                     <!--begin::Wrapper-->
                     <div class="d-flex flex-center flex-column-fluid pb-15 pb-lg-20">
 
@@ -118,7 +113,11 @@
                                 <!--end::Subtitle--->
                             </div>
                             <!--begin::Heading-->
-
+                            @if ($errors->any())
+                                @foreach ($errors->all() as $error)
+                                    <div class="alert alert-danger" role="alert">{{$error}}</div>
+                                @endforeach
+                            @endif
                             <!--begin::Login options-->
                             <div class="row g-3 mb-9">
                                 <!--begin::Col-->
