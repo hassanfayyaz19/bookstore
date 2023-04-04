@@ -27,7 +27,7 @@
         <div class="container clearfix">
             <!-- Website Logo -->
             <div class="logo-header logo-dark">
-                <a href="{{route('welcome')}}"><img src="{{$header_project_settings->logo}}" alt="logo"></a>
+                <a href="{{route('welcome')}}"><img src="{{$header_project_settings->logo??''}}" alt="logo"></a>
             </div>
 
             <!-- EXTRA NAV -->
