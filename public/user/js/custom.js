@@ -564,20 +564,20 @@ var Bookland = function(){
     }
 
     /* handleSupport */
-    var handleSupport = function () {
-		var support = '<script id="DZScript" src="https://dzassets.s3.amazonaws.com/w3-global.js"></script>';
-		jQuery('body').append(support);
-	}
+    // var handleSupport = function () {
+    // 	var support = '<script id="DZScript" src="https://dzassets.s3.amazonaws.com/w3-global.js"></script>';
+    // 	jQuery('body').append(support);
+    // }
 
     /* Function ============ */
-	return {
-		init:function(){
-			boxHover();
-			wow_animation();
-			onePageLayout();
-			dzTheme();
-			homeSearch();
-			MagnificPopup();
+    return {
+        init: function () {
+            boxHover()
+            wow_animation()
+            onePageLayout()
+            dzTheme()
+            homeSearch()
+            MagnificPopup()
 			scrollTop();
 			headerFix();
 			handleVideo();
@@ -598,7 +598,7 @@ var Bookland = function(){
 			handleHeaderMenuItem();
 			handleFinalCountDown();
 			cartButton();
-			handleSupport();
+            // handleSupport();
 		},
 
 		load:function(){

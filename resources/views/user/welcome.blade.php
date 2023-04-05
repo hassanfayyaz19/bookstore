@@ -4,72 +4,13 @@
     <!--Swiper Banner Start -->
     @include('user.partials.banner')
     <!--Swiper Banner End-->
-    <section class="content-inner-1 overlay-white-middle">
-        <div class="container">
-            <div class="row about-style1 align-items-center">
-                <div class="col-lg-6 m-b30 wow fadeInUp" data-wow-delay="0.1s">
-                    <div class="row sp10 about-thumb">
-                        <div class="col-sm-6 aos-item ">
-                            <div class="split-box">
-                                <div>
-                                    <img class="m-b30" src="{{asset('user/images/about/about1.jpg')}}" alt="/">
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-sm-6">
-                            <div class="split-box ">
-                                <div>
-                                    <img class="m-b20 aos-item" src="{{asset('user/images/about/about2.jpg')}}" alt="/">
-                                </div>
-                            </div>
-                            <div class="exp-bx aos-item">
-                                <div class="exp-head">
-                                    <div class="counter-num">
-                                        <h2><span class="counter">50</span><small>+</small></h2>
-                                    </div>
-                                    <h6 class="title">Years of Experience</h6>
-                                </div>
-                                <div class="exp-info">
-                                    <ul class="list-check primary">
-                                        <li>Comics & Graphics</li>
-                                        <li>Biography</li>
-                                        <li>Literary Collections</li>
-                                        <li>Children Fiction</li>
-                                    </ul>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-6 m-b30 wow fadeInUp" data-wow-delay="0.2s">
-                    <div class="about-content px-lg-4">
-                        <div class="section-head style-1">
-                            <h2 class="title">{{$header_project_settings->details->contact_us_headline ?? ''}}</h2>
-                            <p>{{$header_project_settings->details->contact_us_description ?? ''}}</p>
-                        </div>
-                        <a href="{{route('contact_us')}}" class="btn btn-primary shadow-primary btnhover">Contact Us</a>
-                    </div>
-                </div>
-            </div>
-            <!--Client Swiper -->
-            <div class="swiper client-swiper mt-5">
-                <div class="swiper-wrapper">
-                    <div class="swiper-slide"><img src="{{asset('user/images/client/client1.svg')}}" alt="client"></div>
-                    <div class="swiper-slide"><img src="{{asset('user/images/client/client2.svg')}}" alt="client"></div>
-                    <div class="swiper-slide"><img src="{{asset('user/images/client/client3.svg')}}" alt="client"></div>
-                    <div class="swiper-slide"><img src="{{asset('user/images/client/client4.svg')}}" alt="client"></div>
-                    <div class="swiper-slide"><img src="{{asset('user/images/client/client5.svg')}}" alt="client"></div>
-                </div>
-            </div>
-        </div>
-    </section>
+    @include('user.partials.contact_us_component')
+
     <section class="content-inner-1 bg-grey reccomend ">
         <div class="container">
             <div class="section-head text-center">
                 <h2 class="title">Recommended For You</h2>
-                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut
-                    labore
-                    et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris</p>
+                <p>{{$header_project_settings->details->recommended_for_you_description??''}}</p>
             </div>
             <!-- Swiper -->
             <div class="swiper-container swiper-two">
@@ -79,7 +20,7 @@
                             <div class="books-card style-1 wow fadeInUp" data-wow-delay="0.1s">
                                 <div class="dz-media">
                                     <a href="{{route('book.show',['book'=>$book->id])}}">
-                                        <img src="{{$book->image_url}}" alt="book">
+                                        <img class="book-image" src="{{$book->image_url}}" alt="book">
                                     </a>
                                 </div>
                                 <div class="dz-content">
@@ -107,8 +48,8 @@
                             <i class="flaticon-power icon-cell"></i>
                         </div>
                         <div class="icon-content">
-                            <h5 class="dz-title m-b10">Quick Delivery</h5>
-                            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor</p>
+                            <h5 class="dz-title m-b10">{{$header_project_settings->details->feature_1_headline??''}}</h5>
+                            <p>{{$header_project_settings->details->feature_1_headline_description??''}}</p>
                         </div>
                     </div>
                 </div>
@@ -118,8 +59,8 @@
                             <i class="flaticon-shield icon-cell"></i>
                         </div>
                         <div class="icon-content">
-                            <h5 class="dz-title m-b10">Secure Payment</h5>
-                            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor</p>
+                            <h5 class="dz-title m-b10">{{$header_project_settings->details->feature_2_headline??''}}</h5>
+                            <p>{{$header_project_settings->details->feature_2_headline_description??''}}</p>
                         </div>
                     </div>
                 </div>
@@ -129,8 +70,8 @@
                             <i class="flaticon-like icon-cell"></i>
                         </div>
                         <div class="icon-content">
-                            <h5 class="dz-title m-b10">Best Quality</h5>
-                            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor</p>
+                            <h5 class="dz-title m-b10">{{$header_project_settings->details->feature_3_headline??''}}</h5>
+                            <p>{{$header_project_settings->details->feature_3_headline_description??''}}</p>
                         </div>
                     </div>
                 </div>
@@ -140,8 +81,8 @@
                             <i class="flaticon-star icon-cell"></i>
                         </div>
                         <div class="icon-content">
-                            <h5 class="dz-title m-b10">Return Guarantee</h5>
-                            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor</p>
+                            <h5 class="dz-title m-b10">{{$header_project_settings->details->feature_4_headline??''}}</h5>
+                            <p>{{$header_project_settings->details->feature_4_headline_description??''}}</p>
                         </div>
                     </div>
                 </div>
@@ -151,60 +92,7 @@
     <!-- icon-box1 End-->
 
     <!--icon-box3 section-->
-    <section class="content-inner-1 bg-light">
-        <div class="container">
-            <div class="section-head text-center">
-                <h2 class="title">Our Mission</h2>
-                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut
-                    labore
-                    et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris</p>
-            </div>
-            <div class="row">
-                <div class="col-lg-4 col-md-6 wow fadeInUp" data-wow-delay="0.1s">
-                    <div class="icon-bx-wraper style-3 m-b30">
-                        <div class="icon-lg m-b20">
-                            <i class="flaticon-open-book-1 icon-cell"></i>
-                        </div>
-                        <div class="icon-content">
-                            <h4 class="title">Best Bookstore</h4>
-                            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
-                                incididunt
-                                ut labore et dolore magna aliqua. </p>
-                            <a href="{{route('about_us')}}">Learn More <i class="fa-solid fa-angles-right"></i></a>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-4 col-md-6 wow fadeInUp" data-wow-delay="0.2s">
-                    <div class="icon-bx-wraper style-3 m-b30">
-                        <div class="icon-lg m-b20">
-                            <i class="flaticon-exclusive icon-cell"></i>
-                        </div>
-                        <div class="icon-content">
-                            <h4 class="title">Trusted Seller</h4>
-                            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
-                                incididunt
-                                ut labore et dolore magna aliqua. </p>
-                            <a href="{{route('about_us')}}">Learn More <i class="fa-solid fa-angles-right"></i></a>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-4 col-md-12 wow fadeInUp" data-wow-delay="0.3s">
-                    <div class="icon-bx-wraper style-3 m-b30">
-                        <div class="icon-lg m-b20">
-                            <i class="flaticon-store icon-cell"></i>
-                        </div>
-                        <div class="icon-content">
-                            <h4 class="title">Expand Store</h4>
-                            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
-                                incididunt
-                                ut labore et dolore magna aliqua. </p>
-                            <a href="{{route('about_us')}}">Learn More <i class="fa-solid fa-angles-right"></i></a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
+    @include('user.partials.our_mission_component')
 
     <!-- Book Sale -->
     <section class="content-inner-1">
@@ -224,7 +112,7 @@
                             <div class="books-card style-3 wow fadeInUp" data-wow-delay="0.1s">
                                 <div class="dz-media">
                                     <a href="{{route('book.show',['book'=>$book->id])}}">
-                                        <img src="{{$book->image_url}}" alt="book">
+                                        <img class="book-image" src="{{$book->image_url}}" alt="book">
                                     </a>
                                 </div>
                                 <div class="dz-content">
@@ -286,9 +174,7 @@
                                             @endforeach
                                         </ul>
                                     </div>
-                                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
-                                        tempor
-                                        incididunt ut labore.</p>
+                                    <p>{{str()->words($book->description,15,'....')}}</p>
                                     <div class="bookcard-footer">
                                         <a href="javascript:" class="btn btn-primary m-t15 btnhover btnhover2"><i
                                                 class="flaticon-shopping-cart-1 m-r10 add-to-cart"
@@ -312,10 +198,8 @@
     <section class="content-inner bg-light">
         <div class="container">
             <div class="section-head text-center">
-                <h2 class="title">Our Pricing</h2>
-                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut
-                    labore
-                    et dolore magna aliqua</p>
+                <h2 class="title">{{$header_project_settings->details->our_price_headline??''}}</h2>
+                <p>{{$header_project_settings->details->our_price_description??''}}</p>
             </div>
             <div class="row pricingtable-wraper">
                 <div class="col-md-1">

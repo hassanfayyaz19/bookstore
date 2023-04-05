@@ -29,7 +29,7 @@ class ProjectSetting extends Model
     protected function details(): Attribute
     {
         return Attribute::make(
-            get: fn($value) => !is_null($value) ? json_decode($value) : "",
+            get: fn($value) => !is_null($value) ? json_decode($value) : new \stdClass(),
         );
     }
 }

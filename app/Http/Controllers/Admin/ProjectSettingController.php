@@ -45,6 +45,34 @@ class ProjectSettingController extends Controller
             return back()->withSuccess('Settings Save Successfully');
         }
 
+        if ($request->has('home_settings')) {
+            $details = $project_setting->details;
+            $details->recommended_for_you_description = $request->recommended_for_you_description;
+            $details->feature_1_headline = $request->feature_1_headline;
+            $details->feature_1_headline_description = $request->feature_1_headline_description;
+            $details->feature_2_headline = $request->feature_2_headline;
+            $details->feature_2_headline_description = $request->feature_2_headline_description;
+            $details->feature_3_headline = $request->feature_3_headline;
+            $details->feature_3_headline_description = $request->feature_3_headline_description;
+            $details->feature_4_headline = $request->feature_4_headline;
+            $details->feature_4_headline_description = $request->feature_4_headline_description;
+
+            $details->our_mission_headline = $request->our_mission_headline;
+            $details->our_mission_description = $request->our_mission_description;
+            $details->our_mission_box_1_headline = $request->our_mission_box_1_headline;
+            $details->our_mission_box_1_description = $request->our_mission_box_1_description;
+            $details->our_mission_box_2_headline = $request->our_mission_box_2_headline;
+            $details->our_mission_box_2_description = $request->our_mission_box_2_description;
+            $details->our_mission_box_3_headline = $request->our_mission_box_3_headline;
+            $details->our_mission_box_3_description = $request->our_mission_box_3_description;
+
+            $details->our_price_headline = $request->our_price_headline;
+            $details->our_price_description = $request->our_price_description;
+            $project_setting->details = json_encode($details);
+            $project_setting->save();
+            return back()->withSuccess('Settings Save Successfully');
+        }
+
         $project_setting->first_name = $request->first_name;
         $project_setting->last_name = $request->last_name;
         $project_setting->company_name = $request->company_name;
@@ -108,5 +136,11 @@ class ProjectSettingController extends Controller
     public function destroy(ProjectSetting $project_setting)
     {
         //
+    }
+
+
+    public function showHomeSettingPage()
+    {
+        return view('project_settings.home_setting');
     }
 }

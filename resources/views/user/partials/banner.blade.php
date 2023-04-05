@@ -33,19 +33,21 @@
                                         </div>
                                     </div>
                                     <div class="partner">
-                                        <p>Our partner</p>
+                                        <p>We Accept</p>
                                         <div class="brand-logo">
-                                            <img src="{{asset('user/images/partner/partner-1.png')}}" alt="client">
-                                            <img class="mid-logo" src="{{asset('user/images/partner/partner-2.png')}}"
-                                                 alt="client">
-                                            <img src="{{asset('user/images/partner/partner-3.png')}}" alt="client">
+                                            <i class="fa-brands fa-cc-visa fa-2xl m-3"></i>
+                                            <i class="fa-brands fa-stripe fa-2xl m-3"></i>
+                                            <i class="fa-brands fa-paypal fa-2xl m-3"></i>
+                                            <i class="fa-brands fa-cc-mastercard fa-2xl m-3"></i>
                                         </div>
                                     </div>
                                 </div>
                             </div>
+
                             <div class="col-md-6">
-                                <div class="banner-media" data-swiper-parallax="-100">
-                                    <img src="{{asset('user/images/banner/banner-media3.png')}}" alt="media">
+                                <div class="banner-media " data-swiper-parallax="-100">
+                                    <img class="d-none d-sm-block"
+                                         src="{{asset('user/images/banner/banner-media3.png')}}" alt="media">
                                 </div>
                                 <img class="pattern" src="{{asset('user/images/Group.png')}}"
                                      data-swiper-parallax="-100" alt="dots">

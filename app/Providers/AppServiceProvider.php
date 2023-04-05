@@ -24,8 +24,12 @@ class AppServiceProvider extends ServiceProvider
     {
         View::composer(['user.partials.header', 'user.partials.footer'], function ($view) {
             $categories = Category::all();
+            $view->with(['header_categories' => $categories]);
+        });
+
+        View::composer(['user.*'], function ($view) {
             $project_settings = ProjectSetting::first();
-            $view->with(['header_categories' => $categories, 'header_project_settings' => $project_settings]);
+            $view->with(['header_project_settings' => $project_settings]);
         });
     }
 }

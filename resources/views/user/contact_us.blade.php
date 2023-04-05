@@ -40,7 +40,7 @@
                                 </div>
                                 <div class="icon-content">
                                     <h5 class=" dz-tilte text-white">Our Address</h5>
-                                    <p>1247/Plot No. 39, 15th Phase, Huab Colony, Kukatpally, Hyderabad</p>
+                                    <p>{{$header_project_settings->address??''}}</p>
                                 </div>
                             </li>
                             <li class="icon-bx-wraper text-white left m-b30">
@@ -56,7 +56,7 @@
                                 </div>
                                 <div class="icon-content">
                                     <h5 class="dz-tilte text-white">Our Email</h5>
-                                    <p>info@gmail<br>services@gmail.com</p>
+                                    <p>{{$header_project_settings->email??''}}</p>
                                 </div>
                             </li>
                         </ul>

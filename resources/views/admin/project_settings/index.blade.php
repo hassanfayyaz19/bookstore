@@ -140,9 +140,15 @@
                             class="nav nav-stretch nav-line-tabs nav-line-tabs-2x border-transparent fs-5 fw-bold">
 
                             <li class="nav-item mt-2">
-                                <a class="nav-link text-active-primary ms-0 me-10 py-5 active"
-                                   href="javascript:">
+                                <a class="nav-link text-active-primary ms-0 me-10 py-5 {{!request()->has('tab')?'active':''}}"
+                                   href="{{route('admin.project_setting.index')}}">
                                     Settings </a>
+                            </li>
+
+                            <li class="nav-item mt-2">
+                                <a class="nav-link text-active-primary ms-0 me-10 py-5 {{request()->has('tab')&&request()->tab=='home_settings'?'active':''}}"
+                                   href="{{route('admin.project_setting.index',['tab'=>'home_settings'])}}">
+                                    Home Settings </a>
                             </li>
 
                             <li class="nav-item mt-2">
@@ -161,426 +167,802 @@
                     </div>
                 @endif
                 <!--end::Navbar-->
-                <!--begin::Basic info-->
-                <div class="card mb-5 mb-xl-10">
-                    <!--begin::Card header-->
-                    <div class="card-header border-0 cursor-pointer" role="button"
-                         data-bs-toggle="collapse" data-bs-target="#kt_account_profile_details"
-                         aria-expanded="true" aria-controls="kt_account_profile_details">
-                        <!--begin::Card title-->
-                        <div class="card-title m-0">
-                            <h3 class="fw-bold m-0">Profile Details</h3>
+
+                @if(!request()->get('tab'))
+                    <div class="card mb-5 mb-xl-10">
+                        <!--begin::Card header-->
+                        <div class="card-header border-0 cursor-pointer" role="button"
+                             data-bs-toggle="collapse" data-bs-target="#kt_account_profile_details"
+                             aria-expanded="true" aria-controls="kt_account_profile_details">
+                            <!--begin::Card title-->
+                            <div class="card-title m-0">
+                                <h3 class="fw-bold m-0">Profile Details</h3>
+                            </div>
+                            <!--end::Card title-->
                         </div>
-                        <!--end::Card title-->
-                    </div>
-                    <!--begin::Card header-->
+                        <!--begin::Card header-->
 
-                    <!--begin::Content-->
-                    <div id="kt_account_settings_profile_details" class="collapse show">
+                        <!--begin::Content-->
+                        <div id="kt_account_settings_profile_details" class="collapse show">
 
-                        <!--begin::Form-->
-                        <form id="kt_account_profile_details_form" class="form" method="post"
-                              action="{{route('admin.project_setting.store')}}" enctype="multipart/form-data">
-                            @csrf
-                            <!--begin::Card body-->
-                            <div class="card-body border-top p-9">
-                                <!--begin::Input group-->
-                                <div class="row mb-6">
-                                    <!--begin::Label-->
-                                    <label
-                                        class="col-lg-4 col-form-label fw-semibold fs-6">Avatar</label>
-                                    <!--end::Label-->
+                            <!--begin::Form-->
+                            <form id="kt_account_profile_details_form" class="form" method="post"
+                                  action="{{route('admin.project_setting.store')}}" enctype="multipart/form-data">
+                                @csrf
+                                <!--begin::Card body-->
+                                <div class="card-body border-top p-9">
+                                    <!--begin::Input group-->
+                                    <div class="row mb-6">
+                                        <!--begin::Label-->
+                                        <label
+                                            class="col-lg-4 col-form-label fw-semibold fs-6">Avatar</label>
+                                        <!--end::Label-->
 
-                                    <!--begin::Col-->
-                                    <div class="col-lg-8">
-                                        <!--begin::Image input-->
-                                        <div class="image-input image-input-outline"
-                                             data-kt-image-input="true"
-                                             style="background-image: url('{{asset('assets/media/svg/avatars/blank.svg')}}')">
-                                            <!--begin::Preview existing avatar-->
-                                            <div class="image-input-wrapper w-125px h-125px"
-                                                 style="background-image: url('{{isset($project_setting->profile)?asset($project_setting->profile):'assets/media/svg/avatars/blank.svg'}}')">
-                                            </div>
-                                            <!--end::Preview existing avatar-->
+                                        <!--begin::Col-->
+                                        <div class="col-lg-8">
+                                            <!--begin::Image input-->
+                                            <div class="image-input image-input-outline"
+                                                 data-kt-image-input="true"
+                                                 style="background-image: url('{{asset('assets/media/svg/avatars/blank.svg')}}')">
+                                                <!--begin::Preview existing avatar-->
+                                                <div class="image-input-wrapper w-125px h-125px"
+                                                     style="background-image: url('{{isset($project_setting->profile)?asset($project_setting->profile):'assets/media/svg/avatars/blank.svg'}}')">
+                                                </div>
+                                                <!--end::Preview existing avatar-->
 
-                                            <!--begin::Label-->
-                                            <label
-                                                class="btn btn-icon btn-circle btn-active-color-primary w-25px h-25px bg-body shadow"
-                                                data-kt-image-input-action="change"
-                                                data-bs-toggle="tooltip" title="Change avatar">
-                                                <i class="bi bi-pencil-fill fs-7"></i>
+                                                <!--begin::Label-->
+                                                <label
+                                                    class="btn btn-icon btn-circle btn-active-color-primary w-25px h-25px bg-body shadow"
+                                                    data-kt-image-input-action="change"
+                                                    data-bs-toggle="tooltip" title="Change avatar">
+                                                    <i class="bi bi-pencil-fill fs-7"></i>
 
-                                                <!--begin::Inputs-->
-                                                <input type="file" name="profile"
-                                                       accept=".png, .jpg, .jpeg"/>
-                                                <input type="hidden" name="avatar_remove"/>
-                                                <!--end::Inputs-->
-                                            </label>
-                                            <!--end::Label-->
+                                                    <!--begin::Inputs-->
+                                                    <input type="file" name="profile"
+                                                           accept=".png, .jpg, .jpeg"/>
+                                                    <input type="hidden" name="avatar_remove"/>
+                                                    <!--end::Inputs-->
+                                                </label>
+                                                <!--end::Label-->
 
-                                            <!--begin::Cancel-->
-                                            <span
-                                                class="btn btn-icon btn-circle btn-active-color-primary w-25px h-25px bg-body shadow"
-                                                data-kt-image-input-action="cancel"
-                                                data-bs-toggle="tooltip" title="Cancel avatar">
+                                                <!--begin::Cancel-->
+                                                <span
+                                                    class="btn btn-icon btn-circle btn-active-color-primary w-25px h-25px bg-body shadow"
+                                                    data-kt-image-input-action="cancel"
+                                                    data-bs-toggle="tooltip" title="Cancel avatar">
                                                                 <i class="bi bi-x fs-2"></i>
                                                             </span>
-                                            <!--end::Cancel-->
+                                                <!--end::Cancel-->
 
-                                            <!--begin::Remove-->
-                                            <span
-                                                class="btn btn-icon btn-circle btn-active-color-primary w-25px h-25px bg-body shadow"
-                                                data-kt-image-input-action="remove"
-                                                data-bs-toggle="tooltip" title="Remove avatar">
+                                                <!--begin::Remove-->
+                                                <span
+                                                    class="btn btn-icon btn-circle btn-active-color-primary w-25px h-25px bg-body shadow"
+                                                    data-kt-image-input-action="remove"
+                                                    data-bs-toggle="tooltip" title="Remove avatar">
                                                                 <i class="bi bi-x fs-2"></i>
                                                             </span>
-                                            <!--end::Remove-->
-                                        </div>
-                                        <!--end::Image input-->
-
-                                        <!--begin::Hint-->
-                                        <div class="form-text">Allowed file types: png, jpg, jpeg.</div>
-                                        <!--end::Hint-->
-                                    </div>
-                                    <!--end::Col-->
-                                </div>
-                                <!--end::Input group-->
-
-                                <!--begin::Input group-->
-                                <div class="row mb-6">
-                                    <!--begin::Label-->
-                                    <label
-                                        class="col-lg-4 col-form-label fw-semibold fs-6">Full Name</label>
-                                    <!--end::Label-->
-
-                                    <!--begin::Col-->
-                                    <div class="col-lg-8">
-                                        <!--begin::Row-->
-                                        <div class="row">
-                                            <!--begin::Col-->
-                                            <div class="col-lg-6 fv-row">
-                                                <input type="text" name="first_name"
-                                                       class="form-control form-control-lg form-control-solid mb-3 mb-lg-0"
-                                                       placeholder="First name"
-                                                       value="{{$project_setting->first_name??''}}"/>
+                                                <!--end::Remove-->
                                             </div>
-                                            <!--end::Col-->
+                                            <!--end::Image input-->
 
-                                            <!--begin::Col-->
-                                            <div class="col-lg-6 fv-row">
-                                                <input type="text" name="last_name"
-                                                       class="form-control form-control-lg form-control-solid"
-                                                       placeholder="Last name"
-                                                       value="{{$project_setting->last_name??''}}"/>
-                                            </div>
-                                            <!--end::Col-->
+                                            <!--begin::Hint-->
+                                            <div class="form-text">Allowed file types: png, jpg, jpeg.</div>
+                                            <!--end::Hint-->
                                         </div>
-                                        <!--end::Row-->
+                                        <!--end::Col-->
                                     </div>
-                                    <!--end::Col-->
-                                </div>
-                                <!--end::Input group-->
+                                    <!--end::Input group-->
 
-                                <!--begin::Input group-->
-                                <div class="row mb-6">
-                                    <!--begin::Label-->
-                                    <label
-                                        class="col-lg-4 col-form-label fw-semibold fs-6">Company</label>
-                                    <!--end::Label-->
+                                    <!--begin::Input group-->
+                                    <div class="row mb-6">
+                                        <!--begin::Label-->
+                                        <label
+                                            class="col-lg-4 col-form-label fw-semibold fs-6">Full Name</label>
+                                        <!--end::Label-->
 
-                                    <!--begin::Col-->
-                                    <div class="col-lg-8 fv-row">
-                                        <input type="text" name="company_name"
-                                               class="form-control form-control-lg form-control-solid"
-                                               placeholder="Company name"
-                                               value="{{$project_setting->company_name??''}}"/>
+                                        <!--begin::Col-->
+                                        <div class="col-lg-8">
+                                            <!--begin::Row-->
+                                            <div class="row">
+                                                <!--begin::Col-->
+                                                <div class="col-lg-6 fv-row">
+                                                    <input type="text" name="first_name"
+                                                           class="form-control form-control-lg form-control-solid mb-3 mb-lg-0"
+                                                           placeholder="First name"
+                                                           value="{{$project_setting->first_name??''}}"/>
+                                                </div>
+                                                <!--end::Col-->
+
+                                                <!--begin::Col-->
+                                                <div class="col-lg-6 fv-row">
+                                                    <input type="text" name="last_name"
+                                                           class="form-control form-control-lg form-control-solid"
+                                                           placeholder="Last name"
+                                                           value="{{$project_setting->last_name??''}}"/>
+                                                </div>
+                                                <!--end::Col-->
+                                            </div>
+                                            <!--end::Row-->
+                                        </div>
+                                        <!--end::Col-->
                                     </div>
-                                    <!--end::Col-->
-                                </div>
-                                <!--end::Input group-->
+                                    <!--end::Input group-->
 
-                                <!--begin::Input group-->
-                                <div class="row mb-6">
-                                    <!--begin::Label-->
-                                    <label class="col-lg-4 col-form-label fw-semibold fs-6">
-                                        <span class="">Mobile Number</span>
+                                    <!--begin::Input group-->
+                                    <div class="row mb-6">
+                                        <!--begin::Label-->
+                                        <label
+                                            class="col-lg-4 col-form-label fw-semibold fs-6">Company</label>
+                                        <!--end::Label-->
 
-                                        <i class="fas fa-exclamation-circle ms-1 fs-7"
-                                           data-bs-toggle="tooltip"
-                                           title="Phone number must be active"></i>
-                                    </label>
-                                    <!--end::Label-->
-
-                                    <!--begin::Col-->
-                                    <div class="col-lg-8 fv-row">
-                                        <input type="tel" name="mobile_number"
-                                               class="form-control form-control-lg form-control-solid"
-                                               placeholder="Mobile number"
-                                               value="{{$project_setting->mobile_number??''}}"/>
+                                        <!--begin::Col-->
+                                        <div class="col-lg-8 fv-row">
+                                            <input type="text" name="company_name"
+                                                   class="form-control form-control-lg form-control-solid"
+                                                   placeholder="Company name"
+                                                   value="{{$project_setting->company_name??''}}"/>
+                                        </div>
+                                        <!--end::Col-->
                                     </div>
-                                    <!--end::Col-->
-                                </div>
-                                <!--end::Input group-->
+                                    <!--end::Input group-->
 
-                                <!--begin::Input group-->
-                                <div class="row mb-6">
-                                    <!--begin::Label-->
-                                    <label class="col-lg-4 col-form-label fw-semibold fs-6">
-                                        <span class="">Phone Number</span>
+                                    <!--begin::Input group-->
+                                    <div class="row mb-6">
+                                        <!--begin::Label-->
+                                        <label class="col-lg-4 col-form-label fw-semibold fs-6">
+                                            <span class="">Mobile Number</span>
 
-                                        <i class="fas fa-exclamation-circle ms-1 fs-7"
-                                           data-bs-toggle="tooltip"
-                                           title="Phone number must be active"></i>
-                                    </label>
-                                    <!--end::Label-->
+                                            <i class="fas fa-exclamation-circle ms-1 fs-7"
+                                               data-bs-toggle="tooltip"
+                                               title="Phone number must be active"></i>
+                                        </label>
+                                        <!--end::Label-->
 
-                                    <!--begin::Col-->
-                                    <div class="col-lg-8 fv-row">
-                                        <input type="tel" name="phone_number"
-                                               class="form-control form-control-lg form-control-solid"
-                                               placeholder="Phone number"
-                                               value="{{$project_setting->phone_number??''}}"/>
+                                        <!--begin::Col-->
+                                        <div class="col-lg-8 fv-row">
+                                            <input type="tel" name="mobile_number"
+                                                   class="form-control form-control-lg form-control-solid"
+                                                   placeholder="Mobile number"
+                                                   value="{{$project_setting->mobile_number??''}}"/>
+                                        </div>
+                                        <!--end::Col-->
                                     </div>
-                                    <!--end::Col-->
-                                </div>
-                                <!--end::Input group-->
+                                    <!--end::Input group-->
 
-                                <!--begin::Input group-->
-                                <div class="row mb-6">
-                                    <!--begin::Label-->
-                                    <label class="col-lg-4 col-form-label fw-semibold fs-6">
-                                        <span class="">Email</span>
-                                    </label>
-                                    <!--end::Label-->
+                                    <!--begin::Input group-->
+                                    <div class="row mb-6">
+                                        <!--begin::Label-->
+                                        <label class="col-lg-4 col-form-label fw-semibold fs-6">
+                                            <span class="">Phone Number</span>
 
-                                    <!--begin::Col-->
-                                    <div class="col-lg-8 fv-row">
-                                        <input type="email" name="email"
-                                               class="form-control form-control-lg form-control-solid"
-                                               placeholder="Email"
-                                               value="{{$project_setting->email??''}}"/>
+                                            <i class="fas fa-exclamation-circle ms-1 fs-7"
+                                               data-bs-toggle="tooltip"
+                                               title="Phone number must be active"></i>
+                                        </label>
+                                        <!--end::Label-->
+
+                                        <!--begin::Col-->
+                                        <div class="col-lg-8 fv-row">
+                                            <input type="tel" name="phone_number"
+                                                   class="form-control form-control-lg form-control-solid"
+                                                   placeholder="Phone number"
+                                                   value="{{$project_setting->phone_number??''}}"/>
+                                        </div>
+                                        <!--end::Col-->
                                     </div>
-                                    <!--end::Col-->
-                                </div>
-                                <!--end::Input group-->
+                                    <!--end::Input group-->
 
-                                <!--begin::Input group-->
-                                <div class="row mb-6">
-                                    <!--begin::Label-->
-                                    <label class="col-lg-4 col-form-label fw-semibold fs-6">
-                                        <span class="">Address</span>
-                                    </label>
-                                    <!--end::Label-->
+                                    <!--begin::Input group-->
+                                    <div class="row mb-6">
+                                        <!--begin::Label-->
+                                        <label class="col-lg-4 col-form-label fw-semibold fs-6">
+                                            <span class="">Email</span>
+                                        </label>
+                                        <!--end::Label-->
 
-                                    <!--begin::Col-->
-                                    <div class="col-lg-8 fv-row">
-                                        <input type="text" name="address"
-                                               class="form-control form-control-lg form-control-solid"
-                                               placeholder="Address"
-                                               value="{{$project_setting->address??''}}"/>
+                                        <!--begin::Col-->
+                                        <div class="col-lg-8 fv-row">
+                                            <input type="email" name="email"
+                                                   class="form-control form-control-lg form-control-solid"
+                                                   placeholder="Email"
+                                                   value="{{$project_setting->email??''}}"/>
+                                        </div>
+                                        <!--end::Col-->
                                     </div>
-                                    <!--end::Col-->
-                                </div>
-                                <!--end::Input group-->
+                                    <!--end::Input group-->
 
-                                <div class="row mb-6">
-                                    <!--begin::Label-->
-                                    <label
-                                        class="col-lg-4 col-form-label fw-semibold fs-6">Description</label>
-                                    <!--end::Label-->
+                                    <!--begin::Input group-->
+                                    <div class="row mb-6">
+                                        <!--begin::Label-->
+                                        <label class="col-lg-4 col-form-label fw-semibold fs-6">
+                                            <span class="">Address</span>
+                                        </label>
+                                        <!--end::Label-->
 
-                                    <!--begin::Col-->
-                                    <div class="col-lg-8 fv-row">
-                                        <textarea class="form-control form-control-lg form-control-solid mb-3 mb-lg-0" name="description"
-                                                  id="" cols="30" rows="10">{{$project_setting->description??''}}</textarea>
+                                        <!--begin::Col-->
+                                        <div class="col-lg-8 fv-row">
+                                            <input type="text" name="address"
+                                                   class="form-control form-control-lg form-control-solid"
+                                                   placeholder="Address"
+                                                   value="{{$project_setting->address??''}}"/>
+                                        </div>
+                                        <!--end::Col-->
                                     </div>
-                                    <!--end::Col-->
-                                </div>
+                                    <!--end::Input group-->
 
-                                <!--begin::Input group-->
-                                <div class="row mb-6">
-                                    <!--begin::Label-->
-                                    <label class="col-lg-4 col-form-label fw-semibold fs-6">
-                                        <span class="">Logo</span>
-                                    </label>
-                                    <!--end::Label-->
+                                    <div class="row mb-6">
+                                        <!--begin::Label-->
+                                        <label
+                                            class="col-lg-4 col-form-label fw-semibold fs-6">Description</label>
+                                        <!--end::Label-->
 
-                                    <!--begin::Col-->
-                                    <div class="col-lg-8 fv-row">
-                                        <input name="logo" class="form-control" type="file">
+                                        <!--begin::Col-->
+                                        <div class="col-lg-8 fv-row">
+                                        <textarea class="form-control form-control-lg form-control-solid mb-3 mb-lg-0"
+                                                  name="description"
+                                                  id="" cols="30"
+                                                  rows="10">{{$project_setting->description??''}}</textarea>
+                                        </div>
+                                        <!--end::Col-->
                                     </div>
-                                    <!--end::Col-->
-                                </div>
-                                <!--end::Input group-->
 
-                                <!--begin::Input group-->
-                                <div class="row mb-6">
-                                    <!--begin::Label-->
-                                    <label
-                                        class="col-lg-4 col-form-label fw-semibold fs-6">Time Zone</label>
-                                    <!--end::Label-->
+                                    <!--begin::Input group-->
+                                    <div class="row mb-6">
+                                        <!--begin::Label-->
+                                        <label class="col-lg-4 col-form-label fw-semibold fs-6">
+                                            <span class="">Logo</span>
+                                        </label>
+                                        <!--end::Label-->
 
-                                    <!--begin::Col-->
-                                    <div class="col-lg-8 fv-row">
-                                        <select name="timezone" aria-label="Select a Timezone"
-                                                data-control="select2"
-                                                data-placeholder="Select a timezone.."
-                                                class="form-select form-select-solid form-select-lg">
-                                            <option value="" selected disabled>Select a Timezone..</option>
-                                            @foreach($timezone_identifiers as $timezone)
-                                                <option
-                                                    value="{{$timezone}}" {{isset($project_setting->timezone) && $project_setting->timezone==$timezone?'selected':''}}>{{$timezone}}</option>
-                                            @endforeach
-                                        </select>
+                                        <!--begin::Col-->
+                                        <div class="col-lg-8 fv-row">
+                                            <input name="logo" class="form-control" type="file">
+                                        </div>
+                                        <!--end::Col-->
                                     </div>
-                                    <!--end::Col-->
-                                </div>
-                                <!--end::Input group-->
+                                    <!--end::Input group-->
 
-                                <!--begin::Input group-->
-                                <div class="row mb-6">
-                                    <!--begin::Label-->
-                                    <label
-                                        class="col-lg-4 col-form-label  fw-semibold fs-6">Currency</label>
-                                    <!--end::Label-->
+                                    <!--begin::Input group-->
+                                    <div class="row mb-6">
+                                        <!--begin::Label-->
+                                        <label
+                                            class="col-lg-4 col-form-label fw-semibold fs-6">Time Zone</label>
+                                        <!--end::Label-->
 
-                                    <!--begin::Col-->
-                                    <div class="col-lg-8 fv-row">
-                                        <select name="currency" aria-label="Select a Currency"
-                                                data-control="select2"
-                                                data-placeholder="Select a currency.."
-                                                class="form-select form-select-solid form-select-lg">
-                                            <option value="">Select a currency..</option>
-                                            <option data-kt-flag="flags/united-states.svg" value="USD">
-                                                <b>USD</b>&nbsp;-&nbsp;USA dollar
-                                            </option>
-                                            <option data-kt-flag="flags/united-kingdom.svg" value="GBP">
-                                                <b>GBP</b>&nbsp;-&nbsp;British pound
-                                            </option>
-                                            <option data-kt-flag="flags/australia.svg" value="AUD">
-                                                <b>AUD</b>&nbsp;-&nbsp;Australian dollar
-                                            </option>
-                                            <option data-kt-flag="flags/japan.svg" value="JPY">
-                                                <b>JPY</b>&nbsp;-&nbsp;Japanese yen
-                                            </option>
-                                            <option data-kt-flag="flags/sweden.svg" value="SEK">
-                                                <b>SEK</b>&nbsp;-&nbsp;Swedish krona
-                                            </option>
-                                            <option data-kt-flag="flags/canada.svg" value="CAD">
-                                                <b>CAD</b>&nbsp;-&nbsp;Canadian dollar
-                                            </option>
-                                            <option data-kt-flag="flags/switzerland.svg" value="CHF">
-                                                <b>CHF</b>&nbsp;-&nbsp;Swiss franc
-                                            </option>
-                                        </select>
+                                        <!--begin::Col-->
+                                        <div class="col-lg-8 fv-row">
+                                            <select name="timezone" aria-label="Select a Timezone"
+                                                    data-control="select2"
+                                                    data-placeholder="Select a timezone.."
+                                                    class="form-select form-select-solid form-select-lg">
+                                                <option value="" selected disabled>Select a Timezone..</option>
+                                                @foreach($timezone_identifiers as $timezone)
+                                                    <option
+                                                        value="{{$timezone}}" {{isset($project_setting->timezone) && $project_setting->timezone==$timezone?'selected':''}}>{{$timezone}}</option>
+                                                @endforeach
+                                            </select>
+                                        </div>
+                                        <!--end::Col-->
                                     </div>
-                                    <!--end::Col-->
+                                    <!--end::Input group-->
+
+                                    <!--begin::Input group-->
+                                    <div class="row mb-6">
+                                        <!--begin::Label-->
+                                        <label
+                                            class="col-lg-4 col-form-label  fw-semibold fs-6">Currency</label>
+                                        <!--end::Label-->
+
+                                        <!--begin::Col-->
+                                        <div class="col-lg-8 fv-row">
+                                            <select name="currency" aria-label="Select a Currency"
+                                                    data-control="select2"
+                                                    data-placeholder="Select a currency.."
+                                                    class="form-select form-select-solid form-select-lg">
+                                                <option value="">Select a currency..</option>
+                                                <option data-kt-flag="flags/united-states.svg" value="USD">
+                                                    <b>USD</b>&nbsp;-&nbsp;USA dollar
+                                                </option>
+                                                <option data-kt-flag="flags/united-kingdom.svg" value="GBP">
+                                                    <b>GBP</b>&nbsp;-&nbsp;British pound
+                                                </option>
+                                                <option data-kt-flag="flags/australia.svg" value="AUD">
+                                                    <b>AUD</b>&nbsp;-&nbsp;Australian dollar
+                                                </option>
+                                                <option data-kt-flag="flags/japan.svg" value="JPY">
+                                                    <b>JPY</b>&nbsp;-&nbsp;Japanese yen
+                                                </option>
+                                                <option data-kt-flag="flags/sweden.svg" value="SEK">
+                                                    <b>SEK</b>&nbsp;-&nbsp;Swedish krona
+                                                </option>
+                                                <option data-kt-flag="flags/canada.svg" value="CAD">
+                                                    <b>CAD</b>&nbsp;-&nbsp;Canadian dollar
+                                                </option>
+                                                <option data-kt-flag="flags/switzerland.svg" value="CHF">
+                                                    <b>CHF</b>&nbsp;-&nbsp;Swiss franc
+                                                </option>
+                                            </select>
+                                        </div>
+                                        <!--end::Col-->
+                                    </div>
+                                    <!--end::Input group-->
+
                                 </div>
-                                <!--end::Input group-->
+                                <!--end::Card body-->
 
-                            </div>
-                            <!--end::Card body-->
+                                <!--begin::Actions-->
+                                <div class="card-footer d-flex justify-content-end py-6 px-9">
+                                    <button type="reset"
+                                            class="btn btn-light btn-active-light-primary me-2">Discard
+                                    </button>
 
-                            <!--begin::Actions-->
-                            <div class="card-footer d-flex justify-content-end py-6 px-9">
-                                <button type="reset"
-                                        class="btn btn-light btn-active-light-primary me-2">Discard
-                                </button>
-
-                                <button type="submit" class="btn btn-primary"
-                                        id="kt_account_profile_details_submit">Save Changes
-                                </button>
-                            </div>
-                            <!--end::Actions-->
-                        </form>
-                        <!--end::Form-->
-                    </div>
-                    <!--end::Content-->
-                </div>
-                <!--end::Basic info-->
-
-
-                <div class="card mb-5 mb-xl-10">
-                    <!--begin::Card header-->
-                    <div class="card-header border-0 cursor-pointer" role="button"
-                         data-bs-toggle="collapse" data-bs-target="#kt_account_profile_details"
-                         aria-expanded="true" aria-controls="kt_account_profile_details">
-                        <!--begin::Card title-->
-                        <div class="card-title m-0">
-                            <h3 class="fw-bold m-0">Contact Us</h3>
+                                    <button type="submit" class="btn btn-primary"
+                                            id="kt_account_profile_details_submit">Save Changes
+                                    </button>
+                                </div>
+                                <!--end::Actions-->
+                            </form>
+                            <!--end::Form-->
                         </div>
-                        <!--end::Card title-->
+                        <!--end::Content-->
                     </div>
-                    <!--begin::Card header-->
+                    <div class="card mb-5 mb-xl-10">
+                        <!--begin::Card header-->
+                        <div class="card-header border-0 cursor-pointer" role="button"
+                             data-bs-toggle="collapse" data-bs-target="#kt_account_profile_details"
+                             aria-expanded="true" aria-controls="kt_account_profile_details">
+                            <!--begin::Card title-->
+                            <div class="card-title m-0">
+                                <h3 class="fw-bold m-0">Contact Us</h3>
+                            </div>
+                            <!--end::Card title-->
+                        </div>
+                        <!--begin::Card header-->
 
-                    <!--begin::Content-->
-                    <div class="collapse show">
+                        <!--begin::Content-->
+                        <div class="collapse show">
 
-                        <!--begin::Form-->
-                        <form class="form" method="post"
-                              action="{{route('admin.project_setting.store')}}" enctype="multipart/form-data">
-                            @csrf
-                            <!--begin::Card body-->
-                            <div class="card-body border-top p-9">
+                            <!--begin::Form-->
+                            <form class="form" method="post"
+                                  action="{{route('admin.project_setting.store')}}" enctype="multipart/form-data">
+                                @csrf
+                                <!--begin::Card body-->
+                                <div class="card-body border-top p-9">
 
-                                <!--begin::Input group-->
-                                <div class="row mb-6">
-                                    <!--begin::Label-->
-                                    <label
-                                        class="col-lg-4 col-form-label fw-semibold fs-6">Headline</label>
-                                    <!--end::Label-->
+                                    <!--begin::Input group-->
+                                    <div class="row mb-6">
+                                        <!--begin::Label-->
+                                        <label
+                                            class="col-lg-4 col-form-label fw-semibold fs-6">Headline</label>
+                                        <!--end::Label-->
 
-                                    <!--begin::Col-->
-                                    <div class="col-lg-8">
-                                        <!--begin::Row-->
-                                        <div class="row">
-                                            <!--begin::Col-->
-                                            <div class="col-lg-12 fv-row">
-                                                <input type="text" name="contact_us_headline"
-                                                       class="form-control form-control-lg form-control-solid mb-3 mb-lg-0"
-                                                       placeholder="Headline"
-                                                       value="{{$project_setting->details->contact_us_headline??''}}"/>
+                                        <!--begin::Col-->
+                                        <div class="col-lg-8">
+                                            <!--begin::Row-->
+                                            <div class="row">
+                                                <!--begin::Col-->
+                                                <div class="col-lg-12 fv-row">
+                                                    <input type="text" name="contact_us_headline"
+                                                           class="form-control form-control-lg form-control-solid mb-3 mb-lg-0"
+                                                           placeholder="Headline"
+                                                           value="{{$project_setting->details->contact_us_headline??''}}"/>
+                                                </div>
+                                                <!--end::Col-->
                                             </div>
-                                            <!--end::Col-->
+                                            <!--end::Row-->
                                         </div>
-                                        <!--end::Row-->
+                                        <!--end::Col-->
                                     </div>
-                                    <!--end::Col-->
-                                </div>
-                                <!--end::Input group-->
+                                    <!--end::Input group-->
 
-                                <!--begin::Input group-->
-                                <div class="row mb-6">
-                                    <!--begin::Label-->
-                                    <label
-                                        class="col-lg-4 col-form-label fw-semibold fs-6">Description</label>
-                                    <!--end::Label-->
+                                    <!--begin::Input group-->
+                                    <div class="row mb-6">
+                                        <!--begin::Label-->
+                                        <label
+                                            class="col-lg-4 col-form-label fw-semibold fs-6">Description</label>
+                                        <!--end::Label-->
 
-                                    <!--begin::Col-->
-                                    <div class="col-lg-8 fv-row">
-                                        <textarea class="form-control form-control-lg form-control-solid mb-3 mb-lg-0" name="contact_us_description"
-                                                  id="" cols="30" rows="10">{{$project_setting->details->contact_us_description??''}}</textarea>
+                                        <!--begin::Col-->
+                                        <div class="col-lg-8 fv-row">
+                                        <textarea class="form-control form-control-lg form-control-solid mb-3 mb-lg-0"
+                                                  name="contact_us_description"
+                                                  id="" cols="30"
+                                                  rows="10">{{$project_setting->details->contact_us_description??''}}</textarea>
+                                        </div>
+                                        <!--end::Col-->
                                     </div>
-                                    <!--end::Col-->
+                                    <!--end::Input group-->
                                 </div>
-                                <!--end::Input group-->
-                            </div>
-                            <!--end::Card body-->
+                                <!--end::Card body-->
 
-                            <!--begin::Actions-->
-                            <div class="card-footer d-flex justify-content-end py-6 px-9">
-                                <button type="reset"
-                                        class="btn btn-light btn-active-light-primary me-2">Discard
-                                </button>
-                                <input type="hidden" name="contact_us">
-                                <button type="submit" class="btn btn-primary">Save Changes</button>
-                            </div>
-                            <!--end::Actions-->
-                        </form>
-                        <!--end::Form-->
+                                <!--begin::Actions-->
+                                <div class="card-footer d-flex justify-content-end py-6 px-9">
+                                    <button type="reset"
+                                            class="btn btn-light btn-active-light-primary me-2">Discard
+                                    </button>
+                                    <input type="hidden" name="contact_us">
+                                    <button type="submit" class="btn btn-primary">Save Changes</button>
+                                </div>
+                                <!--end::Actions-->
+                            </form>
+                            <!--end::Form-->
+                        </div>
+                        <!--end::Content-->
                     </div>
-                    <!--end::Content-->
-                </div>
+                @elseif(request()->get('tab')=='home_settings')
+                    <div class="card mb-5 mb-xl-10">
+                        <!--begin::Card header-->
+                        <div class="card-header border-0 cursor-pointer" role="button"
+                             data-bs-toggle="collapse" data-bs-target="#kt_account_profile_details"
+                             aria-expanded="true" aria-controls="kt_account_profile_details">
+                            <!--begin::Card title-->
+                            <div class="card-title m-0">
+                                <h3 class="fw-bold m-0">Home Settings</h3>
+                            </div>
+                            <!--end::Card title-->
+                        </div>
+                        <!--begin::Card header-->
+
+                        <!--begin::Content-->
+                        <div class="collapse show">
+
+                            <!--begin::Form-->
+                            <form class="form" method="post"
+                                  action="{{route('admin.project_setting.store')}}" enctype="multipart/form-data">
+                                @csrf
+                                <!--begin::Card body-->
+                                <div class="card-body border-top p-9">
+                                    <!--begin::Input group-->
+                                    <div class="row mb-6">
+                                        <!--begin::Label-->
+                                        <label
+                                            class="col-lg-4 col-form-label fw-semibold fs-6">Recommended For You</label>
+                                        <!--end::Label-->
+                                        <!--begin::Col-->
+                                        <div class="col-lg-8 fv-row">
+                                        <textarea class="form-control form-control-lg form-control-solid mb-3 mb-lg-0"
+                                                  name="recommended_for_you_description"
+                                                  id="" cols="30"
+                                                  rows="10">{{$project_setting->details->recommended_for_you_description??'Based on your previous purchases and browsing history, we recommend books that we believe will pique your interest and inspire you. Our goal is to provide you with a seamless and enjoyable reading experience, so feel free to browse our recommended books and discover your next favorite read.
+'}}</textarea>
+                                        </div>
+                                        <!--end::Col-->
+                                    </div>
+                                    <!--end::Input group-->
+                                </div>
+                                <!--end::Card body-->
+
+                                <div class="card-body border-top p-9">
+                                    <h2>Feature Headline 1</h2>
+
+                                    <!--begin::Input group-->
+                                    <div class="row mb-6">
+                                        <!--begin::Label-->
+                                        <label
+                                            class="col-lg-4 col-form-label fw-semibold fs-6">Headline 1 title</label>
+                                        <!--end::Label-->
+                                        <!--begin::Col-->
+                                        <div class="col-lg-8 fv-row">
+                                            <input class="form-control form-control-lg form-control-solid mb-3 mb-lg-0"
+                                                   name="feature_1_headline"
+                                                   value="{{$project_setting->details->feature_1_headline??'Instant Delivery'}}"/>
+                                        </div>
+                                        <!--end::Col-->
+                                    </div>
+                                    <!--end::Input group-->
+
+                                    <!--begin::Input group-->
+                                    <div class="row mb-6">
+                                        <!--begin::Label-->
+                                        <label
+                                            class="col-lg-4 col-form-label fw-semibold fs-6">
+                                            Headline 1 description</label>
+                                        <!--end::Label-->
+                                        <!--begin::Col-->
+                                        <div class="col-lg-8 fv-row">
+                                        <textarea class="form-control form-control-lg form-control-solid mb-3 mb-lg-0"
+                                                  name="feature_1_headline_description" cols="30"
+                                                  rows="10">{{$project_setting->details->feature_1_headline_description??'Our system ensures that your purchased books are available for download immediately after purchase.'}}</textarea>
+                                        </div>
+                                        <!--end::Col-->
+                                    </div>
+                                    <!--end::Input group-->
+                                </div>
+
+                                <div class="card-body border-top p-9">
+                                    <h2>Feature Headline 2</h2>
+
+                                    <!--begin::Input group-->
+                                    <div class="row mb-6">
+                                        <!--begin::Label-->
+                                        <label
+                                            class="col-lg-4 col-form-label fw-semibold fs-6">Headline 2 title</label>
+                                        <!--end::Label-->
+                                        <!--begin::Col-->
+                                        <div class="col-lg-8 fv-row">
+                                            <input class="form-control form-control-lg form-control-solid mb-3 mb-lg-0"
+                                                   name="feature_2_headline"
+                                                   value="{{$project_setting->details->feature_2_headline??'Secure Payment'}}"/>
+                                        </div>
+                                        <!--end::Col-->
+                                    </div>
+                                    <!--end::Input group-->
+
+                                    <!--begin::Input group-->
+                                    <div class="row mb-6">
+                                        <!--begin::Label-->
+                                        <label
+                                            class="col-lg-4 col-form-label fw-semibold fs-6">
+                                            Headline 2 description</label>
+                                        <!--end::Label-->
+                                        <!--begin::Col-->
+                                        <div class="col-lg-8 fv-row">
+                                        <textarea class="form-control form-control-lg form-control-solid mb-3 mb-lg-0"
+                                                  name="feature_2_headline_description" cols="30"
+                                                  rows="10">{{$project_setting->details->feature_2_headline_description??'We offer a secure payment process that ensures your financial information is protected.'}}</textarea>
+                                        </div>
+                                        <!--end::Col-->
+                                    </div>
+                                    <!--end::Input group-->
+                                </div>
+
+                                <div class="card-body border-top p-9">
+                                    <h2>Feature Headline 3</h2>
+
+                                    <!--begin::Input group-->
+                                    <div class="row mb-6">
+                                        <!--begin::Label-->
+                                        <label
+                                            class="col-lg-4 col-form-label fw-semibold fs-6">Headline 3 title</label>
+                                        <!--end::Label-->
+                                        <!--begin::Col-->
+                                        <div class="col-lg-8 fv-row">
+                                            <input class="form-control form-control-lg form-control-solid mb-3 mb-lg-0"
+                                                   name="feature_3_headline"
+                                                   value="{{$project_setting->details->feature_3_headline??'Best Quality'}}"/>
+                                        </div>
+                                        <!--end::Col-->
+                                    </div>
+                                    <!--end::Input group-->
+
+                                    <!--begin::Input group-->
+                                    <div class="row mb-6">
+                                        <!--begin::Label-->
+                                        <label
+                                            class="col-lg-4 col-form-label fw-semibold fs-6">
+                                            Headline 3 description</label>
+                                        <!--end::Label-->
+                                        <!--begin::Col-->
+                                        <div class="col-lg-8 fv-row">
+                                        <textarea class="form-control form-control-lg form-control-solid mb-3 mb-lg-0"
+                                                  name="feature_3_headline_description" cols="30"
+                                                  rows="10">{{$project_setting->details->feature_3_headline_description??'We offer the highest quality of educational books written by professionals in various categories'}}</textarea>
+                                        </div>
+                                        <!--end::Col-->
+                                    </div>
+                                    <!--end::Input group-->
+                                </div>
+
+                                <div class="card-body border-top p-9">
+                                    <h2>Feature Headline 4</h2>
+
+                                    <!--begin::Input group-->
+                                    <div class="row mb-6">
+                                        <!--begin::Label-->
+                                        <label
+                                            class="col-lg-4 col-form-label fw-semibold fs-6">Headline 4 title</label>
+                                        <!--end::Label-->
+                                        <!--begin::Col-->
+                                        <div class="col-lg-8 fv-row">
+                                            <input class="form-control form-control-lg form-control-solid mb-3 mb-lg-0"
+                                                   name="feature_4_headline"
+                                                   value="{{$project_setting->details->feature_4_headline??'Positive Feedback'}}"/>
+                                        </div>
+                                        <!--end::Col-->
+                                    </div>
+                                    <!--end::Input group-->
+
+                                    <!--begin::Input group-->
+                                    <div class="row mb-6">
+                                        <!--begin::Label-->
+                                        <label
+                                            class="col-lg-4 col-form-label fw-semibold fs-6">
+                                            Headline 4 description</label>
+                                        <!--end::Label-->
+                                        <!--begin::Col-->
+                                        <div class="col-lg-8 fv-row">
+                                        <textarea class="form-control form-control-lg form-control-solid mb-3 mb-lg-0"
+                                                  name="feature_4_headline_description" cols="30"
+                                                  rows="10">{{$project_setting->details->feature_4_headline_description??'Our books have received consistently positive feedback, with an average rating of 4.9 stars out of 5 from our satisfied customers.'}}</textarea>
+                                        </div>
+                                        <!--end::Col-->
+                                    </div>
+                                    <!--end::Input group-->
+                                </div>
+
+                                <div class="card-body border-top p-9">
+                                    <h2>Our Mission</h2>
+
+                                    <!--begin::Input group-->
+                                    <div class="row mb-6">
+                                        <!--begin::Label-->
+                                        <label
+                                            class="col-lg-4 col-form-label fw-semibold fs-6">Our Mission
+                                            headline</label>
+                                        <!--end::Label-->
+                                        <!--begin::Col-->
+                                        <div class="col-lg-8 fv-row">
+                                            <input class="form-control form-control-lg form-control-solid mb-3 mb-lg-0"
+                                                   name="our_mission_headline"
+                                                   value="{{$project_setting->details->our_mission_headline??'Our Mission'}}"/>
+                                        </div>
+                                        <!--end::Col-->
+                                    </div>
+                                    <!--end::Input group-->
+
+                                    <!--begin::Input group-->
+                                    <div class="row mb-6">
+                                        <!--begin::Label-->
+                                        <label
+                                            class="col-lg-4 col-form-label fw-semibold fs-6">
+                                            Our Mission description</label>
+                                        <!--end::Label-->
+                                        <!--begin::Col-->
+                                        <div class="col-lg-8 fv-row">
+                                        <textarea class="form-control form-control-lg form-control-solid mb-3 mb-lg-0"
+                                                  name="our_mission_description" cols="30"
+                                                  rows="10">{{$project_setting->details->our_mission_description??'At A2ZBooks, our mission is to provide a diverse collection of educational books written by professionals in their respective fields, delivering the best reading experience with competitive pricing, and excellent customer service, to inspire and empower our customers to unlock their full potential.'}}</textarea>
+                                        </div>
+                                        <!--end::Col-->
+                                    </div>
+                                    <!--end::Input group-->
+
+                                    <!--begin::Input group-->
+                                    <div class="row mb-6">
+                                        <!--begin::Label-->
+                                        <label
+                                            class="col-lg-4 col-form-label fw-semibold fs-6">
+                                            Our Mission Box 1 headline</label>
+                                        <!--end::Label-->
+                                        <!--begin::Col-->
+                                        <div class="col-lg-8 fv-row">
+                                            <input class="form-control form-control-lg form-control-solid mb-3 mb-lg-0"
+                                                   name="our_mission_box_1_headline"
+                                                   value="{{$project_setting->details->our_mission_box_1_headline??'Best Bookstore'}}"/>
+                                        </div>
+                                        <!--end::Col-->
+                                    </div>
+                                    <div class="row mb-6">
+                                        <!--begin::Label-->
+                                        <label
+                                            class="col-lg-4 col-form-label fw-semibold fs-6">
+                                            Our Mission Box 1 description</label>
+                                        <!--end::Label-->
+                                        <!--begin::Col-->
+                                        <div class="col-lg-8 fv-row">
+                                        <textarea class="form-control form-control-lg form-control-solid mb-3 mb-lg-0"
+                                                  name="our_mission_box_1_description" cols="30"
+                                                  rows="10">{{$project_setting->details->our_mission_box_1_description??'A2ZBooks is the go-to bookstore for educational books, featuring a wide-ranging collection of books authored by professionals across different categories, competitive pricing, and exceptional customer service. With an average rating of 4.9 stars out of 5, A2ZBooks has gained a trusted reputation for providing high-quality educational books, thus making it one of the best shops online for ebooks.
+'}}</textarea>
+                                        </div>
+                                        <!--end::Col-->
+                                    </div>
+                                    <!--end::Input group-->
+
+                                    <!--begin::Input group-->
+                                    <div class="row mb-6">
+                                        <!--begin::Label-->
+                                        <label
+                                            class="col-lg-4 col-form-label fw-semibold fs-6">
+                                            Our Mission Box 2 headline</label>
+                                        <!--end::Label-->
+                                        <!--begin::Col-->
+                                        <div class="col-lg-8 fv-row">
+                                            <input class="form-control form-control-lg form-control-solid mb-3 mb-lg-0"
+                                                   name="our_mission_box_2_headline"
+                                                   value="{{$project_setting->details->our_mission_box_2_headline??'Trusted Seller'}}"/>
+                                        </div>
+                                        <!--end::Col-->
+                                    </div>
+                                    <div class="row mb-6">
+                                        <!--begin::Label-->
+                                        <label
+                                            class="col-lg-4 col-form-label fw-semibold fs-6">
+                                            Our Mission Box 2 description</label>
+                                        <!--end::Label-->
+                                        <!--begin::Col-->
+                                        <div class="col-lg-8 fv-row">
+                                        <textarea class="form-control form-control-lg form-control-solid mb-3 mb-lg-0"
+                                                  name="our_mission_box_2_description" cols="30"
+                                                  rows="10">{{$project_setting->details->our_mission_box_2_description??'We are your most reliable and trusted seller of educational books, consistently earning an average rating of 4.9 stars out of 5. Customers rave about the exceptional quality of the books, with many stating that they exceeded their expectations upon purchase.'}}</textarea>
+                                        </div>
+                                        <!--end::Col-->
+                                    </div>
+                                    <!--end::Input group-->
+
+                                    <!--begin::Input group-->
+                                    <div class="row mb-6">
+                                        <!--begin::Label-->
+                                        <label
+                                            class="col-lg-4 col-form-label fw-semibold fs-6">
+                                            Our Mission Box 3 headline</label>
+                                        <!--end::Label-->
+                                        <!--begin::Col-->
+                                        <div class="col-lg-8 fv-row">
+                                            <input class="form-control form-control-lg form-control-solid mb-3 mb-lg-0"
+                                                   name="our_mission_box_3_headline"
+                                                   value="{{$project_setting->details->our_mission_box_2_headline??'Video/Audio Books'}}"/>
+                                        </div>
+                                        <!--end::Col-->
+                                    </div>
+                                    <div class="row mb-6">
+                                        <!--begin::Label-->
+                                        <label
+                                            class="col-lg-4 col-form-label fw-semibold fs-6">
+                                            Our Mission Box 2 description</label>
+                                        <!--end::Label-->
+                                        <!--begin::Col-->
+                                        <div class="col-lg-8 fv-row">
+                                        <textarea class="form-control form-control-lg form-control-solid mb-3 mb-lg-0"
+                                                  name="our_mission_box_3_description" cols="30"
+                                                  rows="10">{{$project_setting->details->our_mission_box_3_description??'Too busy to read? No problem! A2ZBooks offers a unique reading experience with books that come with video and audio content, allowing users to learn on-the-go or while performing other tasks. Whether you prefer to read, watch, or listen, A2ZBooks has got you covered, offering an immersive and convenient learning experience.'}}</textarea>
+                                        </div>
+                                        <!--end::Col-->
+                                    </div>
+                                    <!--end::Input group-->
+                                </div>
+
+                                <div class="card-body border-top p-9">
+                                    <h2>Our Pricing Section</h2>
+
+                                    <!--begin::Input group-->
+                                    <div class="row mb-6">
+                                        <!--begin::Label-->
+                                        <label
+                                            class="col-lg-4 col-form-label fw-semibold fs-6">Headline</label>
+                                        <!--end::Label-->
+                                        <!--begin::Col-->
+                                        <div class="col-lg-8 fv-row">
+                                            <input class="form-control form-control-lg form-control-solid mb-3 mb-lg-0"
+                                                   name="our_price_headline"
+                                                   value="{{$project_setting->details->our_price_headline??'Our Pricing'}}"/>
+                                        </div>
+                                        <!--end::Col-->
+                                    </div>
+                                    <!--end::Input group-->
+
+                                    <!--begin::Input group-->
+                                    <div class="row mb-6">
+                                        <!--begin::Label-->
+                                        <label
+                                            class="col-lg-4 col-form-label fw-semibold fs-6">Description</label>
+                                        <!--end::Label-->
+                                        <!--begin::Col-->
+                                        <div class="col-lg-8 fv-row">
+                                        <textarea class="form-control form-control-lg form-control-solid mb-3 mb-lg-0"
+                                                  name="our_price_description" cols="30"
+                                                  rows="10">{{$project_setting->details->our_price_description??'We offers competitive pricing plans, allowing customers to pay per purchase or join a membership club for additional discounts and perks. With flexible options to suit every budget, we ensures that customers get the best value for their money while purchasing high-quality educational books.'}}</textarea>
+                                        </div>
+                                        <!--end::Col-->
+                                    </div>
+                                    <!--end::Input group-->
+                                </div>
+
+                                <!--begin::Actions-->
+                                <div class="card-footer d-flex justify-content-end py-6 px-9">
+                                    <button type="reset"
+                                            class="btn btn-light btn-active-light-primary me-2">Discard
+                                    </button>
+                                    <input type="hidden" name="home_settings">
+                                    <button type="submit" class="btn btn-primary">Save Changes</button>
+                                </div>
+                                <!--end::Actions-->
+                            </form>
+                            <!--end::Form-->
+                        </div>
+                        <!--end::Content-->
+                    </div>
+                @endif
 
             </div>
             <!--end::Content container-->

@@ -208,7 +208,7 @@
                                     <div class="dz-shop-card style-1">
                                         <div class="dz-media">
                                             <a href="{{route('book.show',['book'=>$book->id])}}">
-                                                <img src="{{$book->image_url}}" alt="book">
+                                                <img class="book-image" src="{{$book->image_url}}" alt="book">
                                             </a>
                                         </div>
                                         <div class="bookmark-btn style-2">

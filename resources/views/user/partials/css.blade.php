@@ -17,4 +17,10 @@
     .swal2-toast {
         margin-top: 150px !important;
     }
+
+    .book-image {
+        width: 250px !important;
+        height: 357px !important;
+        object-fit: cover !important;
+    }
 </style>
