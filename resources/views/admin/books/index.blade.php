@@ -218,11 +218,24 @@
                                                required/>
                                     </div>
                                 </div>
+                                <div class="col-md-4">
+                                    <div class="fv-row mb-7">
+                                        <label class="required fw-semibold fs-6 mb-2">Language</label>
+                                        <input type="text" name="language" class="form-control mb-3 mb-lg-0"
+                                               required/>
+                                    </div>
+                                </div>
                                 <div class="col-md-12">
                                     <div class="fv-row mb-7">
                                         <label class="required fw-semibold fs-6 mb-2">Description</label>
                                         <textarea name="description" class="form-control" cols="30"
                                                   rows="10"></textarea>
+                                    </div>
+                                </div>
+                                <div class="col-md-12">
+                                    <div class="fv-row mb-7">
+                                        <label class=" fw-semibold fs-6 mb-2">Video URL</label>
+                                        <input name="video_url" class="form-control" type="url">
                                     </div>
                                 </div>
                                 <div class="col-md-12">
@@ -233,8 +246,26 @@
                                 </div>
                                 <div class="col-md-12">
                                     <div class="fv-row mb-7">
+                                        <label class="required fw-semibold fs-6 mb-2">Banner Image</label>
+                                        <input name="banner_image_url" class="form-control" type="file">
+                                    </div>
+                                </div>
+                                <div class="col-md-12">
+                                    <div class="fv-row mb-7">
                                         <label class="required fw-semibold fs-6 mb-2">File</label>
                                         <input name="file_path" class="form-control" type="file" required>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="fv-row mb-7">
+                                        <label class="required fw-semibold fs-6 mb-2">Total Ratings</label>
+                                        <input name="rating" class="form-control" type="number" min="0" required>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="fv-row mb-7">
+                                        <label class="required fw-semibold fs-6 mb-2">Number of Ratings</label>
+                                        <input name="num_ratings" class="form-control" type="number" min="0" required>
                                     </div>
                                 </div>
                                 <div class="col-md-4">
@@ -422,11 +453,25 @@
                                                required/>
                                     </div>
                                 </div>
+                                <div class="col-md-4">
+                                    <div class="fv-row mb-7">
+                                        <label class="required fw-semibold fs-6 mb-2">Language</label>
+                                        <input type="text" name="language" id="language"
+                                               class="form-control mb-3 mb-lg-0"
+                                               required/>
+                                    </div>
+                                </div>
                                 <div class="col-md-12">
                                     <div class="fv-row mb-7">
                                         <label class="required fw-semibold fs-6 mb-2">Description</label>
                                         <textarea name="description" id="description" class="form-control" cols="30"
                                                   rows="10"></textarea>
+                                    </div>
+                                </div>
+                                <div class="col-md-12">
+                                    <div class="fv-row mb-7">
+                                        <label class="fw-semibold fs-6 mb-2">Video URL</label>
+                                        <input name="video_url" id="video_url" class="form-control" type="url">
                                     </div>
                                 </div>
                                 <div class="col-md-12">
@@ -437,8 +482,28 @@
                                 </div>
                                 <div class="col-md-12">
                                     <div class="fv-row mb-7">
+                                        <label class="required fw-semibold fs-6 mb-2">Banner Image</label>
+                                        <input name="banner_image_url" class="form-control" type="file">
+                                    </div>
+                                </div>
+                                <div class="col-md-12">
+                                    <div class="fv-row mb-7">
                                         <label class="required fw-semibold fs-6 mb-2">File</label>
                                         <input name="file_path" class="form-control" type="file">
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="fv-row mb-7">
+                                        <label class="required fw-semibold fs-6 mb-2">Total Ratings</label>
+                                        <input name="rating" id="rating" class="form-control" type="number" min="0"
+                                               required>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="fv-row mb-7">
+                                        <label class="required fw-semibold fs-6 mb-2">Number of Ratings</label>
+                                        <input name="num_ratings" id="num_ratings" class="form-control" type="number"
+                                               min="0" required>
                                     </div>
                                 </div>
                                 <div class="col-md-12">
@@ -466,7 +531,7 @@
                                         <label class=" fw-semibold fs-6 mb-2">On Sale</label>
                                         <div class="form-check form-check-solid form-switch form-check-custom fv-row">
                                             <input class="form-check-input w-45px h-30px" type="checkbox"
-                                                   name="is_on_sale" id="edit_is_on_sale" value="1">
+                                                   name="is_on_sale" id="edit_is_on_sale">
                                         </div>
                                     </div>
                                 </div>
@@ -612,6 +677,7 @@
             $('#edit_is_on_sale').on('change', function () {
                 $('#edit_discount_percentage_div').hide()
                 if (this.checked) {
+                    console.log('checked')
                     $('#edit_discount_percentage_div').show()
                 }
             })
@@ -632,6 +698,10 @@
             $('#page_count').val(data.page_count)
             $('#price').val(data.price)
             $('#publication_date').val(data.publication_date)
+            $('#language').val(data.language)
+            $('#video_url').val(data.video_url)
+            $('#rating').val(data.rating)
+            $('#num_ratings').val(data.num_ratings)
             // tinyMCE.get('description').setContent(data.description)
             $('#hidden_id').val(data.id)
 
@@ -643,8 +713,9 @@
             }
 
             if (data.is_on_sale == 1) {
-                $('#edit_is_on_sale').attr('checked', true)
                 $('#edit_discount_percentage_div').show()
+                $('#edit_is_on_sale').attr('checked', true)
+                $('#discount_percentage').val(data.discount_percentage)
             }
 
             $('#edit_modal').modal('show')

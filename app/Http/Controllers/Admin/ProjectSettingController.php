@@ -37,10 +37,10 @@ class ProjectSettingController extends Controller
 
 
         if ($request->has('contact_us')) {
-            $project_setting->details = json_encode([
-                'contact_us_headline' => $request->contact_us_headline ?? '',
-                'contact_us_description' => $request->contact_us_description ?? '',
-            ]);
+            $details = $project_setting->details;
+            $details->contact_us_headline = $request->contact_us_headline;
+            $details->contact_us_description = $request->contact_us_description;
+            $project_setting->details = json_encode($details);
             $project_setting->save();
             return back()->withSuccess('Settings Save Successfully');
         }

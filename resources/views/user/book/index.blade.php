@@ -208,7 +208,8 @@
                                     <div class="dz-shop-card style-1">
                                         <div class="dz-media">
                                             <a href="{{route('book.show',['book'=>$book->id])}}">
-                                                <img class="book-image" src="{{$book->image_url}}" alt="book">
+                                                <img style="height: 357px;object-fit: cover" src="{{$book->image_url}}"
+                                                     alt="book">
                                             </a>
                                         </div>
                                         <div class="bookmark-btn style-2">
@@ -227,11 +228,21 @@
                                                 @endforeach
                                             </ul>
                                             <ul class="dz-rating">
-                                                <li><i class="flaticon-star text-yellow"></i></li>
-                                                <li><i class="flaticon-star text-yellow"></i></li>
-                                                <li><i class="flaticon-star text-yellow"></i></li>
-                                                <li><i class="flaticon-star text-yellow"></i></li>
-                                                <li><i class="flaticon-star text-muted"></i></li>
+                                                <li>
+                                                    <i class="flaticon-star {{$book->total_rating>=1?'text-yellow':'text-muted'}} text-yellow"></i>
+                                                </li>
+                                                <li>
+                                                    <i class="flaticon-star {{$book->total_rating>=2?'text-yellow':'text-muted'}}"></i>
+                                                </li>
+                                                <li>
+                                                    <i class="flaticon-star {{$book->total_rating>=3?'text-yellow':'text-muted'}}"></i>
+                                                </li>
+                                                <li>
+                                                    <i class="flaticon-star {{$book->total_rating>=4?'text-yellow':'text-muted'}}"></i>
+                                                </li>
+                                                <li>
+                                                    <i class="flaticon-star {{$book->total_rating>=5?'text-yellow':'text-muted'}}"></i>
+                                                </li>
                                             </ul>
                                             <div class="book-footer">
                                                 <div class="price">
@@ -239,9 +250,14 @@
                                                     <del>$ {{$book->price}}</del>
                                                 </div>
                                                 <a href="javascript:;"
-                                                   class="btn btn-secondary box-btn btnhover btnhover2 add-to-cart"
+                                                   class="btn btn-secondary box-btn btnhover btnhover2 add-to-cart cart-btn-{{$book->id}}"
                                                    data-book="{{$book}}"><i
                                                         class="flaticon-shopping-cart-1 m-r10"></i> Add to cart</a>
+
+                                                <a href="{{route('book.checkout')}}"
+                                                   style="display: none"
+                                                   class="btn btn-secondary box-btn btnhover btnhover2 checkout-btn-{{$book->id}}">
+                                                    <i class="flaticon-shopping-cart-1 m-r10"></i> Checkout</a>
                                             </div>
                                         </div>
                                     </div>

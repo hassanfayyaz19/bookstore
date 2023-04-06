@@ -24,11 +24,18 @@
                                     </a>
                                 </div>
                                 <div class="dz-content">
-                                    <h4 class="title">{{$book->title}}</h4>
+                                    <h4 class="title" data-bs-toggle="tooltip" data-bs-placement="top"
+                                        title="{{$book->title}}">{{str()->words($book->title,2)}}</h4>
                                     <span class="price">$ {{$book->price}}</span>
+
                                     <a href="javascript:" data-book="{{$book}}"
-                                       class="btn btn-secondary btnhover btnhover2 add-to-cart">
+                                       class="btn btn-secondary btnhover btnhover2 add-to-cart cart-btn-{{$book->id}}">
                                         <i class="flaticon-shopping-cart-1 m-r10"></i> Add to cart</a>
+
+                                    <a href="{{route('book.checkout')}}"
+                                       style="display: none"
+                                       class="btn btn-secondary box-btn btnhover btnhover2 checkout-btn-{{$book->id}}">
+                                        <i class="flaticon-shopping-cart-1 m-r10"></i> Checkout</a>
                                 </div>
                             </div>
                         </div>
@@ -125,7 +132,7 @@
                                     </ul>
                                     <div class="book-footer">
                                         <div class="rate">
-                                            <i class="flaticon-star"></i> 6.8
+                                            <i class="flaticon-star"></i> {{$book->total_rating}}
                                         </div>
                                         <div class="price">
                                             <span class="price-num">$ {{$book->sale_price}}</span>
@@ -176,9 +183,16 @@
                                     </div>
                                     <p>{{str()->words($book->description,15,'....')}}</p>
                                     <div class="bookcard-footer">
-                                        <a href="javascript:" class="btn btn-primary m-t15 btnhover btnhover2"><i
-                                                class="flaticon-shopping-cart-1 m-r10 add-to-cart"
-                                                data-book="{{$book}}"></i> Add to cart</a>
+                                        <a href="javascript:"
+                                           class="btn btn-primary m-t15 btnhover btnhover2 add-to-cart cart-btn-{{$book->id}}"
+                                           data-book="{{$book}}">
+                                            <i class="flaticon-shopping-cart-1 m-r10"></i> Add to cart</a>
+
+                                        <a href="{{route('book.checkout')}}"
+                                           style="display: none"
+                                           class="btn btn-primary m-t15 btnhover btnhover2 checkout-btn-{{$book->id}}">
+                                            <i class="flaticon-shopping-cart-1 m-r10"></i>Checkout</a>
+
                                         <div class="price-details">
                                             $ {{$book->sale_price}}
                                             <del>$ {{$book->price}}</del>

@@ -26,8 +26,13 @@
                                                 class="badge badge-danger">{{$book->discount_percentage}}% OFF</span>
                                         </div>
                                         <div class="content-btn" data-swiper-parallax="-60">
-                                            <a class="btn btn-primary btnhover add-to-cart" data-book="{{$book}}"
+                                            <a class="btn btn-primary btnhover add-to-cart cart-btn-{{$book->id}}"
+                                               data-book="{{$book}}"
                                                href="javascript:">Add To Cart</a>
+
+                                            <a class="btn btn-primary btnhover checkout-btn-{{$book->id}}"
+                                               href="{{route('book.checkout')}}" style="display: none">Checkout</a>
+
                                             <a class="btn btn-outline-secondary btnhover ms-4"
                                                href="{{route('book.show',['book'=>$book->id])}}">See Details</a>
                                         </div>
@@ -47,7 +52,7 @@
                             <div class="col-md-6">
                                 <div class="banner-media " data-swiper-parallax="-100">
                                     <img class="d-none d-sm-block"
-                                         src="{{asset('user/images/banner/banner-media3.png')}}" alt="media">
+                                         src="{{$book->banner_image_url}}" alt="media">
                                 </div>
                                 <img class="pattern" src="{{asset('user/images/Group.png')}}"
                                      data-swiper-parallax="-100" alt="dots">

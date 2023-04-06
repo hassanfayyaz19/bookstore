@@ -125,8 +125,10 @@ class BookController extends Controller
     public function show(Book $book)
     {
         $book->load(['author', 'publisher', 'categories']);
-
-        $books = Book::limit(3)->get();
+        $category_ids = $book->categories->pluck('id')->toArray();
+        $books = Book::whereHas('categories', function ($q) use ($category_ids) {
+            return $q->whereIn('category_id', $category_ids);
+        })->limit(3)->get();
         return view('user.book.detail', get_defined_vars());
     }
 

@@ -17,6 +17,7 @@ class Book extends Model
     protected $appends = [
         'sale_price',
         'discounted_price',
+        'total_rating',
     ];
 
 //   Mutators
@@ -28,6 +29,13 @@ class Book extends Model
     }
 
     protected function imageUrl(): Attribute
+    {
+        return Attribute::make(
+            get: fn(string $value) => asset($value),
+        );
+    }
+
+    protected function bannerImageUrl(): Attribute
     {
         return Attribute::make(
             get: fn(string $value) => asset($value),
@@ -52,6 +60,13 @@ class Book extends Model
     {
         return Attribute::make(
             get: fn() => $this->price - $this->sale_price,
+        );
+    }
+
+    protected function totalRating(): Attribute
+    {
+        return Attribute::make(
+            get: fn() => $this->rating / $this->num_ratings,
         );
     }
 

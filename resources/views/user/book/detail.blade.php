@@ -20,13 +20,24 @@
                                     <div class="shop-item-rating">
                                         <div class="d-lg-flex d-sm-inline-flex d-flex align-items-center">
                                             <ul class="dz-rating">
-                                                <li><i class="flaticon-star text-yellow"></i></li>
-                                                <li><i class="flaticon-star text-yellow"></i></li>
-                                                <li><i class="flaticon-star text-yellow"></i></li>
-                                                <li><i class="flaticon-star text-yellow"></i></li>
-                                                <li><i class="flaticon-star text-muted"></i></li>
+                                                <li>
+                                                    <i class="flaticon-star {{$book->total_rating>=1?'text-yellow':'text-muted'}} text-yellow"></i>
+                                                </li>
+                                                <li>
+                                                    <i class="flaticon-star {{$book->total_rating>=2?'text-yellow':'text-muted'}}"></i>
+                                                </li>
+                                                <li>
+                                                    <i class="flaticon-star {{$book->total_rating>=3?'text-yellow':'text-muted'}}"></i>
+                                                </li>
+                                                <li>
+                                                    <i class="flaticon-star {{$book->total_rating>=4?'text-yellow':'text-muted'}}"></i>
+                                                </li>
+                                                <li>
+                                                    <i class="flaticon-star {{$book->total_rating>=5?'text-yellow':'text-muted'}}"></i>
+                                                </li>
                                             </ul>
-                                            <h6 class="m-b0">4.0 (15 reviews)</h6>
+                                            <h6 class="m-b0">{{$book->total_rating}} ({{$book->num_ratings}}
+                                                reviews)</h6>
                                         </div>
                                         {{--                                        <div class="social-area">--}}
                                         {{--                                            <ul class="dz-social-icon style-3">--}}
@@ -53,21 +64,58 @@
                                                     </div>
                                                 </div>
                                             </li>
-                                            <li><span>Publisher</span>{{$book->publisher->name}}</li>
-                                            <li><span>Year</span>{{date('Y',strtotime($book->publication_date))}}</li>
+                                            <li><span>Languages </span>{{$book->language}}</li>
+                                            <li><span>Pages </span>{{$book->page_count}}</li>
                                         </ul>
                                     </div>
+                                    <iframe allowfullscreen class="col-12" height="350"
+                                            src="{{$book->video_url}}">
+                                    </iframe>
+                                    @if(!empty($book->video_url))
+                                        <div class="book-footer mb-3 mt-2">
+                                            <div class="price">
+                                                <h5>$ {{$book->sale_price}}</h5>
+                                                <p class="p-lr10">$ {{$book->price}}</p>
+                                            </div>
+                                            <div class="product-num">
+                                                <a href="javascript:"
+                                                   class="btn btn-primary btnhover btnhover2 add-to-cart cart-btn-{{$book->id}}"
+                                                   data-book="{{$book}}">
+                                                    <i class="flaticon-shopping-cart-1"></i>
+                                                    <span>Add to cart</span></a>
+
+                                                <a href="{{route('book.checkout')}}"
+                                                   style="display: none"
+                                                   class="btn btn-primary btnhover btnhover2 checkout-btn-{{$book->id}}">
+                                                    <i class="flaticon-shopping-cart-1"></i> <span>Checkout</span></a>
+
+                                                <div class="bookmark-btn style-1 d-none d-sm-block">
+                                                    <input class="form-check-input" type="checkbox"
+                                                           id="flexCheckDefault1">
+                                                    <label class="form-check-label" for="flexCheckDefault1">
+                                                        <i class="flaticon-heart"></i>
+                                                    </label>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    @endif
                                     <p class="text-1">{{$book->description}}</p>
-                                    <div class="book-footer">
+                                    <div class="book-footer mb-3 mt-2">
                                         <div class="price">
                                             <h5>$ {{$book->sale_price}}</h5>
                                             <p class="p-lr10">$ {{$book->price}}</p>
                                         </div>
                                         <div class="product-num">
                                             <a href="javascript:"
-                                               class="btn btn-primary btnhover btnhover2 add-to-cart"
+                                               class="btn btn-primary btnhover btnhover2 add-to-cart cart-btn-{{$book->id}}"
                                                data-book="{{$book}}">
                                                 <i class="flaticon-shopping-cart-1"></i> <span>Add to cart</span></a>
+
+                                            <a href="{{route('book.checkout')}}"
+                                               style="display: none"
+                                               class="btn btn-primary btnhover btnhover2 checkout-btn-{{$book->id}}">
+                                                <i class="flaticon-shopping-cart-1"></i> <span>Checkout</span></a>
+
                                             <div class="bookmark-btn style-1 d-none d-sm-block">
                                                 <input class="form-check-input" type="checkbox" id="flexCheckDefault1">
                                                 <label class="form-check-label" for="flexCheckDefault1">
@@ -163,7 +211,8 @@
                                                                 id="comment-3">
                                                                 <div class="comment-body" id="div-comment-3">
                                                                     <div class="comment-author vcard">
-                                                                        <img src="images/profile3.jpg" alt=""
+                                                                        <img src="{{asset('user/images/profile3.jpg')}}"
+                                                                             alt=""
                                                                              class="avatar"/>
                                                                         <cite class="fn">Celesto Anderson</cite> <span
                                                                             class="says">says:</span>
@@ -191,7 +240,8 @@
                                                         id="comment-4">
                                                         <div class="comment-body" id="div-comment-4">
                                                             <div class="comment-author vcard">
-                                                                <img src="images/profile2.jpg" alt="" class="avatar"/>
+                                                                <img src="{{asset('user/images/profile2.jpg')}}" alt=""
+                                                                     class="avatar"/>
                                                                 <cite class="fn">Ryan</cite> <span
                                                                     class="says">says:</span>
                                                                 <div class="comment-meta">
@@ -215,7 +265,8 @@
                                                         id="comment-5">
                                                         <div class="comment-body" id="div-comment-5">
                                                             <div class="comment-author vcard">
-                                                                <img src="images/profile1.jpg" alt="" class="avatar"/>
+                                                                <img src="{{asset('user/images/profile1.jpg')}}" alt=""
+                                                                     class="avatar"/>
                                                                 <cite class="fn">Stuart</cite> <span
                                                                     class="says">says:</span>
                                                                 <div class="comment-meta">
@@ -285,10 +336,14 @@
                                     <div class="col-xl-12 col-lg-6">
                                         <div class="dz-shop-card style-5">
                                             <div class="dz-media">
-                                                <img src="{{$book->image_url}}" alt="">
+                                                <a href="{{route('book.show',['book'=>$book->id])}}">
+                                                    <img src="{{$book->image_url}}" alt="">
+                                                </a>
                                             </div>
                                             <div class="dz-content">
-                                                <h5 class="subtitle">{{$book->title}}</h5>
+                                                <h5 class="subtitle"><a
+                                                        href="{{route('book.show',['book'=>$book->id])}}">{{$book->title}}</a>
+                                                </h5>
                                                 <ul class="dz-tags">
                                                     @foreach($book->categories as $category)
                                                         <li>{{$category->name}},</li>
@@ -301,8 +356,14 @@
                                                     <del>$ {{$book->price}}</del>
                                                 </div>
                                                 <a href="javascript:"
-                                                   class="btn btn-outline-primary btn-sm btnhover btnhover2 add-to-cart">
+                                                   class="btn btn-outline-primary btn-sm btnhover btnhover2 add-to-cart cart-btn-{{$book->id}}"
+                                                   data-book="{{$book}}">
                                                     <i class="flaticon-shopping-cart-1 me-2"></i> Add to cart</a>
+
+                                                <a href="{{route('book.checkout')}}"
+                                                   style="display: none"
+                                                   class="btn btn-outline-primary btn-sm btnhover btnhover2 checkout-btn-{{$book->id}}">
+                                                    <i class="flaticon-shopping-cart-1 me-2"></i> Checkout</a>
                                             </div>
                                         </div>
                                     </div>
