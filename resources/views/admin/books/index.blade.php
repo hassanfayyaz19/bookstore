@@ -187,7 +187,7 @@
                                     <div class="fv-row mb-7">
                                         <label class="required fw-semibold fs-6 mb-2">price</label>
                                         <input type="number" name="price" class="form-control mb-3 mb-lg-0"
-                                               min="0" step=".5"
+                                               min="0" step=".01"
                                                required/>
                                     </div>
                                 </div>
@@ -268,7 +268,17 @@
                                         <input name="num_ratings" class="form-control" type="number" min="0" required>
                                     </div>
                                 </div>
-                                <div class="col-md-4">
+                                <div class="col-md-3">
+                                    <div class="fv-row mb-7">
+                                        <label class=" fw-semibold fs-6 mb-2">Show On Banner</label>
+                                        <div class="form-check form-check-solid form-switch form-check-custom fv-row">
+                                            <input class="form-check-input w-45px h-30px" type="checkbox"
+                                                   name="is_banner"
+                                                   value="1">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-3">
                                     <div class="fv-row mb-7">
                                         <label class=" fw-semibold fs-6 mb-2">Recommended</label>
                                         <div class="form-check form-check-solid form-switch form-check-custom fv-row">
@@ -277,7 +287,7 @@
                                         </div>
                                     </div>
                                 </div>
-                                <div class="col-md-4">
+                                <div class="col-md-3">
                                     <div class="fv-row mb-7">
                                         <label class=" fw-semibold fs-6 mb-2">Featured</label>
                                         <div class="form-check form-check-solid form-switch form-check-custom fv-row">
@@ -286,7 +296,7 @@
                                         </div>
                                     </div>
                                 </div>
-                                <div class="col-md-4">
+                                <div class="col-md-3">
                                     <div class="fv-row mb-7">
                                         <label class=" fw-semibold fs-6 mb-2">On Sale</label>
                                         <div class="form-check form-check-solid form-switch form-check-custom fv-row">
@@ -419,7 +429,7 @@
                                     <div class="fv-row mb-7">
                                         <label class="required fw-semibold fs-6 mb-2">price</label>
                                         <input type="number" name="price" id="price" class="form-control mb-3 mb-lg-0"
-                                               min="0" step=".5"
+                                               min="0" step=".01"
                                                required/>
                                     </div>
                                 </div>
@@ -506,7 +516,17 @@
                                                min="0" required>
                                     </div>
                                 </div>
-                                <div class="col-md-12">
+                                <div class="col-md-3">
+                                    <div class="fv-row mb-7">
+                                        <label class=" fw-semibold fs-6 mb-2">Show On Banner</label>
+                                        <div class="form-check form-check-solid form-switch form-check-custom fv-row">
+                                            <input class="form-check-input w-45px h-30px" type="checkbox"
+                                                   name="is_banner" id="is_banner"
+                                                   value="1">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-3">
                                     <div class="fv-row mb-7">
                                         <label class=" fw-semibold fs-6 mb-2">Recommended</label>
                                         <div class="form-check form-check-solid form-switch form-check-custom fv-row">
@@ -516,7 +536,7 @@
                                         </div>
                                     </div>
                                 </div>
-                                <div class="col-md-12">
+                                <div class="col-md-3">
                                     <div class="fv-row mb-7">
                                         <label class=" fw-semibold fs-6 mb-2">Featured</label>
                                         <div class="form-check form-check-solid form-switch form-check-custom fv-row">
@@ -526,7 +546,7 @@
                                         </div>
                                     </div>
                                 </div>
-                                <div class="col-md-12">
+                                <div class="col-md-3">
                                     <div class="fv-row mb-7">
                                         <label class=" fw-semibold fs-6 mb-2">On Sale</label>
                                         <div class="form-check form-check-solid form-switch form-check-custom fv-row">

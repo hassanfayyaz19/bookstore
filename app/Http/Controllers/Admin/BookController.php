@@ -124,6 +124,7 @@ class BookController extends Controller
         $book->is_featured = $request->is_featured == 1 ? 1 : 0;
         $book->is_recommended = $request->is_recommended == 1 ? 1 : 0;
         $book->is_on_sale = $request->is_on_sale == 1 ? 1 : 0;
+        $book->is_banner = $request->is_banner == 1 ? 1 : 0;
         $book->discount_percentage = $request->discount_percentage ?? 0;
         $book->video_url = $request->video_url ?? null;
         $book->language = $request->language;
@@ -183,6 +184,7 @@ class BookController extends Controller
         $book->is_featured = $request->is_featured == 1 ? 1 : 0;
         $book->is_recommended = $request->is_recommended == 1 ? 1 : 0;
         $book->is_on_sale = $request->is_on_sale == 1 ? 1 : 0;
+        $book->is_banner = $request->is_banner == 1 ? 1 : 0;
         $book->discount_percentage = $request->discount_percentage ?? 0;
         $book->video_url = $request->video_url ?? null;
         $book->language = $request->language;

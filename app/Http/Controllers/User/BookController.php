@@ -124,7 +124,11 @@ class BookController extends Controller
 
     public function show(Book $book)
     {
-        $book->load(['author', 'publisher', 'categories']);
+        $book->load(['author', 'publisher', 'categories', 'book_reviews']);
+        $book->whereHas('book_reviews', function ($q) {
+            $q->where('is_active', 1);
+        });
+
         $category_ids = $book->categories->pluck('id')->toArray();
         $books = Book::whereHas('categories', function ($q) use ($category_ids) {
             return $q->whereIn('category_id', $category_ids);
