@@ -41,6 +41,10 @@ Route::prefix('admin')->as('admin.')->middleware(['auth:admin'])->group(function
     Route::resource('author', \App\Http\Controllers\Admin\AuthorController::class);
     Route::resource('purchase', \App\Http\Controllers\Admin\PurchaseController::class);
     Route::resource('project_setting', \App\Http\Controllers\Admin\ProjectSettingController::class);
+
+    Route::resource('blog_category', \App\Http\Controllers\Admin\BlogCategoryController::class);
+
+
     Route::get('/project/home_setting', [App\Http\Controllers\Admin\ProjectSettingController::class, 'showHomeSettingPage'])->name('project_setting.home');
     Route::get('/dashboard', function () {
         return redirect()->route('admin.book.index');
