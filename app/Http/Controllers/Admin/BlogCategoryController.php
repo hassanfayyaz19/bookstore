@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Models\BlogCategory;
 use Illuminate\Http\Request;
+use Illuminate\Support\Str;
 
 class BlogCategoryController extends Controller
 {
@@ -40,12 +41,11 @@ class BlogCategoryController extends Controller
             ]);
 
             $blog_category = new BlogCategory();
-            $blog_category->name = $request->input('name');
-            $blog_category->slug = $request->input('slug');
-            $blog_category->description = $request->input('description');
-            //dd($blog_category);
+            $blog_category->name = $request->name;
+            $blog_category->slug = Str::slug($request->slug);
+            $blog_category->description = $request->description;
             $blog_category->save();
-            return redirect('admin/blog_category')->with('message', 'Category Added Successfully!');
+            return back()->with('message', 'Category Added Successfully!');
 
         }
     }
@@ -61,17 +61,15 @@ class BlogCategoryController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit($blog_category)
+    public function edit(BlogCategory $blog_category)
     {
-        $blog_category = BlogCategory::find($blog_category);
-        //dd($blog_category);
         return view('admin.blog.category.edit', compact('blog_category'));
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request,  $blog_category)
+    public function update(Request $request, BlogCategory $blog_category)
     {
         {
             $request->validate([
@@ -81,13 +79,11 @@ class BlogCategoryController extends Controller
 
             ]);
 
-            $blog_category = BlogCategory::find($blog_category);
-            $blog_category->name = $request->input('name');
-            $blog_category->slug = $request->input('slug');
-            $blog_category->description = $request->input('description');
-            //dd($blog_category);
+            $blog_category->name = $request->name;
+            $blog_category->slug = Str::slug($request->slug);
+            $blog_category->description = $request->description;
             $blog_category->update();
-            return redirect('admin/blog_category')->with('message', 'Category Added Successfully!');
+            return back()->with('message', 'Category Added Successfully!');
 
         }
 
@@ -96,10 +92,9 @@ class BlogCategoryController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy($blog_category)
+    public function destroy(BlogCategory $blog_category)
     {
-        $blog_category = BlogCategory::find($blog_category);
         $blog_category->delete();
-        return redirect('admin/blog_category')->with('message', 'Category Deleted Successfully');
+        return back()->with('message', 'Category Deleted Successfully');
     }
 }

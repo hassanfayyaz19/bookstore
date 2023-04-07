@@ -9,11 +9,5 @@ class BlogCategory extends Model
 {
     use HasFactory;
 
-    protected $table = 'blog_categories';
-
-    protected $fillable = [
-        'name',
-        'slug',
-        'description',
-    ];
+    protected $guarded = [];
 }

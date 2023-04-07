@@ -4,7 +4,6 @@ namespace App\Providers;
 
 use App\Models\Category;
 use App\Models\ProjectSetting;
-use Illuminate\Support\Facades\Schema;
 use Illuminate\Support\Facades\View;
 use Illuminate\Support\ServiceProvider;
 
@@ -23,7 +22,6 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
-        Schema::defaultStringLength(191);
         View::composer(['user.partials.header', 'user.partials.footer'], function ($view) {
             $categories = Category::all();
             $view->with(['header_categories' => $categories]);

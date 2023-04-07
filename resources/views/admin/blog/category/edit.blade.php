@@ -77,9 +77,9 @@
                         <form class="form"
                               action="{{ route('admin.blog_category.update',['blog_category' => $blog_category])}}"
                               method="post">
-                        @csrf
-                        @method('PUT')
-                        <!--begin::Scroll-->
+                            @csrf
+                            @method('PUT')
+                            <!--begin::Scroll-->
                             <div class="d-flex flex-column scroll-y me-n7 pe-7" id="kt_modal_add_user_scroll"
                                  data-kt-scroll="true" data-kt-scroll-activate="{default: false, lg: true}"
                                  data-kt-scroll-max-height="auto"
@@ -178,9 +178,9 @@
                 <div class="modal-body scroll-y mx-5 mx-xl-15 my-7">
                     <!--begin::Form-->
                     <form id="edit_form" class="form" action="#">
-                    @csrf
-                    @method('PUT')
-                    <!--begin::Scroll-->
+                        @csrf
+                        @method('PUT')
+                        <!--begin::Scroll-->
                         <div class="d-flex flex-column scroll-y me-n7 pe-7" id="kt_modal_edit_user_scroll"
                              data-kt-scroll="true" data-kt-scroll-activate="{default: false, lg: true}"
                              data-kt-scroll-max-height="auto"

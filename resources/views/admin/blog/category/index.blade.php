@@ -85,16 +85,16 @@
 
                             <!--begin::Table body-->
                             <tbody class="text-gray-600 fw-semibold">
-                            @foreach($blog_category as $item)
+                            @foreach($blog_category as $category)
                                 <tr>
-                                    <td>{{ $item->id }}</td>
-                                    <td>{{ $item->name }}</td>
-                                    <td>{{ $item->slug }}</td>
-                                    <td>{{ $item->description }}</td>
+                                    <td>{{ $category->id }}</td>
+                                    <td>{{ $category->name }}</td>
+                                    <td>{{ $category->slug }}</td>
+                                    <td>{{ $category->description }}</td>
                                     <td>
-                                        <a href="{{ url('admin/blog_category/'.$item->id.'/edit') }}"
+                                        <a href="{{route('admin.blog_category.edit',['blog_category'=>$category->id])}}"
                                            class="btn btn-success">Edit</a>
-                                        <form action="{{ route('admin.blog_category.destroy', $item->id ) }}"
+                                        <form action="{{ route('admin.blog_category.destroy', $category->id ) }}"
                                               method="post">
                                             @csrf
                                             @method('DELETE')
@@ -156,8 +156,8 @@
                 <div class="modal-body scroll-y mx-5 mx-xl-15 my-7">
                     <!--begin::Form-->
                     <form id="add_form" class="form" action="#">
-                    @csrf
-                    <!--begin::Scroll-->
+                        @csrf
+                        <!--begin::Scroll-->
                         <div class="d-flex flex-column scroll-y me-n7 pe-7" id="kt_modal_add_user_scroll"
                              data-kt-scroll="true" data-kt-scroll-activate="{default: false, lg: true}"
                              data-kt-scroll-max-height="auto"
@@ -239,9 +239,9 @@
                 <div class="modal-body scroll-y mx-5 mx-xl-15 my-7">
                     <!--begin::Form-->
                     <form id="edit_form" class="form" action="#">
-                    @csrf
-                    @method('PUT')
-                    <!--begin::Scroll-->
+                        @csrf
+                        @method('PUT')
+                        <!--begin::Scroll-->
                         <div class="d-flex flex-column scroll-y me-n7 pe-7" id="kt_modal_edit_user_scroll"
                              data-kt-scroll="true" data-kt-scroll-activate="{default: false, lg: true}"
                              data-kt-scroll-max-height="auto"
