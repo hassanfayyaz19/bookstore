@@ -22,9 +22,11 @@ return new class extends Migration {
             $table->string('language')->nullable();
             $table->integer('page_count')->nullable();
             $table->longText('description')->nullable();;
-            $table->decimal('rating', 2, 1)->nullable();
+            $table->decimal('rating', 8, 2)->nullable();
             $table->integer('num_ratings')->default(0);
+            $table->string('video_url')->nullable();
             $table->string('image_url')->nullable();
+            $table->string('banner_image_url')->nullable();
             $table->text('file_path')->nullable();
             $table->boolean('is_recommended')->default(0);
             $table->boolean('is_featured')->default(0);

@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class Book extends Model
 {
@@ -17,6 +18,7 @@ class Book extends Model
     protected $appends = [
         'sale_price',
         'discounted_price',
+        'total_rating',
     ];
 
 //   Mutators
@@ -28,6 +30,13 @@ class Book extends Model
     }
 
     protected function imageUrl(): Attribute
+    {
+        return Attribute::make(
+            get: fn(string $value) => asset($value),
+        );
+    }
+
+    protected function bannerImageUrl(): Attribute
     {
         return Attribute::make(
             get: fn(string $value) => asset($value),
@@ -55,6 +64,20 @@ class Book extends Model
         );
     }
 
+    protected function totalRating(): Attribute
+    {
+        return Attribute::make(
+            get: function ($value, $attributes) {
+                $book_reviews = $this->book_reviews->where('is_active', 1);
+                if (count($book_reviews) == 0) {
+                    return 0;
+                }
+                $rating = $book_reviews->sum('rating');
+                return round($rating / count($book_reviews), 1);
+            }
+        );
+    }
+
 // End  Mutators
 
 // Start  Relations
@@ -71,6 +94,11 @@ class Book extends Model
     public function categories(): BelongsToMany
     {
         return $this->belongsToMany(Category::class, 'book_categories');
+    }
+
+    public function book_reviews(): HasMany
+    {
+        return $this->hasMany(BookReview::class);
     }
 // End  Relations
 

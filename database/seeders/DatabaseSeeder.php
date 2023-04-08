@@ -22,6 +22,7 @@ class DatabaseSeeder extends Seeder
             BookCategorySeeder::class,
             BannerBookSeeder::class,
             RecommendedBookSeeder::class,
+            BookOnSaleSeeder::class,
             FeaturedBookSeeder::class,
             BlogCategorySeeder::class,
         ]);

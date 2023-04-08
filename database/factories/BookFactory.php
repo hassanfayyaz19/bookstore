@@ -25,7 +25,11 @@ class BookFactory extends Factory
             'language' => fake()->randomElement(['english', 'spanish', 'french', 'hindi', 'urdu', 'korean', 'japanese']),
             'page_count' => fake()->numberBetween($min = 10, $max = 6000),
             'description' => fake()->paragraphs(10, true),
+            'video_url' => "https://www.youtube.com/embed/tgbNymZ7vqY",
+            'rating' => 80,
+            'num_ratings' => 16,
             'image_url' => fake()->imageUrl(),
+            'banner_image_url' => 'user/images/banner/banner-media3.png',
             'file_path' => 'sample.pdf',
         ];
     }

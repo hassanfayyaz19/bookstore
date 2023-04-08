@@ -12,7 +12,6 @@
 <script src="https://cdn.tiny.cloud/1/018h0i4wkpqg0nyfor5gt4h8dzqb4275oabhcr1hnoq2aza2/tinymce/6/tinymce.min.js"
         referrerpolicy="origin"></script>
 <!--begin::Custom Javascript(used for this page only)-->
-<script src="{{asset('assets/js/cart.js')}}"></script>
 <!--end::Custom Javascript-->
 <!--end::Javascript-->
 <script>

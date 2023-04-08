@@ -217,6 +217,29 @@ var shoppingCart = (function () {
 
     }
 
+    obj.showCheckoutButton = function () {
+        let books = shoppingCart.listCart()
+        books.forEach(function (book) {
+            console.log(book)
+            let book_class = 'cart-btn-' + book.id
+            if ($('.' + book_class).length) {
+                $('.' + book_class).hide()
+                $('.checkout-btn-' + book.id).show()
+            }
+        })
+    }
+
+    obj.showCartButton = function () {
+        let books = shoppingCart.listCart()
+        books.forEach(function (book) {
+            let cart_btn = $('.cart-btn-' + book.id)
+            if (cart_btn.length) {
+                cart_btn.show()
+                $('.checkout-btn-' + book.id).hide()
+            }
+        })
+    }
+
     // cart : Array
 
     // Item : Object/Class
@@ -282,7 +305,7 @@ $(document).on('click', '.add-to-cart', function (e) {
     })
 
     shoppingCart.addItemToCart(book)
-
+    shoppingCart.showCheckoutButton()
     displayHeaderCart()
 })
 
@@ -291,7 +314,6 @@ function displayHeaderCart () {
     var cartArray = shoppingCart.listCart()
     var output = ''
     var header_cart_count = 0
-    console.log(cartArray)
     var total_cart_price = 0.00
     for (var i in cartArray) {
         let book = cartArray[i]
@@ -321,6 +343,7 @@ function displayHeaderCart () {
 
     $('#header_cart_count').text(shoppingCart.totalCount())
     $('.header-cart-list').html(output)
+    shoppingCart.showCheckoutButton()
 }
 
 function displayCartPage () {
@@ -397,10 +420,12 @@ $(document).on('click', '.plus-item', function (event) {
 })
 
 $(document).on('click', '.item_remove', function (event) {
+    console.log('item_remove')
     const id = $(this).data('id')
     if (id == undefined) {
         return false
     }
+    shoppingCart.showCartButton()
     shoppingCart.removeItemFromCartAll(id)
     displayHeaderCart()
     displayCartPage()

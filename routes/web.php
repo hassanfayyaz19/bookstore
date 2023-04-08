@@ -41,6 +41,7 @@ Route::prefix('admin')->as('admin.')->middleware(['auth:admin'])->group(function
     Route::resource('author', \App\Http\Controllers\Admin\AuthorController::class);
     Route::resource('purchase', \App\Http\Controllers\Admin\PurchaseController::class);
     Route::resource('project_setting', \App\Http\Controllers\Admin\ProjectSettingController::class);
+    Route::resource('book_review', \App\Http\Controllers\Admin\BookReviewController::class);
     Route::resource('blog_category', \App\Http\Controllers\Admin\BlogCategoryController::class);
     Route::resource('blog', \App\Http\Controllers\Admin\BlogController::class);
     Route::get('/project/home_setting', [App\Http\Controllers\Admin\ProjectSettingController::class, 'showHomeSettingPage'])->name('project_setting.home');
@@ -56,6 +57,7 @@ Route::middleware(['auth:web'])->group(function () {
     Route::get('/book/download/{book}', [\App\Http\Controllers\User\BookController::class, 'downloadBook'])->name('book.download');
     Route::get('/book/purchased', [\App\Http\Controllers\User\BookController::class, 'purchasedBook'])->name('book.purchased');
     Route::get('checkout', [\App\Http\Controllers\User\BookController::class, 'showCheckoutPage'])->name('book.checkout');
+    Route::resource('book_review', \App\Http\Controllers\User\BookReviewController::class);
 });
 
 Route::get('/about-us', function () {
