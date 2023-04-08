@@ -32,6 +32,9 @@ Route::prefix('admin')->as('admin.')->middleware(['guest:admin'])->group(functio
 
 Route::prefix('admin')->as('admin.')->middleware(['auth:admin'])->group(function () {
     Route::post('/logout', [LoginController::class, 'adminLogout'])->name('logout');
+    Route::get('/dashboard', function () {
+        return redirect()->route('admin.book.index');
+    })->name('home');
     Route::resource('book', \App\Http\Controllers\Admin\BookController::class);
     Route::resource('recommended_book', \App\Http\Controllers\Admin\RecommendedBookController::class);
     Route::resource('featured_book', \App\Http\Controllers\Admin\FeaturedBookController::class);
@@ -45,9 +48,7 @@ Route::prefix('admin')->as('admin.')->middleware(['auth:admin'])->group(function
     Route::resource('blog_category', \App\Http\Controllers\Admin\BlogCategoryController::class);
     Route::resource('blog', \App\Http\Controllers\Admin\BlogController::class);
     Route::get('/project/home_setting', [App\Http\Controllers\Admin\ProjectSettingController::class, 'showHomeSettingPage'])->name('project_setting.home');
-    Route::get('/dashboard', function () {
-        return redirect()->route('admin.book.index');
-    })->name('home');
+
 });
 Auth::routes();
 

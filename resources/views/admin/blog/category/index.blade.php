@@ -1,5 +1,8 @@
 @extends('admin.layouts.app')
 @section('title', 'Category List')
+@push('css')
+    <link href="{{asset('assets/plugins/custom/datatables/datatables.bundle.css')}}" rel="stylesheet" type="text/css"/>
+@endpush
 @section('content')
     <!--begin::Content wrapper-->
     <div class="d-flex flex-column flex-column-fluid">
@@ -12,7 +15,7 @@
                 <div class="page-title d-flex flex-column justify-content-center flex-wrap me-3 ">
                     <!--begin::Title-->
                     <h1 class="page-heading d-flex text-dark fw-bold fs-3 flex-column justify-content-center my-0">
-                        Blog List
+                        Blog Category List
                     </h1>
                 </div>
             </div>
@@ -40,18 +43,19 @@
 
 
                                 <!--begin::Add user-->
-                                <a href="{{ route('admin.blog_category.create') }}" class="btn btn-primary">
+                                <button type="button" class="btn btn-primary" data-bs-toggle="modal"
+                                        data-bs-target="#add_modal">
                                     <!--begin::Svg Icon | path: icons/duotune/arrows/arr075.svg-->
                                     <span class="svg-icon svg-icon-2">
-        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <rect opacity="0.5" x="11.364" y="20.364" width="16" height="2" rx="1" transform="rotate(-90 11.364 20.364)"
-                  fill="currentColor"/>
-            <rect x="4.36396" y="11.364" width="16" height="2" rx="1" fill="currentColor"/>
-        </svg>
-    </span>
-                                    Add Category
-                                </a>
-
+                                                    <svg width="24" height="24"
+                                                         viewBox="0 0 24 24" fill="none"
+                                                         xmlns="http://www.w3.org/2000/svg">
+                                                        <rect opacity="0.5" x="11.364" y="20.364" width="16" height="2"
+                                                              rx="1" transform="rotate(-90 11.364 20.364)"
+                                                              fill="currentColor"/>
+                                                        <rect x="4.36396" y="11.364" width="16" height="2" rx="1"
+                                                              fill="currentColor"/></svg></span>Add Blog Category
+                                </button>
                                 <!--end::Add user-->
                             </div>
                             <!--end::Toolbar-->
@@ -85,26 +89,7 @@
 
                             <!--begin::Table body-->
                             <tbody class="text-gray-600 fw-semibold">
-                            @foreach($blog_category as $category)
-                                <tr>
-                                    <td>{{ $category->id }}</td>
-                                    <td>{{ $category->name }}</td>
-                                    <td>{{ $category->slug }}</td>
-                                    <td>{{ $category->description }}</td>
-                                    <td>
-                                        <a href="{{route('admin.blog_category.edit',['blog_category'=>$category->id])}}"
-                                           class="btn btn-success">Edit</a>
-                                        <form action="{{ route('admin.blog_category.destroy', $category->id ) }}"
-                                              method="post">
-                                            @csrf
-                                            @method('DELETE')
-                                            <button type="submit" class="btn btn-danger"
-                                                    onclick="return confirm('Are you sure to delete this user?')">Delete
-                                            </button>
-                                        </form>
-                                    </td>
-                                </tr>
-                            @endforeach
+
                             </tbody>
                             <!--end::Table body-->
                         </table>
@@ -129,7 +114,7 @@
                 <!--begin::Modal header-->
                 <div class="modal-header" id="kt_modal_add_user_header">
                     <!--begin::Modal title-->
-                    <h2 class="fw-bold">Add Category Details</h2>
+                    <h2 class="fw-bold">Add Blog Category Details</h2>
                     <!--end::Modal title-->
 
                     <!--begin::Close-->
@@ -170,6 +155,12 @@
                                 <label class="required fw-semibold fs-6 mb-2">Name</label>
                                 <input type="text" name="name" class="form-control mb-3 mb-lg-0"
                                        required/>
+                            </div>
+
+                            <div class="fv-row mb-7">
+                                <label class="required fw-semibold fs-6 mb-2">Description</label>
+                                <textarea class="form-control mb-3 mb-lg-0" name="description" cols="30"
+                                          rows="10"></textarea>
                             </div>
                         </div>
                         <!--end::Scroll-->
@@ -212,7 +203,7 @@
                 <!--begin::Modal header-->
                 <div class="modal-header" id="kt_modal_edit_user_header">
                     <!--begin::Modal title-->
-                    <h2 class="fw-bold">Update Category Details</h2>
+                    <h2 class="fw-bold">Update Blog Category Details</h2>
                     <!--end::Modal title-->
 
                     <!--begin::Close-->
@@ -238,7 +229,7 @@
                 <!--begin::Modal body-->
                 <div class="modal-body scroll-y mx-5 mx-xl-15 my-7">
                     <!--begin::Form-->
-                    <form id="edit_form" class="form" action="#">
+                    <form id="edit_form" class="form">
                         @csrf
                         @method('PUT')
                         <!--begin::Scroll-->
@@ -254,6 +245,11 @@
                                 <label class="required fw-semibold fs-6 mb-2">Name</label>
                                 <input type="text" name="name" id="name" class="form-control mb-3 mb-lg-0"
                                        required/>
+                            </div>
+                            <div class="fv-row mb-7">
+                                <label class="required fw-semibold fs-6 mb-2">Description</label>
+                                <textarea class="form-control mb-3 mb-lg-0" name="description" id="description"
+                                          cols="30" rows="10"></textarea>
                             </div>
 
                         </div>
@@ -289,4 +285,101 @@
     </div>
     <!--end::Modal - Update task-->
 @endsection
+@push('js')
+    <script src="{{asset('assets/plugins/custom/datatables/datatables.bundle.js')}}"></script>
+    <script>
+        $(document).ready(function () {
+            $('#table').DataTable({
+                scrollX: true,
+                'lengthChange': false,
+                'autoWidth': false,
+                'processing': true,
+                'serverSide': true,
+                'ajax': {
+                    'url': "{{ route('admin.blog_category.index') }}",
+                    'dataType': 'json',
+                    'type': 'GET',
+                    'data': {
+                        _token: "{{csrf_token()}}"
+                    }
+                },
+                'columns': [
+                    { 'data': 'id' },
+                    { 'data': 'name' },
+                    { 'data': 'options', orderable: false, searchable: false }
+                ],
+                'order': [0, 'desc'],
+                'bDestroy': true
+            })
 
+            $('#add_form').on('submit', function (e) {
+                e.preventDefault()
+                $.ajax({
+                    type: 'POST',
+                    url: '{{route('admin.blog_category.store')}}',
+                    data: new FormData(this),
+                    contentType: false,
+                    data_type: 'json',
+                    cache: false,
+                    processData: false,
+                    beforeSend: function () {
+                        Swal.showLoading()
+                    },
+                    success: function (response) {
+                        swal.close()
+                        $('#table').DataTable().ajax.reload()
+                        alertMsg(response.message, response.status)
+                        $('#add_form')[0].reset()
+                        $('#add_modal').modal('hide')
+                    },
+                    error: function (xhr, error, status) {
+                        swal.close()
+                        var response = xhr.responseJSON
+                        alertMsg(response.message, 'error')
+                    }
+                })
+            })
+
+            $('#edit_form').on('submit', function (e) {
+                e.preventDefault()
+                var id = $('#hidden_id').val()
+                var route = "{{route('admin.blog_category.update',['blog_category'=>':blog_category'])}}"
+                route = route.replace(':blog_category', id)
+                $.ajax({
+                    type: 'POST',
+                    url: route,
+                    data: new FormData(this),
+                    contentType: false,
+                    data_type: 'json',
+                    cache: false,
+                    processData: false,
+                    beforeSend: function () {
+                        Swal.showLoading()
+                    },
+                    success: function (response) {
+                        swal.close()
+                        $('#table').DataTable().ajax.reload()
+                        alertMsg(response.message, response.status)
+                        $('#edit_modal').modal('hide')
+                    },
+                    error: function (xhr, error, status) {
+                        swal.close()
+                        var response = xhr.responseJSON
+                        alertMsg(response.message, 'error')
+                    }
+                })
+            })
+        })
+
+        $(document).on('click', '.edit_data', function () {
+            var data = $(this).data('params')
+            console.log(data)
+            $('#name').val(data.name)
+            $('#description').text(data.description)
+            $('#hidden_id').val(data.id)
+            $('#edit_modal').modal('show')
+        })
+
+
+    </script>
+@endpush

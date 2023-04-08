@@ -278,7 +278,7 @@
                                   </svg>
                             </span>
                         </span>
-                        <span class="menu-title">Blog</span>
+                        <span class="menu-title">Book Review</span>
                         <span class="menu-arrow"></span>
                     </span>
 
