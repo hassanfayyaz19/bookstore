@@ -258,6 +258,15 @@
                                     class="menu-title">Blog Category</span></a>
                         </div>
                     </div>
+
+                    <div class="menu-sub menu-sub-accordion">
+                        <div class="menu-item">
+                            <a class="menu-link {{request()->route()->getName()=='admin.blog.index'?'active':''}}"
+                               href="{{route('admin.blog.index')}}">
+                                <span class="menu-bullet"><span class="bullet bullet-dot"></span></span><span
+                                    class="menu-title">Blog List</span></a>
+                        </div>
+                    </div>
                 </div>
 
                 <div data-kt-menu-trigger="click"

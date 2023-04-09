@@ -25,6 +25,7 @@ class DatabaseSeeder extends Seeder
             BookOnSaleSeeder::class,
             FeaturedBookSeeder::class,
             BlogCategorySeeder::class,
+            BlogSeeder::class,
         ]);
     }
 }
