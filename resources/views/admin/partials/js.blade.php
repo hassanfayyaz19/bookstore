@@ -22,7 +22,7 @@
         toolbar: 'undo redo | blocks fontfamily fontsize | bold italic underline strikethrough | link image media table | align lineheight | numlist bullist indent outdent | emoticons charmap | removeformat',
     })
 
-    function alertMsg (msg, status = 'success') {
+    function alertMsg(msg, status = 'success') {
         Swal.fire({
             icon: status,
             title: msg,
@@ -34,6 +34,10 @@
     $(document).on('submit', '.delete_form', function (e) {
         e.preventDefault()
         var route = $(this).attr('action')
+        var table_id = "table"
+        if ($(this).data('table-id')) {
+            table_id = $(this).data('table-id')
+        }
         Swal.fire({
             title: 'Are you sure?',
             text: 'You will not be able to recover this data!',
@@ -57,7 +61,7 @@
                     success: function (response) {
                         swal.close()
                         alertMsg(response.message, 'error')
-                        $('#table').DataTable().ajax.reload()
+                        $('#' + table_id).DataTable().ajax.reload()
                     },
                     error: function (xhr, error, status) {
                         swal.close()

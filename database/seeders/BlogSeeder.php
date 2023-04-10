@@ -14,7 +14,7 @@ class BlogSeeder extends Seeder
      */
     public function run(): void
     {
-        Blog::factory(50)->create();
+        Blog::factory(20)->create();
 
         $blogs = Blog::all();
         $categories = BlogCategory::all();

@@ -49,7 +49,7 @@ class BlogController extends Controller
      */
     public function show(string $blog)
     {
-        $blog = Blog::with('user', 'categories', 'recommended_books')->whereSlug($blog)->first();
+        $blog = Blog::with('user', 'categories', 'recommended_books', 'comments', 'comments.replies', 'comments.user')->whereSlug($blog)->first();
         $latest_blogs = Blog::with(['user'])->latest()->limit(5)->get();
         $blog_categories = BlogCategory::latest()->get();
 //        dd($blog);

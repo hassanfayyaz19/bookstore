@@ -191,20 +191,22 @@ class BlogController extends Controller
 
                 $id = $row->id;
                 $edit_link = route("admin.blog.edit", ["blog" => $id]);
+                $comment_link = route("admin.blog.comment.index", ["blog" => $id]);
                 $del_link = route("admin.blog.destroy", ["blog" => $id]);
                 $csrf = csrf_token();
 
                 $nestedData['options'] = "
                     <div class='btn-group' role='group'>
                     <a href='$edit_link' title='Edit' class='edit_data mr-2 btn btn-primary btn-sm rounded'>Edit</a>
-                    <form action='$del_link' method='POST' class='delete_form'>
+                    <a href='javascript:' title='Comments' class='mr-2 btn btn-secondary btn-sm rounded comment-btn' data-href='$comment_link' data-blog='$id'>Comments</a>
+                    <form action='$del_link' method='POST' class='delete_form' data-table-id='table'>
                     <input type='hidden' name='_token' value='$csrf'>
                     <input type='hidden' name='_method' value='delete' />
                     <button type='submit' title='Delete' class='delete_data btn btn-danger btn-sm' data-id='$row->id'>
                     Delete</button>
                     </form>
-                    </div>
-                    ";
+                    </div>";
+
                 $data[] = $nestedData;
             }
         }

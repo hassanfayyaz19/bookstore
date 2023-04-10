@@ -3,7 +3,6 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
-use App\Models\Category;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
@@ -140,7 +139,7 @@ class UserController extends Controller
                 $nestedData['options'] = "
                     <div class='btn-group' role='group'>
                     <button title='Edit' class='edit_data mr-2 btn btn-primary btn-sm rounded' data-params='$params'>Edit</button>
-                    <form action='$del_link' method='POST' class='delete_form'>
+                    <form action='$del_link' method='POST' class='delete_form' data-table-id='table'>
                     <input type='hidden' name='_token' value='$csrf'>
                     <input type='hidden' name='_method' value='delete' />
                     <button type='submit' title='Delete' class='delete_data btn btn-danger btn-sm' data-id='$row->id'>

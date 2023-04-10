@@ -47,6 +47,7 @@ Route::prefix('admin')->as('admin.')->middleware(['auth:admin'])->group(function
     Route::resource('book_review', \App\Http\Controllers\Admin\BookReviewController::class);
     Route::resource('blog_category', \App\Http\Controllers\Admin\BlogCategoryController::class);
     Route::resource('blog', \App\Http\Controllers\Admin\BlogController::class);
+    Route::resource('blog.comment', \App\Http\Controllers\Admin\CommentController::class);
     Route::get('/project/home_setting', [App\Http\Controllers\Admin\ProjectSettingController::class, 'showHomeSettingPage'])->name('project_setting.home');
 
 });
@@ -59,6 +60,7 @@ Route::middleware(['auth:web'])->group(function () {
     Route::get('/book/purchased', [\App\Http\Controllers\User\BookController::class, 'purchasedBook'])->name('book.purchased');
     Route::get('checkout', [\App\Http\Controllers\User\BookController::class, 'showCheckoutPage'])->name('book.checkout');
     Route::resource('book_review', \App\Http\Controllers\User\BookReviewController::class);
+    Route::resource('blog.comment', \App\Http\Controllers\User\CommentController::class);
 });
 
 Route::get('/about-us', function () {
