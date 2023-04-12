@@ -81,7 +81,7 @@
                             <li class="nav-item dropdown profile-dropdown  ms-4">
                                 <a class="nav-link" href="javascript:void(0);" role="button" data-bs-toggle="dropdown"
                                    aria-expanded="false">
-                                    <img src="{{asset('user/images/profile1.jpg')}}" alt="/">
+                                    <img src="{{auth()->guard('web')->user()->profile}}" alt="/" style="height: 50px">
                                     <div class="profile-info">
                                         <h6 class="title">{{auth()->guard('web')->user()->first_name}}</h6>
                                         <span>{{auth()->guard('web')->user()->email}}</span>
@@ -93,7 +93,7 @@
                                         <span>{{auth()->guard('web')->user()->email}}</span>
                                     </div>
                                     <div class="dropdown-body">
-                                        <a href="javascript:"
+                                        <a href="{{route('profile.index')}}"
                                            class="dropdown-item d-flex justify-content-between align-items-center ai-icon">
                                             <div>
                                                 <svg xmlns="http://www.w3.org/2000/svg" height="20px"

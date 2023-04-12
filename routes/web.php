@@ -61,6 +61,7 @@ Route::middleware(['auth:web'])->group(function () {
     Route::get('checkout', [\App\Http\Controllers\User\BookController::class, 'showCheckoutPage'])->name('book.checkout');
     Route::resource('book_review', \App\Http\Controllers\User\BookReviewController::class);
     Route::resource('blog.comment', \App\Http\Controllers\User\CommentController::class);
+    Route::resource('profile', \App\Http\Controllers\User\ProfileController::class);
 });
 
 Route::get('/about-us', function () {

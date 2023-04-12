@@ -23,6 +23,7 @@ class UserSeeder extends Seeder
         Admin::create([
             'name' => 'Admin',
             'email' => 'admin@admin.com',
+            'profile' => 'assets/media/default-profile.png',
             'email_verified_at' => now(),
             'password' => Hash::make('admin'),
             'remember_token' => Str::random(10),
@@ -32,6 +33,7 @@ class UserSeeder extends Seeder
             'first_name' => 'User',
             'last_name' => 'Demo',
             'email' => 'user@user.com',
+            'profile' => 'assets/media/default-profile.png',
             'email_verified_at' => now(),
             'password' => Hash::make('user'),
             'remember_token' => Str::random(10),
