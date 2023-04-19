@@ -51,10 +51,10 @@ Route::prefix('admin')->as('admin.')->middleware(['auth:admin'])->group(function
     Route::get('/project/home_setting', [App\Http\Controllers\Admin\ProjectSettingController::class, 'showHomeSettingPage'])->name('project_setting.home');
 
 });
-Auth::routes();
+Auth::routes(['verify' => true]);
 
 
-Route::middleware(['auth:web'])->group(function () {
+Route::middleware(['auth:web', 'verified'])->group(function () {
     Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
     Route::get('/book/download/{book}', [\App\Http\Controllers\User\BookController::class, 'downloadBook'])->name('book.download');
     Route::get('/book/purchased', [\App\Http\Controllers\User\BookController::class, 'purchasedBook'])->name('book.purchased');

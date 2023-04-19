@@ -69,6 +69,11 @@
                     </div>
                     <div class="col-lg-6 col-md-6 mb-4">
                         <div class="login-area">
+                            @if (session('status'))
+                                <div class="alert alert-success" role="alert">
+                                    {{ session('status') }}
+                                </div>
+                            @endif
                             <div class="tab-content nav">
                                 <form id="login" class="tab-pane active col-12" method="post"
                                       action="{{route('login')}}">
@@ -97,13 +102,20 @@
                                                 class="fas fa-unlock-alt"></i> Forgot Password</a>
                                     </div>
                                 </form>
-                                <form id="forgot-password" class="tab-pane fade  col-12">
+                                <form id="forgot-password" class="tab-pane fade  col-12"
+                                      action="{{ route('password.email') }}" method="POST">
+                                    @csrf
                                     <h4 class="text-secondary">FORGET PASSWORD ?</h4>
                                     <p class="font-weight-600">We will email you to reset your password. </p>
                                     <div class="mb-3">
                                         <label class="label-title">E-MAIL *</label>
-                                        <input name="dzName" required="" class="form-control"
-                                               placeholder="Your Email Id" type="email">
+                                        <input name="email" required="" class="form-control"
+                                               placeholder="Your Email" type="email">
+                                        @error('email')
+                                        <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                        </span>
+                                        @enderror
                                     </div>
                                     <div class="text-left">
                                         <a class="btn btn-outline-secondary btnhover m-r10" data-bs-toggle="tab"
