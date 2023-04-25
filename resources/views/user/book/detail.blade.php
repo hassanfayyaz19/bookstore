@@ -84,10 +84,10 @@
                                             </div>
                                             <div class="product-num">
                                                 <a href="javascript:"
-                                                   class="btn btn-primary btnhover btnhover2 add-to-cart cart-btn-{{$book->id}}"
+                                                   class="btn btn-primary btnhover btnhover2 buy-btn cart-btn-{{$book->id}}"
                                                    data-book="{{$book}}">
                                                     <i class="flaticon-shopping-cart-1"></i>
-                                                    <span>Add to cart</span></a>
+                                                    <span>Buy</span></a>
 
                                                 <a href="{{route('book.checkout')}}"
                                                    style="display: none"
@@ -113,10 +113,10 @@
                                         </div>
                                         <div class="product-num">
                                             <a href="javascript:"
-                                               class="btn btn-primary btnhover btnhover2 add-to-cart cart-btn-{{$book->id}}"
+                                               class="btn btn-primary btnhover btnhover2 buy-btn cart-btn-{{$book->id}}"
                                                data-book="{{$book}}">
                                                 <i class="flaticon-shopping-cart-1"></i>
-                                                <span>Add to cart</span></a>
+                                                <span>Buy</span></a>
 
                                             <a href="{{route('book.checkout')}}"
                                                style="display: none"
@@ -316,9 +316,9 @@
                                                     @endif
                                                 </div>
                                                 <a href="javascript:"
-                                                   class="btn btn-outline-primary btn-sm btnhover btnhover2 add-to-cart cart-btn-{{$book->id}}"
+                                                   class="btn btn-outline-primary btn-sm btnhover btnhover2 buy-btn cart-btn-{{$book->id}}"
                                                    data-book="{{$book}}">
-                                                    <i class="flaticon-shopping-cart-1 me-2"></i> Add to cart</a>
+                                                    <i class="flaticon-shopping-cart-1 me-2"></i> Buy</a>
 
                                                 <a href="{{route('book.checkout')}}"
                                                    style="display: none"

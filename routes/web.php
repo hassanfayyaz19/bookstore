@@ -64,6 +64,7 @@ Route::middleware(['auth:web', 'verified'])->group(function () {
     Route::resource('book_review', \App\Http\Controllers\User\BookReviewController::class);
     Route::resource('blog.comment', \App\Http\Controllers\User\CommentController::class);
     Route::resource('profile', \App\Http\Controllers\User\ProfileController::class);
+    Route::post('stripe', [\App\Http\Controllers\User\BookController::class, 'stripePost'])->name('stripe.post');
 });
 
 Route::get('/about-us', function () {
@@ -93,4 +94,3 @@ Route::resource('blog', \App\Http\Controllers\User\BlogController::class);
 
 Route::get('cart', [\App\Http\Controllers\User\BookController::class, 'showCartPage'])->name('book.cart');
 
-Route::post('stripe', [\App\Http\Controllers\User\BookController::class, 'stripePost'])->name('stripe.post');

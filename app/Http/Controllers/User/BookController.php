@@ -22,7 +22,7 @@ class BookController extends Controller
 {
     public function index()
     {
-        $books = Book::with('author', 'publisher', 'categories');
+        $books = Book::with('author', 'publisher', 'categories', 'book_addons');
         if (request()->has('category')) {
             $category_slugs = request()->get('category');
             $books = $books->whereHas('categories', function ($q) use ($category_slugs) {
@@ -62,7 +62,7 @@ class BookController extends Controller
         if ($total_price > 0) {
             Stripe::setApiKey(env('STRIPE_SECRET'));
             $charge = Charge::create([
-                "amount" => $total_price,
+                "amount" => round($total_price),
                 "currency" => "USD",
                 "source" => $request->stripeToken,
                 "description" => "Payment Dedicated Through BookStore",
@@ -82,7 +82,8 @@ class BookController extends Controller
                         'user_id' => Auth::id(),
                         'book_id' => $item->id,
                         'payment_id' => $payment->id,
-                        'price' => $item->price,
+                        'price' => $item->total_price,
+                        'addons' => json_encode($item->cart_addons ?? []),
                         'created_at' => Carbon::now(),
                         'updated_at' => Carbon::now(),
                     ];
@@ -104,7 +105,7 @@ class BookController extends Controller
         $id = decrypt($book);
         $book = Book::find($id);
         if (!$book) {
-            new \Exception('Invalid URL');
+            throw new \Exception('Invalid URL');
         }
 
         if (Storage::exists($book->file_path)) {
@@ -112,7 +113,6 @@ class BookController extends Controller
         }
 
         return response()->download(public_path($book->file_path));
-
     }
 
     public function purchasedBook()
@@ -124,7 +124,7 @@ class BookController extends Controller
 
     public function show(Book $book)
     {
-        $book->load(['author', 'publisher', 'categories', 'book_reviews']);
+        $book->load(['author', 'publisher', 'categories', 'book_reviews', 'book_addons']);
         $book->whereHas('book_reviews', function ($q) {
             $q->where('is_active', 1);
         });

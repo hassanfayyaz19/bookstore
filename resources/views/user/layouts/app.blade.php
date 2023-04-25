@@ -47,15 +47,15 @@
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="cart_modal_title">Book Title</h5>
+                <h5 class="modal-title" id="cart_modal_title"></h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
                 <div class="col-md-12" id="cart_book_addons">
                 </div>
                 <div class="d-grid gap-2">
-                    <button class="btn btn-primary btn-block">Checkout</button>
-                    <button class="btn btn-outline-primary btn-block">Continue Shopping</button>
+                    <a class="btn btn-primary btn-block" href="{{route('book.checkout')}}">Checkout</a>
+                    <button class="btn btn-outline-primary btn-block" data-bs-dismiss="modal">Continue Shopping</button>
                 </div>
             </div>
         </div>

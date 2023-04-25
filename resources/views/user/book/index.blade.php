@@ -252,7 +252,7 @@
                                                     @endif
                                                 </div>
                                                 <a href="javascript:;"
-                                                   class="btn btn-secondary box-btn btnhover btnhover2 add-to-cart cart-btn-{{$book->id}}"
+                                                   class="btn btn-secondary box-btn btnhover btnhover2 buy-btn cart-btn-{{$book->id}}"
                                                    data-book="{{$book}}"><i
                                                         class="flaticon-shopping-cart-1 m-r10"></i> Add to cart</a>
 
