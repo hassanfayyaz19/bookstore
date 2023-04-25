@@ -71,7 +71,8 @@ class BookController extends Controller
                 $nestedData['title'] = $row->title;
                 $nestedData['author_id'] = $row->author_id;
                 $nestedData['price'] = $row->price;
-                $nestedData['publisher_id'] = $row->publisher_id;
+                $nestedData['publisher_id'] = $row->publisher->name;
+                $nestedData['addon'] = "<a href='" . route('admin.book.addon.index', ['book' => $row->id]) . "' class='btn btn-info btn-sm'>Addons</a>";
 
                 $id = $row->id;
                 $del_link = route("admin.book.destroy", ["book" => $id]);

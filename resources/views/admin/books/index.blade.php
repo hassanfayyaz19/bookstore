@@ -84,6 +84,7 @@
                                 <th class="min-w-125px">Author</th>
                                 <th class="min-w-125px">price</th>
                                 <th class="min-w-125px">publisher</th>
+                                <th class="min-w-125px">Addons</th>
                                 <th class="text-end min-w-100px">Actions</th>
                             </tr>
                             <!--end::Table row-->
@@ -155,7 +156,8 @@
 
                             <div class="fv-row mb-7">
                                 <label class="required fw-semibold fs-6 mb-2">Categories</label>
-                                <select class="form-select mb-2" name="categories" data-control="select2"
+                                <select class="form-select mb-2" name="categories" id="add_categories"
+                                        data-control="select2"
                                         data-hide-search="true" required multiple data-placeholder="Select an option">
                                     @foreach($categories as $category)
                                         <option
@@ -172,7 +174,7 @@
 
                             <div class="fv-row mb-7">
                                 <label class="required fw-semibold fs-6 mb-2">Author</label>
-                                <select class="form-select mb-2" name="author_id" data-control="select2"
+                                <select class="form-select mb-2" name="author_id" id="author_id" data-control="select2"
                                         data-hide-search="true" required>
                                     <option value="" selected disabled>Select an option</option>
                                     @foreach($authors as $author)
@@ -194,7 +196,8 @@
                                 <div class="col-md-6">
                                     <div class="fv-row mb-7">
                                         <label class="required fw-semibold fs-6 mb-2">Publisher</label>
-                                        <select class="form-select mb-2" name="publisher_id" data-control="select2"
+                                        <select class="form-select mb-2" name="publisher_id" id="publisher_id"
+                                                data-control="select2"
                                                 data-hide-search="true" required>
                                             <option value="" selected disabled>Select an option</option>
                                             @foreach($publishers as $publisher)
@@ -623,6 +626,7 @@
                     {'data': 'author_id'},
                     {'data': 'price'},
                     {'data': 'publisher_id'},
+                    {'data': 'addon', orderable: false, searchable: false},
                     {'data': 'options', orderable: false, searchable: false},
                 ],
                 'order': [0, 'desc'],
@@ -648,6 +652,9 @@
                         alertMsg(response.message, response.status)
                         $('#add_form')[0].reset()
                         $('#add_modal').modal('hide')
+                        $('#add_author_id').val('').trigger('change')
+                        $('#add_publisher_id').val('').trigger('change')
+                        $('#add_categories').val('').trigger('change')
                     },
                     error: function (xhr, error, status) {
                         swal.close()
@@ -678,6 +685,10 @@
                         $('#table').DataTable().ajax.reload()
                         alertMsg(response.message, response.status)
                         $('#edit_modal').modal('hide')
+                        $('#edit_form')[0].reset()
+                        $('#author_id').val('').trigger('change')
+                        $('#publisher_id').val('').trigger('change')
+                        $('#categories').val('').trigger('change')
                     },
                     error: function (xhr, error, status) {
                         swal.close()

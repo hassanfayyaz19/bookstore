@@ -311,7 +311,9 @@
 
                                                 <div class="price">
                                                     <span class="price-num">$ {{$book->sale_price}}</span>
-                                                    <del>$ {{$book->price}}</del>
+                                                    @if($book->sale_price!=$book->price)
+                                                        <del>$ {{$book->price}}</del>
+                                                    @endif
                                                 </div>
                                                 <a href="javascript:"
                                                    class="btn btn-outline-primary btn-sm btnhover btnhover2 add-to-cart cart-btn-{{$book->id}}"

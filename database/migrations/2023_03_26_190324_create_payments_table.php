@@ -14,7 +14,7 @@ return new class extends Migration {
             $table->id();
             $table->string('payment_method');
             $table->string('transaction_id');
-            $table->decimal('amount', 8, 2);
+            $table->decimal('amount', 11, 2);
             $table->string('status');
             $table->text('failure_reason')->nullable();
             $table->json('response')->nullable();

@@ -21,7 +21,9 @@
                                            data-swiper-parallax="-40">{{str()->words($book->description,25,'....')}}</p>
                                         <div class="price" data-swiper-parallax="-50">
                                             <span class="price-num">$ {{$book->sale_price}}</span>
-                                            <del>$ {{$book->price}}</del>
+                                            @if($book->sale_price!=$book->price)
+                                                <del>$ {{$book->price}}</del>
+                                            @endif
                                             <span
                                                 class="badge badge-danger">{{$book->discount_percentage}}% OFF</span>
                                         </div>

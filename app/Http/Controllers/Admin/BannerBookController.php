@@ -73,7 +73,7 @@ class BannerBookController extends Controller
      */
     public function destroy(Book $banner_book)
     {
-        $banner_book->is_featured = 0;
+        $banner_book->is_banner = 0;
         $banner_book->save();
         return response()->json(['status' => 'success', 'message' => 'Book Removed from banner section Successful']);
     }

@@ -6,6 +6,8 @@
 <script>
     const CART_ROUTE = "{{route('book.cart')}}"
     const CHECKOUT_ROUTE = "{{route('book.checkout')}}"
+    var BOOK_DETAIL_ROUTE = "{{route('book.show',['book'=>':book'])}}"
+
     $(document).ready(function () {
         $.urlParam = function (name) {
             var results = new RegExp('[\?&]' + name + '=([^&#]*)')

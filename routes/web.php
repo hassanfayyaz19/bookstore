@@ -16,10 +16,10 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    $recommended_books = \App\Models\Book::with('categories')->recommended()->get();
-    $featured_books = \App\Models\Book::with('categories')->featured()->get();
-    $banner_books = \App\Models\Book::with('categories')->banner()->get();
-    $on_sale_books = \App\Models\Book::with('categories')->onSale()->get();
+    $recommended_books = \App\Models\Book::with('categories', 'book_addons')->recommended()->get();
+    $featured_books = \App\Models\Book::with('categories', 'book_addons')->featured()->get();
+    $banner_books = \App\Models\Book::with('categories', 'book_addons')->banner()->get();
+    $on_sale_books = \App\Models\Book::with('categories', 'book_addons')->onSale()->get();
     $settings = \App\Models\ProjectSetting::first();
     return view('user.welcome', get_defined_vars());
 })->name('welcome');
@@ -48,6 +48,8 @@ Route::prefix('admin')->as('admin.')->middleware(['auth:admin'])->group(function
     Route::resource('blog_category', \App\Http\Controllers\Admin\BlogCategoryController::class);
     Route::resource('blog', \App\Http\Controllers\Admin\BlogController::class);
     Route::resource('blog.comment', \App\Http\Controllers\Admin\CommentController::class);
+    Route::resource('book.addon', \App\Http\Controllers\Admin\BookAddonController::class);
+
     Route::get('/project/home_setting', [App\Http\Controllers\Admin\ProjectSettingController::class, 'showHomeSettingPage'])->name('project_setting.home');
 
 });

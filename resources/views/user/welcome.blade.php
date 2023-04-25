@@ -29,8 +29,8 @@
                                     <span class="price">$ {{$book->price}}</span>
 
                                     <a href="javascript:" data-book="{{$book}}"
-                                       class="btn btn-secondary btnhover btnhover2 add-to-cart cart-btn-{{$book->id}}">
-                                        <i class="flaticon-shopping-cart-1 m-r10"></i> Add to cart</a>
+                                       class="btn btn-secondary btnhover btnhover2 buy-btn cart-btn-{{$book->id}}">
+                                        <i class="flaticon-shopping-cart-1 m-r10"></i> Buy</a>
 
                                     <a href="{{route('book.checkout')}}"
                                        style="display: none"
@@ -136,7 +136,9 @@
                                         </div>
                                         <div class="price">
                                             <span class="price-num">$ {{$book->sale_price}}</span>
-                                            <del>$ {{$book->price}}</del>
+                                            @if($book->sale_price!=$book->price)
+                                                <del>$ {{$book->price}}</del>
+                                            @endif
                                         </div>
                                     </div>
                                 </div>
@@ -184,9 +186,9 @@
                                     <p>{{str()->words($book->description,15,'....')}}</p>
                                     <div class="bookcard-footer">
                                         <a href="javascript:"
-                                           class="btn btn-primary m-t15 btnhover btnhover2 add-to-cart cart-btn-{{$book->id}}"
+                                           class="btn btn-primary m-t15 btnhover btnhover2 buy-btn cart-btn-{{$book->id}}"
                                            data-book="{{$book}}">
-                                            <i class="flaticon-shopping-cart-1 m-r10"></i> Add to cart</a>
+                                            <i class="flaticon-shopping-cart-1 m-r10"></i> Buy</a>
 
                                         <a href="{{route('book.checkout')}}"
                                            style="display: none"
@@ -195,7 +197,9 @@
 
                                         <div class="price-details">
                                             $ {{$book->sale_price}}
-                                            <del>$ {{$book->price}}</del>
+                                            @if($book->sale_price!=$book->price)
+                                                <del>$ {{$book->price}}</del>
+                                            @endif
                                         </div>
                                     </div>
                                 </div>
@@ -326,7 +330,6 @@
         </div>
     </section>
     <!-- Feature Box End -->
-
 @endsection
 @push('js')
     <!-- BOOTSTRAP SELECT MIN JS -->

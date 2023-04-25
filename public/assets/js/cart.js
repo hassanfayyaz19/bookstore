@@ -18,28 +18,26 @@ var shoppingCart = (function () {
 
     // Constructor
 
-    function Item (book) {
+    function Item(book) {
         this.book = book
     }
 
     // Save cart
 
-    function saveCart () {
+    function saveCart() {
         localStorage.setItem('shoppingCart', JSON.stringify(cart))
+        console.log("saveCart: ", cart)
     }
 
     // Load cart
 
-    function loadCart () {
-
+    function loadCart() {
         cart = JSON.parse(localStorage.getItem('shoppingCart'))
-
+        console.log("loadCart: ", cart)
     }
 
     if (localStorage.getItem('shoppingCart') != null) {
-
         loadCart()
-
     }
 
     // =============================
@@ -58,13 +56,60 @@ var shoppingCart = (function () {
         if (!cart_book) {
             cart_book = book
             cart_book.count = 1
-            cart_book.total_price = cart_book.price
+            cart_book.total_price = cart_book.price.toFixed(2)
             cart.push(cart_book)
         } else {
             cart_book.count++
             cart_book.total_price = parseFloat(cart_book.price) * parseFloat(cart_book.count)
+            cart_book.total_price.toFixed(2)
         }
-        console.log('cart_book: ', cart_book)
+        saveCart()
+    }
+
+    obj.addAddonToCart = function (book_id, addon_id) {
+        const book = cart.find((book) => book.id === book_id);
+        if (!book) {
+            return;
+        }
+        const addon = book.book_addons.find((addon) => addon.id === addon_id);
+        if (!addon) {
+            return;
+        }
+        if (!book.cart_addons) {
+            book.cart_addons = [];
+        }
+        if (!book.cart_addons.some((a) => a.id === addon.id)) {
+            book.cart_addons.push(addon);
+        }
+
+        if (book.cart_addons) {
+            let addonPrice = book.cart_addons.reduce((sum, a) => sum + a.price, 0);
+            book.total_price = parseFloat(book.total_price) + parseFloat(addonPrice, 2)
+            book.total_price = book.total_price.toFixed(2)
+        }
+
+        // let price_addon = 0
+        // book.cart_addons.forEach(function (addon) {
+        //     price_addon += parseFloat(addon.price)
+        // })
+
+        // cart.forEach(function (book) {
+        //     if (book.id === book_id) {
+        //         book.book_addons.forEach(function (addon) {
+        //             if (addon.id === addon_id) {
+        //                 if (!book.hasOwnProperty('cart_addons')) {
+        //                     book.cart_addons = []
+        //                     book.cart_addons.push(addon)
+        //                 } else {
+        //                     let cart_addon = book.cart_addons.find(a => a.id === addon.id)
+        //                     if (!cart_addon) {
+        //                         book.cart_addons.push(addon)
+        //                     }
+        //                 }
+        //             }
+        //         })
+        //     }
+        // })
         saveCart()
     }
 
@@ -101,6 +146,19 @@ var shoppingCart = (function () {
         saveCart()
     }
 
+    obj.removeAddonToCart = function (book_id, addon_id) {
+        const book = cart.find((book) => book.id === book_id);
+        if (!book || !book.cart_addons) {
+            return;
+        }
+        const addonIndex = book.cart_addons.findIndex((addon) => addon.id === addon_id);
+        if (addonIndex === -1) {
+            return;
+        }
+        book.cart_addons.splice(addonIndex, 1);
+        saveCart()
+    }
+
     // Remove all items from cartremoveItemFromCart(prodid,type,SelectedFeatureID)
 
     obj.removeItemFromCartAll = function (id) {
@@ -112,24 +170,6 @@ var shoppingCart = (function () {
             }
         }
         saveCart()
-    }
-
-    obj.TotalDeliveryCharges = function (prodid, variantid, vendorid, campaign_vendor_product_id) {
-
-        var delivery_charges = 0
-
-        for (var item in cart) {
-
-            if (cart[item].prodid == prodid && cart[item].variantid == variantid && cart[item].vendorid == vendorid && cart[item].campaign_vendor_product_id == campaign_vendor_product_id) {
-
-                delivery_charges += parseFloat(cart[item].delivery_charges)
-
-                break
-
-            }
-
-        }
-
     }
 
     // Clear cart
@@ -220,7 +260,6 @@ var shoppingCart = (function () {
     obj.showCheckoutButton = function () {
         let books = shoppingCart.listCart()
         books.forEach(function (book) {
-            console.log(book)
             let book_class = 'cart-btn-' + book.id
             if ($('.' + book_class).length) {
                 $('.' + book_class).hide()
@@ -291,6 +330,62 @@ $(document).on('click', '.clear-cart', function () {
 // Add item
 
 // shoppingCart.clearCart()
+$(document).on('click', '.buy-btn', function (e) {
+    e.preventDefault()
+    let book = $(this).data('book')
+    if (!book) {
+        return false
+    }
+    Toast.fire({
+        icon: 'success',
+        title: book.title + ' is Added'
+    })
+
+    shoppingCart.addItemToCart(book)
+    shoppingCart.showCheckoutButton()
+    displayHeaderCart()
+
+    if (book.book_addons.length === 0) {
+        return false
+    }
+
+    $('#cart_modal_title').text(book.title);
+    $('#cart_book_addons').html('<h6>Would you like to Purchase the Video / Audio Guide at a discounted price?</h6>')
+    book.book_addons.forEach(function (addon) {
+        $('#cart_book_addons').append('<div class="row">' +
+            '                        <div class="col-md-6">' +
+            '                            <div class="form-group mb-2">' +
+            '                                <div class="form-check">' +
+            '                                    <input class="form-check-input addons-add-to-cart" type="checkbox" data-book="' + book.id + '" data-addon="' + addon.id + '" id="addon_checkbox_' + addon.id + '">' +
+            '                                    <label class="form-check-label" for="addon_checkbox_' + addon.id + '">' + addon.name + '</label>' +
+            '                                </div>' +
+            '                            </div>' +
+            '                        </div>' +
+            '                        <div class="col-md-6">' +
+            '                            <span>$ ' + addon.price + '</span>' +
+            '                        </div>' +
+            '                    </div>')
+    })
+
+
+    $('#cart_modal').modal('show')
+})
+
+$(document).on('click', '.addons-add-to-cart', function (e) {
+    let book_id = $(this).data('book')
+    let addon_id = $(this).data('addon')
+    if (!book_id || !addon_id) {
+        return false
+    }
+
+    if ($(this).is(':checked')) {
+        shoppingCart.addAddonToCart(book_id, addon_id)
+    } else {
+        shoppingCart.removeAddonToCart(book_id, addon_id)
+    }
+    // shoppingCart.showCheckoutButton()
+    displayHeaderCart()
+})
 
 $(document).on('click', '.add-to-cart', function (e) {
 
@@ -309,7 +404,7 @@ $(document).on('click', '.add-to-cart', function (e) {
     displayHeaderCart()
 })
 
-function displayHeaderCart () {
+function displayHeaderCart() {
 
     var cartArray = shoppingCart.listCart()
     var output = ''
@@ -336,7 +431,7 @@ function displayHeaderCart () {
     }
 
     output += '<li class="cart-item text-center">' +
-        '<h6 class="text-secondary">Total = $ ' + total_cart_price + '</h6></li>' +
+        '<h6 class="text-secondary">Total = $ ' + total_cart_price.toFixed(2) + '</h6></li>' +
         '<li class="text-center d-flex"><a href="' + CART_ROUTE + '" class="btn btn-sm btn-primary me-2 btnhover w-100">' +
         'View Cart</a>' +
         '<a href="' + CHECKOUT_ROUTE + '" class="btn btn-sm btn-outline-primary btnhover w-100">Checkout</a></li>'
@@ -346,30 +441,39 @@ function displayHeaderCart () {
     shoppingCart.showCheckoutButton()
 }
 
-function displayCartPage () {
+function displayCartPage() {
 
     var cartArray = shoppingCart.listCart()
     var output = ''
-    console.log(cartArray)
     var total_cart_price = 0.00
     for (var i in cartArray) {
         let book = cartArray[i]
         total_cart_price += parseFloat(book.total_price)
+        let addon_names = '';
+        if (book.cart_addons) {
+            addon_names = '(' + book.cart_addons.map((a) => a.name).join(', ') + ')';
+        }
+
+        let addon_prices = '';
+        if (book.cart_addons) {
+            addon_prices = '(' + book.cart_addons.map((a) => a.price).join('+ ') + ')';
+        }
+
 
         output += '<tr>' +
             '<td class="product-item-img"><img src="' + book.image_url + '" alt=""></td>' +
-            '<td class="product-item-name">' + book.title + '</td>' +
-            '<td class="product-item-price">$ ' + book.price + '</td>' +
+            '<td class="product-item-name">' + book.title + ' <small>' + addon_names + '</small></td>' +
+            '<td class="product-item-price">$ ' + book.price + ' <small>' + addon_prices + '</small></td>' +
             '</td>' +
             '<td class="product-item-totle">$ ' + book.total_price + '</td>' +
             '<td class="product-item-close"><a href="javascript:;" data-id="' + book.id + '" class="ti-close item_remove"></a></td>' +
             '</tr>'
     }
     $('#cart_page_list').html(output)
-    $('#cart_page_total_price').text('$ ' + total_cart_price)
+    $('#cart_page_total_price').text('$ ' + total_cart_price.toFixed(2))
 }
 
-function displayCartOutPage () {
+function displayCartOutPage() {
 
     var cartArray = shoppingCart.listCart()
     var output = ''
@@ -378,14 +482,19 @@ function displayCartOutPage () {
         let book = cartArray[i]
         total_cart_price += parseFloat(book.total_price)
 
+        let addon_names = '';
+        if (book.cart_addons) {
+            addon_names = '(' + book.cart_addons.map((a) => a.name).join(', ') + ')';
+        }
+
         output += '<tr>' +
             '<td class="product-item-img"><img src="' + book.image_url + '" alt=""></td>' +
-            '<td class="product-item-name">' + book.title + '</td>' +
+            '<td class="product-item-name">' + book.title + ' <small>' + addon_names + '</small></td>' +
             '<td class="product-price">$ ' + book.total_price + '</td>' +
             '</tr>'
     }
     $('#checkout_list').html(output)
-    $('#checkout_total_price').text('$ ' + total_cart_price)
+    $('#checkout_total_price').text('$ ' + total_cart_price.toFixed(2))
 }
 
 // Delete item button
@@ -393,7 +502,6 @@ function displayCartOutPage () {
 // -1
 
 $(document).on('click', '.minus-item', function (event) {
-    console.log('minus-item called')
     let book_id = $(this).data('id')
     let book = cart.find(c => c.id == book_id)
     if (!book) {
@@ -408,7 +516,6 @@ $(document).on('click', '.minus-item', function (event) {
 // +1
 
 $(document).on('click', '.plus-item', function (event) {
-    console.log('plus-item called')
     let book_id = $(this).data('id')
     let book = cart.find(c => c.id == book_id)
     if (!book) {
@@ -420,7 +527,6 @@ $(document).on('click', '.plus-item', function (event) {
 })
 
 $(document).on('click', '.item_remove', function (event) {
-    console.log('item_remove')
     const id = $(this).data('id')
     if (id == undefined) {
         return false

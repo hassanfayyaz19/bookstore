@@ -25,7 +25,7 @@ class Book extends Model
     protected function price(): Attribute
     {
         return Attribute::make(
-            get: fn(string $value) => $value,
+            get: fn(string $value) => round($value, 2),
         );
     }
 
@@ -53,14 +53,14 @@ class Book extends Model
     protected function salePrice(): Attribute
     {
         return Attribute::make(
-            get: fn() => $this->price - ($this->price * ($this->discount_percentage / 100)),
+            get: fn() => round($this->price - ($this->price * ($this->discount_percentage / 100)), 2),
         );
     }
 
     protected function discountedPrice(): Attribute
     {
         return Attribute::make(
-            get: fn() => $this->price - $this->sale_price,
+            get: fn() => round($this->price - $this->sale_price, 2),
         );
     }
 
@@ -99,6 +99,11 @@ class Book extends Model
     public function book_reviews(): HasMany
     {
         return $this->hasMany(BookReview::class);
+    }
+
+    public function book_addons()
+    {
+        return $this->hasMany(BookAddon::class);
     }
 // End  Relations
 
