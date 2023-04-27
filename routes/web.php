@@ -21,6 +21,7 @@ Route::get('/', function () {
     $banner_books = \App\Models\Book::with('categories', 'book_addons')->banner()->get();
     $on_sale_books = \App\Models\Book::with('categories', 'book_addons')->onSale()->get();
     $settings = \App\Models\ProjectSetting::first();
+    $subscription_plans = \App\Models\SubscriptionPlan::orderBy('id', 'ASC')->get();
     return view('user.welcome', get_defined_vars());
 })->name('welcome');
 
@@ -49,6 +50,7 @@ Route::prefix('admin')->as('admin.')->middleware(['auth:admin'])->group(function
     Route::resource('blog', \App\Http\Controllers\Admin\BlogController::class);
     Route::resource('blog.comment', \App\Http\Controllers\Admin\CommentController::class);
     Route::resource('book.addon', \App\Http\Controllers\Admin\BookAddonController::class);
+    Route::resource('user_subscription', \App\Http\Controllers\Admin\UserSubscriptionController::class);
 
     Route::get('/project/home_setting', [App\Http\Controllers\Admin\ProjectSettingController::class, 'showHomeSettingPage'])->name('project_setting.home');
 
@@ -65,6 +67,10 @@ Route::middleware(['auth:web', 'verified'])->group(function () {
     Route::resource('blog.comment', \App\Http\Controllers\User\CommentController::class);
     Route::resource('profile', \App\Http\Controllers\User\ProfileController::class);
     Route::post('stripe', [\App\Http\Controllers\User\BookController::class, 'stripePost'])->name('stripe.post');
+
+    Route::get('subscribe/{subscription_plan:slug}', [\App\Http\Controllers\User\UserSubscriptionController::class, 'showSubscriptionPage'])->name('subscription_plan.show');
+    Route::post('subscribe/{subscription_plan:slug}', [\App\Http\Controllers\User\UserSubscriptionController::class, 'saveUserSubscription'])->name('subscription_plan.save');
+
 });
 
 Route::get('/about-us', function () {

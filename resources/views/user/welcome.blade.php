@@ -222,56 +222,32 @@
             <div class="row pricingtable-wraper">
                 <div class="col-md-1">
                 </div>
-                <div class="col-lg-5 col-md-5 wow fadeInUp" data-wow-delay="0.1s">
-                    <div class="pricingtable-wrapper mt-0 style-1 m-b30">
-                        <div class="pricingtable-inner">
-                            <div class="pricingtable-title">
-                                <h3 class="title">Basic Plan</h3>
-                            </div>
-                            <div class="pricingtable-price">
-                                <h2 class="pricingtable-bx">$99<small class="pricingtable-type">/Month</small></h2>
-                            </div>
-                            <p class="text">Aliquam dui lacus, lobortis quis sapien non.</p>
-                            <ul class="pricingtable-features">
-                                <li>Graphic Design</li>
-                                <li>Web Design</li>
-                                <li>UI/UX</li>
-                                <li>HTML/CSS</li>
-                                <li>SEO Marketing</li>
-                                <li>Business Analysis</li>
-                            </ul>
-                            <div class="pricingtable-footer">
-                                <a href="javascript:" class="btn btn-primary btnhover3">Start Now <i
-                                        class="fa fa-angle-right m-l10"></i></a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-5 col-md-5 wow fadeInUp" data-wow-delay="0.2s">
-                    <div class="pricingtable-wrapper  mt-0 style-1 m-b30">
-                        <div class="pricingtable-inner">
-                            <div class="pricingtable-title">
-                                <h3 class="title">Standart Plan</h3>
-                            </div>
-                            <div class="pricingtable-price">
-                                <h2 class="pricingtable-bx">$199<small class="pricingtable-type">/Month</small></h2>
-                            </div>
-                            <p class="text">Aliquam dui lacus, lobortis quis sapien non.</p>
-                            <ul class="pricingtable-features">
-                                <li>Graphic Design</li>
-                                <li>Web Design</li>
-                                <li>UI/UX</li>
-                                <li>HTML/CSS</li>
-                                <li>SEO Marketing</li>
-                                <li>Business Analysis</li>
-                            </ul>
-                            <div class="pricingtable-footer">
-                                <a href="javascript:" class="btn btn-primary btnhover3">Start Now <i
-                                        class="fa fa-angle-right m-l10"></i></a>
+                @foreach($subscription_plans as $plan)
+                    <div class="col-lg-5 col-md-5 wow fadeInUp" data-wow-delay="0.1s">
+                        <div class="pricingtable-wrapper mt-0 style-1 m-b30">
+                            <div class="pricingtable-inner">
+                                <div class="pricingtable-title">
+                                    <h3 class="title">{{$plan->name}}</h3>
+                                </div>
+                                <div class="pricingtable-price">
+                                    <h2 class="pricingtable-bx">$ {{$plan->price}}
+                                        <small class="pricingtable-type">/ {{$plan->interval}}</small></h2>
+                                </div>
+                                <p class="text">Features</p>
+                                <ul class="pricingtable-features">.
+                                    @foreach($plan->features as $feature)
+                                        <li>{{$feature}}</li>
+                                    @endforeach
+                                </ul>
+                                <div class="pricingtable-footer">
+                                    <a href="{{route('subscription_plan.show',['subscription_plan'=>$plan->slug])}}"
+                                       class="btn btn-primary btnhover3">Start Now
+                                        <i class="fa fa-angle-right m-l10"></i></a>
+                                </div>
                             </div>
                         </div>
                     </div>
-                </div>
+                @endforeach
                 <div class="col-md-1">
                 </div>
             </div>

@@ -62,7 +62,7 @@ class BookController extends Controller
         if ($total_price > 0) {
             Stripe::setApiKey(env('STRIPE_SECRET'));
             $charge = Charge::create([
-                "amount" => round($total_price),
+                "amount" => round($total_price * 100),
                 "currency" => "USD",
                 "source" => $request->stripeToken,
                 "description" => "Payment Dedicated Through BookStore",

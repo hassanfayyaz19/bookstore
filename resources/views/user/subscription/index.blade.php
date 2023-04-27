@@ -8,11 +8,11 @@
          style="background-image:url({{asset('user/images/background/bg3.jpg')}});">
         <div class="container">
             <div class="dz-bnr-inr-entry">
-                <h1>Checkout</h1>
+                <h1>Subscription Confirmation</h1>
                 <nav aria-label="breadcrumb" class="breadcrumb-row">
                     <ul class="breadcrumb">
                         <li class="breadcrumb-item"><a href="{{route('welcome')}}"> Home</a></li>
-                        <li class="breadcrumb-item">Checkout</li>
+                        <li class="breadcrumb-item">Subscription Confirmation</li>
                     </ul>
                 </nav>
             </div>
@@ -25,29 +25,20 @@
         <!-- Product -->
         <div class="container">
             <div class="row">
-                <div class="col-lg-6">
-                    <div class="widget">
-                        <h4 class="widget-title">Your Order</h4>
-                        <table class="table-bordered check-tbl">
-                            <thead class="text-center">
-                            <tr>
-                                <th>IMAGE</th>
-                                <th>PRODUCT NAME</th>
-                                <th>TOTAL</th>
-                            </tr>
-                            </thead>
-                            <tbody id="checkout_list">
-                            </tbody>
-                        </table>
-                    </div>
-                </div>
-                <div class="col-lg-6">
+                <div class="col-lg-12">
                     @if (Session::has('success'))
                         <div class="alert alert-success text-center">
                             {{ Session::get('success') }}
                         </div>
                     @endif
-                    <form method="post" action="{{ route('stripe.post') }}" class="require-validation shop-form widget"
+                    @if (Session::has('error'))
+                        <div class="alert alert-danger text-center">
+                            {{ Session::get('error') }}
+                        </div>
+                    @endif
+                    <form method="post"
+                          action="{{ route('subscription_plan.save',['subscription_plan'=>$subscription_plan->slug]) }}"
+                          class="require-validation shop-form widget"
                           data-cc-on-file="false"
                           data-stripe-publishable-key="{{ env('STRIPE_KEY') }}" id="payment-form">
                         @csrf
@@ -56,7 +47,7 @@
                             <tbody>
                             <tr>
                                 <td>Total</td>
-                                <td class="product-price-total" id="checkout_total_price"></td>
+                                <td class="product-price-total">$ {{$subscription_plan->price}}</td>
                             </tr>
                             </tbody>
                         </table>
@@ -102,8 +93,7 @@
                         </div>
                         <input type="hidden" id="cart" name="cart">
                         <div class="form-group">
-                            <button class="btn btn-primary btnhover" type="submit" id="place_order_btn">Place Order
-                                Now
+                            <button class="btn btn-primary btnhover" type="submit" id="place_order_btn">Buy this Plan
                             </button>
                         </div>
                     </form>
@@ -121,18 +111,7 @@
     <script src="{{asset('user/js/dz.ajax.js')}}"></script><!-- AJAX -->
     <script src="{{asset('user/js/custom.js')}}"></script><!-- CUSTOM JS -->
     <script type="text/javascript" src="https://js.stripe.com/v2/"></script>
-    @if (Session::has('success'))
-        <script>
-            shoppingCart.clearCart()
-        </script>
-    @endif
     <script>
-        $(document).ready(function () {
-            displayCartOutPage()
-            var cartArray = JSON.stringify(shoppingCart.listCart())
-            $('#cart').val(cartArray)
-        })
-
         $(function () {
             var $form = $('.require-validation')
             $('form.require-validation').bind('submit', function (e) {
@@ -163,7 +142,7 @@
                 }
             })
 
-            function stripeResponseHandler (status, response) {
+            function stripeResponseHandler(status, response) {
                 if (response.error) {
                     $('.error')
                         .removeClass('hide')
