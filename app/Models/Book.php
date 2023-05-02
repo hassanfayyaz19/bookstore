@@ -8,6 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Support\Facades\Auth;
 
 class Book extends Model
 {
@@ -19,6 +20,7 @@ class Book extends Model
         'sale_price',
         'discounted_price',
         'total_rating',
+//        'subscription_discount_price'
     ];
 
 //   Mutators
@@ -50,12 +52,12 @@ class Book extends Model
         );
     }
 
-    protected function salePrice(): Attribute
-    {
-        return Attribute::make(
-            get: fn() => round($this->price - ($this->price * ($this->discount_percentage / 100)), 2),
-        );
-    }
+//    protected function salePrice(): Attribute
+//    {
+//        return Attribute::make(
+//            get: fn() => round($this->price - ($this->price * ($this->discount_percentage / 100)), 2),
+//        );
+//    }
 
     protected function discountedPrice(): Attribute
     {
@@ -75,6 +77,26 @@ class Book extends Model
                 $rating = $book_reviews->sum('rating');
                 return round($rating / count($book_reviews), 1);
             }
+        );
+    }
+
+    protected function salePrice(): Attribute
+    {
+        return Attribute::make(
+            get: function () {
+                $sale_price = round($this->price - ($this->price * ($this->discount_percentage / 100)), 2);
+                if (!Auth::guard('web')->check()) {
+                    return $sale_price;
+                }
+
+                $subscription_discount = Auth::guard('web')->user()->subscription_discount();
+
+                if (!$subscription_discount) {
+                    return $sale_price;
+                }
+
+                return round($sale_price - ($sale_price * ($subscription_discount / 100)), 2);
+            },
         );
     }
 

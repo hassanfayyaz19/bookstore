@@ -3,12 +3,15 @@
 namespace App\Models;
 
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
+use Carbon\Carbon;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Cache;
 use Laravel\Sanctum\HasApiTokens;
 
 class User extends Authenticatable implements MustVerifyEmail
@@ -52,6 +55,11 @@ class User extends Authenticatable implements MustVerifyEmail
         return $this->hasMany(Purchase::class);
     }
 
+    public function user_subscription(): HasMany
+    {
+        return $this->hasMany(UserSubscription::class);
+    }
+
     protected function profile(): Attribute
     {
         return Attribute::make(
@@ -64,5 +72,53 @@ class User extends Authenticatable implements MustVerifyEmail
         return Attribute::make(
             get: fn() => $this->first_name . ' ' . $this->last_name,
         );
+    }
+
+    public function activeSubscription()
+    {
+        return $this->user_subscription->where('status', 1)->first();
+    }
+
+    public function activeSubscriptionPlan()
+    {
+        return $this->activeSubscription()->subscription_plan ?? null;
+    }
+
+    public function subscription_discount()
+    {
+        if (!Auth::guard('web')->check()) {
+            return null;
+        }
+
+        $user = Auth::guard('web')->user();
+        $cache_key = 'subscription_discount_' . $user->id;
+
+        $discount = Cache::remember($cache_key, Carbon::now()->addDays(30), function () use ($user) {
+            $active_subscription = $user->activeSubscriptionPlan();
+            if (!$active_subscription) {
+                return null;
+            }
+            if ($active_subscription->slug == SubscriptionPlan::BASIC_PLAN) {
+                return 10;
+            } elseif ($active_subscription->slug == SubscriptionPlan::PREMIUM_PLAN) {
+                return 20;
+            }
+            return null;
+        });
+
+        return $discount;
+    }
+
+    public function clearSubscriptionDiscountCache()
+    {
+        $user = Auth::guard('web')->user();
+
+        if (!$user) {
+            return false;
+        }
+
+        $cache_key = 'subscription_discount_' . $user->id;
+
+        Cache::forget($cache_key);
     }
 }

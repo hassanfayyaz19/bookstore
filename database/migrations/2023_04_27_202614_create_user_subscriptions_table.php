@@ -17,7 +17,7 @@ return new class extends Migration {
             $table->id();
             $table->foreignIdFor(User::class)->constrained()->cascadeOnDelete();
             $table->foreignIdFor(SubscriptionPlan::class)->constrained();
-            $table->foreignIdFor(Payment::class)->constrained();
+            $table->foreignIdFor(Payment::class)->nullable()->constrained();
             $table->boolean('status')->default(1);
             $table->timestamp('start_date')->nullable();
             $table->timestamp('end_date')->nullable();

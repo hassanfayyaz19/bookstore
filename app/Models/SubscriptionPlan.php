@@ -14,6 +14,8 @@ class SubscriptionPlan extends Model
 {
     use HasFactory;
 
+    public const BASIC_PLAN = "basic-plan";
+    public const PREMIUM_PLAN = "premium-plan";
     /**
      * @var array
      */

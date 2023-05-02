@@ -6,36 +6,56 @@
     <!--Swiper Banner End-->
     @include('user.partials.contact_us_component')
 
-    <section class="content-inner-1 bg-grey reccomend ">
+    <section class="content-inner-1 bg-light">
         <div class="container">
-            <div class="section-head text-center">
-                <h2 class="title">Recommended For You</h2>
-                <p>{{$header_project_settings->details->recommended_for_you_description??''}}</p>
+            <div class="section-head book-align">
+                <h2 class="title mb-0">Featured Books</h2>
+                <div class="pagination-align style-1">
+                    <div class="book-button-prev swiper-button-prev"><i class="fa-solid fa-angle-left"></i></div>
+                    <div class="book-button-next swiper-button-next"><i class="fa-solid fa-angle-right"></i></div>
+                </div>
             </div>
-            <!-- Swiper -->
-            <div class="swiper-container swiper-two">
+            <div class="swiper-container book-swiper">
                 <div class="swiper-wrapper">
-                    @foreach($recommended_books as $book)
+                    @foreach($featured_books as $book)
                         <div class="swiper-slide">
-                            <div class="books-card style-1 wow fadeInUp" data-wow-delay="0.1s">
+                            <div class="dz-card style-2 wow fadeInUp" data-wow-delay="0.1s">
                                 <div class="dz-media">
                                     <a href="{{route('book.show',['book'=>$book->id])}}">
-                                        <img class="book-image" src="{{$book->image_url}}" alt="book">
+                                        <img src="{{ $book->image_url }}"
+                                             alt="/">
                                     </a>
                                 </div>
-                                <div class="dz-content">
-                                    <h4 class="title" data-bs-toggle="tooltip" data-bs-placement="top"
-                                        title="{{$book->title}}">{{str()->words($book->title,2)}}</h4>
-                                    <span class="price">$ {{$book->price}}</span>
+                                <div class="dz-info">
+                                    <h4 class="dz-title"><a
+                                            href="{{route('book.show',['book'=>$book->id])}}">{{ $book->title }}</a>
+                                    </h4>
+                                    <div class="dz-meta">
+                                        <ul class="dz-tags">
+                                            @foreach($book->categories as $category)
+                                                <li><a href="javascript:">{{$category->name}}</a></li>
+                                            @endforeach
+                                        </ul>
+                                    </div>
+                                    <p>{{str()->words($book->description,15,'....')}}</p>
+                                    <div class="bookcard-footer">
+                                        <a href="javascript:"
+                                           class="btn btn-primary m-t15 btnhover btnhover2 buy-btn cart-btn-{{$book->id}}"
+                                           data-book="{{$book}}">
+                                            <i class="flaticon-shopping-cart-1 m-r10"></i> Buy</a>
 
-                                    <a href="javascript:" data-book="{{$book}}"
-                                       class="btn btn-secondary btnhover btnhover2 buy-btn cart-btn-{{$book->id}}">
-                                        <i class="flaticon-shopping-cart-1 m-r10"></i> Buy</a>
+                                        <a href="{{route('book.checkout')}}"
+                                           style="display: none"
+                                           class="btn btn-primary m-t15 btnhover btnhover2 checkout-btn-{{$book->id}}">
+                                            <i class="flaticon-shopping-cart-1 m-r10"></i>Checkout</a>
 
-                                    <a href="{{route('book.checkout')}}"
-                                       style="display: none"
-                                       class="btn btn-secondary box-btn btnhover btnhover2 checkout-btn-{{$book->id}}">
-                                        <i class="flaticon-shopping-cart-1 m-r10"></i> Checkout</a>
+                                        <div class="price-details">
+                                            $ {{$book->sale_price}}
+                                            @if($book->sale_price!=$book->price)
+                                                <del>$ {{$book->price}}</del>
+                                            @endif
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -44,6 +64,45 @@
             </div>
         </div>
     </section>
+
+    {{--    <section class="content-inner-1 bg-grey reccomend ">--}}
+    {{--        <div class="container">--}}
+    {{--            <div class="section-head text-center">--}}
+    {{--                <h2 class="title">Recommended For You</h2>--}}
+    {{--                <p>{{$header_project_settings->details->recommended_for_you_description??''}}</p>--}}
+    {{--            </div>--}}
+    {{--            <!-- Swiper -->--}}
+    {{--            <div class="swiper-container swiper-two">--}}
+    {{--                <div class="swiper-wrapper">--}}
+    {{--                    @foreach($recommended_books as $book)--}}
+    {{--                        <div class="swiper-slide">--}}
+    {{--                            <div class="books-card style-1 wow fadeInUp" data-wow-delay="0.1s">--}}
+    {{--                                <div class="dz-media">--}}
+    {{--                                    <a href="{{route('book.show',['book'=>$book->id])}}">--}}
+    {{--                                        <img class="book-image" src="{{$book->image_url}}" alt="book">--}}
+    {{--                                    </a>--}}
+    {{--                                </div>--}}
+    {{--                                <div class="dz-content">--}}
+    {{--                                    <h4 class="title" data-bs-toggle="tooltip" data-bs-placement="top"--}}
+    {{--                                        title="{{$book->title}}">{{str()->words($book->title,2)}}</h4>--}}
+    {{--                                    <span class="price">$ {{$book->price}}</span>--}}
+
+    {{--                                    <a href="javascript:" data-book="{{$book}}"--}}
+    {{--                                       class="btn btn-secondary btnhover btnhover2 buy-btn cart-btn-{{$book->id}}">--}}
+    {{--                                        <i class="flaticon-shopping-cart-1 m-r10"></i> Buy</a>--}}
+
+    {{--                                    <a href="{{route('book.checkout')}}"--}}
+    {{--                                       style="display: none"--}}
+    {{--                                       class="btn btn-secondary box-btn btnhover btnhover2 checkout-btn-{{$book->id}}">--}}
+    {{--                                        <i class="flaticon-shopping-cart-1 m-r10"></i> Checkout</a>--}}
+    {{--                                </div>--}}
+    {{--                            </div>--}}
+    {{--                        </div>--}}
+    {{--                    @endforeach--}}
+    {{--                </div>--}}
+    {{--            </div>--}}
+    {{--        </div>--}}
+    {{--    </section>--}}
 
     <!-- icon-box1 -->
     <section class="content-inner">
@@ -102,114 +161,114 @@
     @include('user.partials.our_mission_component')
 
     <!-- Book Sale -->
-    <section class="content-inner-1">
-        <div class="container">
-            <div class="section-head book-align">
-                <h2 class="title mb-0">Books on Sale</h2>
-                <div class="pagination-align style-1">
-                    <div class="swiper-button-prev"><i class="fa-solid fa-angle-left"></i></div>
-                    <div class="swiper-pagination-two"></div>
-                    <div class="swiper-button-next"><i class="fa-solid fa-angle-right"></i></div>
-                </div>
-            </div>
-            <div class="swiper-container books-wrapper-3 swiper-four">
-                <div class="swiper-wrapper">
-                    @foreach($on_sale_books as $book)
-                        <div class="swiper-slide">
-                            <div class="books-card style-3 wow fadeInUp" data-wow-delay="0.1s">
-                                <div class="dz-media">
-                                    <a href="{{route('book.show',['book'=>$book->id])}}">
-                                        <img class="book-image" src="{{$book->image_url}}" alt="book">
-                                    </a>
-                                </div>
-                                <div class="dz-content">
-                                    <h5 class="title"><a
-                                            href="{{route('book.show',['book'=>$book->id])}}">{{$book->title}}</a></h5>
-                                    <ul class="dz-tags">
-                                        @foreach($book->categories as $category)
-                                            <li><a href="javascript:">{{$category->name}},</a></li>
-                                        @endforeach
-                                    </ul>
-                                    <div class="book-footer">
-                                        <div class="rate">
-                                            <i class="flaticon-star"></i> {{$book->total_rating}}
-                                        </div>
-                                        <div class="price">
-                                            <span class="price-num">$ {{$book->sale_price}}</span>
-                                            @if($book->sale_price!=$book->price)
-                                                <del>$ {{$book->price}}</del>
-                                            @endif
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    @endforeach
-                </div>
-            </div>
-        </div>
-    </section>
+    {{--    <section class="content-inner-1">--}}
+    {{--        <div class="container">--}}
+    {{--            <div class="section-head book-align">--}}
+    {{--                <h2 class="title mb-0">Books on Sale</h2>--}}
+    {{--                <div class="pagination-align style-1">--}}
+    {{--                    <div class="swiper-button-prev"><i class="fa-solid fa-angle-left"></i></div>--}}
+    {{--                    <div class="swiper-pagination-two"></div>--}}
+    {{--                    <div class="swiper-button-next"><i class="fa-solid fa-angle-right"></i></div>--}}
+    {{--                </div>--}}
+    {{--            </div>--}}
+    {{--            <div class="swiper-container books-wrapper-3 swiper-four">--}}
+    {{--                <div class="swiper-wrapper">--}}
+    {{--                    @foreach($on_sale_books as $book)--}}
+    {{--                        <div class="swiper-slide">--}}
+    {{--                            <div class="books-card style-3 wow fadeInUp" data-wow-delay="0.1s">--}}
+    {{--                                <div class="dz-media">--}}
+    {{--                                    <a href="{{route('book.show',['book'=>$book->id])}}">--}}
+    {{--                                        <img class="book-image" src="{{$book->image_url}}" alt="book">--}}
+    {{--                                    </a>--}}
+    {{--                                </div>--}}
+    {{--                                <div class="dz-content">--}}
+    {{--                                    <h5 class="title"><a--}}
+    {{--                                            href="{{route('book.show',['book'=>$book->id])}}">{{$book->title}}</a></h5>--}}
+    {{--                                    <ul class="dz-tags">--}}
+    {{--                                        @foreach($book->categories as $category)--}}
+    {{--                                            <li><a href="javascript:">{{$category->name}},</a></li>--}}
+    {{--                                        @endforeach--}}
+    {{--                                    </ul>--}}
+    {{--                                    <div class="book-footer">--}}
+    {{--                                        <div class="rate">--}}
+    {{--                                            <i class="flaticon-star"></i> {{$book->total_rating}}--}}
+    {{--                                        </div>--}}
+    {{--                                        <div class="price">--}}
+    {{--                                            <span class="price-num">$ {{$book->sale_price}}</span>--}}
+    {{--                                            @if($book->sale_price!=$book->price)--}}
+    {{--                                                <del>$ {{$book->price}}</del>--}}
+    {{--                                            @endif--}}
+    {{--                                        </div>--}}
+    {{--                                    </div>--}}
+    {{--                                </div>--}}
+    {{--                            </div>--}}
+    {{--                        </div>--}}
+    {{--                    @endforeach--}}
+    {{--                </div>--}}
+    {{--            </div>--}}
+    {{--        </div>--}}
+    {{--    </section>--}}
     <!-- Book Sale End -->
 
-    <!-- Special Offer-->
-    <section class="content-inner-1">
-        <div class="container">
-            <div class="section-head book-align">
-                <h2 class="title mb-0">Featured Books</h2>
-                <div class="pagination-align style-1">
-                    <div class="book-button-prev swiper-button-prev"><i class="fa-solid fa-angle-left"></i></div>
-                    <div class="book-button-next swiper-button-next"><i class="fa-solid fa-angle-right"></i></div>
-                </div>
-            </div>
-            <div class="swiper-container book-swiper">
-                <div class="swiper-wrapper">
-                    @foreach($featured_books as $book)
-                        <div class="swiper-slide">
-                            <div class="dz-card style-2 wow fadeInUp" data-wow-delay="0.1s">
-                                <div class="dz-media">
-                                    <a href="{{route('book.show',['book'=>$book->id])}}">
-                                        <img src="{{ $book->image_url }}"
-                                             alt="/">
-                                    </a>
-                                </div>
-                                <div class="dz-info">
-                                    <h4 class="dz-title"><a
-                                            href="{{route('book.show',['book'=>$book->id])}}">{{ $book->title }}</a>
-                                    </h4>
-                                    <div class="dz-meta">
-                                        <ul class="dz-tags">
-                                            @foreach($book->categories as $category)
-                                                <li><a href="javascript:">{{$category->name}}</a></li>
-                                            @endforeach
-                                        </ul>
-                                    </div>
-                                    <p>{{str()->words($book->description,15,'....')}}</p>
-                                    <div class="bookcard-footer">
-                                        <a href="javascript:"
-                                           class="btn btn-primary m-t15 btnhover btnhover2 buy-btn cart-btn-{{$book->id}}"
-                                           data-book="{{$book}}">
-                                            <i class="flaticon-shopping-cart-1 m-r10"></i> Buy</a>
+    <!-- Featured Books-->
+    {{--    <section class="content-inner-1">--}}
+    {{--        <div class="container">--}}
+    {{--            <div class="section-head book-align">--}}
+    {{--                <h2 class="title mb-0">Featured Books</h2>--}}
+    {{--                <div class="pagination-align style-1">--}}
+    {{--                    <div class="book-button-prev swiper-button-prev"><i class="fa-solid fa-angle-left"></i></div>--}}
+    {{--                    <div class="book-button-next swiper-button-next"><i class="fa-solid fa-angle-right"></i></div>--}}
+    {{--                </div>--}}
+    {{--            </div>--}}
+    {{--            <div class="swiper-container book-swiper">--}}
+    {{--                <div class="swiper-wrapper">--}}
+    {{--                    @foreach($featured_books as $book)--}}
+    {{--                        <div class="swiper-slide">--}}
+    {{--                            <div class="dz-card style-2 wow fadeInUp" data-wow-delay="0.1s">--}}
+    {{--                                <div class="dz-media">--}}
+    {{--                                    <a href="{{route('book.show',['book'=>$book->id])}}">--}}
+    {{--                                        <img src="{{ $book->image_url }}"--}}
+    {{--                                             alt="/">--}}
+    {{--                                    </a>--}}
+    {{--                                </div>--}}
+    {{--                                <div class="dz-info">--}}
+    {{--                                    <h4 class="dz-title"><a--}}
+    {{--                                            href="{{route('book.show',['book'=>$book->id])}}">{{ $book->title }}</a>--}}
+    {{--                                    </h4>--}}
+    {{--                                    <div class="dz-meta">--}}
+    {{--                                        <ul class="dz-tags">--}}
+    {{--                                            @foreach($book->categories as $category)--}}
+    {{--                                                <li><a href="javascript:">{{$category->name}}</a></li>--}}
+    {{--                                            @endforeach--}}
+    {{--                                        </ul>--}}
+    {{--                                    </div>--}}
+    {{--                                    <p>{{str()->words($book->description,15,'....')}}</p>--}}
+    {{--                                    <div class="bookcard-footer">--}}
+    {{--                                        <a href="javascript:"--}}
+    {{--                                           class="btn btn-primary m-t15 btnhover btnhover2 buy-btn cart-btn-{{$book->id}}"--}}
+    {{--                                           data-book="{{$book}}">--}}
+    {{--                                            <i class="flaticon-shopping-cart-1 m-r10"></i> Buy</a>--}}
 
-                                        <a href="{{route('book.checkout')}}"
-                                           style="display: none"
-                                           class="btn btn-primary m-t15 btnhover btnhover2 checkout-btn-{{$book->id}}">
-                                            <i class="flaticon-shopping-cart-1 m-r10"></i>Checkout</a>
+    {{--                                        <a href="{{route('book.checkout')}}"--}}
+    {{--                                           style="display: none"--}}
+    {{--                                           class="btn btn-primary m-t15 btnhover btnhover2 checkout-btn-{{$book->id}}">--}}
+    {{--                                            <i class="flaticon-shopping-cart-1 m-r10"></i>Checkout</a>--}}
 
-                                        <div class="price-details">
-                                            $ {{$book->sale_price}}
-                                            @if($book->sale_price!=$book->price)
-                                                <del>$ {{$book->price}}</del>
-                                            @endif
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    @endforeach
-                </div>
-            </div>
-        </div>
-    </section>
+    {{--                                        <div class="price-details">--}}
+    {{--                                            $ {{$book->sale_price}}--}}
+    {{--                                            @if($book->sale_price!=$book->price)--}}
+    {{--                                                <del>$ {{$book->price}}</del>--}}
+    {{--                                            @endif--}}
+    {{--                                        </div>--}}
+    {{--                                    </div>--}}
+    {{--                                </div>--}}
+    {{--                            </div>--}}
+    {{--                        </div>--}}
+    {{--                    @endforeach--}}
+    {{--                </div>--}}
+    {{--            </div>--}}
+    {{--        </div>--}}
+    {{--    </section>--}}
     <!-- Special Offer End -->
 
     <!-- Pricing Table -->

@@ -23,7 +23,7 @@ class UserSubscriptionController extends Controller
     public function saveUserSubscription(Request $request, SubscriptionPlan $subscription_plan)
     {
         $total_price = round($subscription_plan->price);
-        $user_id = Auth::guard('web')->user()->id;
+        $user = Auth::guard('web')->user();
 
         if ($total_price <= 0) {
             Session::flash('error', "Invalid Price");
@@ -31,7 +31,7 @@ class UserSubscriptionController extends Controller
         }
 
 
-        $user_subscription = UserSubscription::where('user_id', $user_id)->where('subscription_plan_id', $subscription_plan->id)->where('status', 1)->exists();
+        $user_subscription = UserSubscription::where('user_id', $user->id)->where('subscription_plan_id', $subscription_plan->id)->where('status', 1)->exists();
         if ($user_subscription) {
             Session::flash('error', "You already subscribed this plan");
             return back();
@@ -54,7 +54,7 @@ class UserSubscriptionController extends Controller
         ]);
         if ($charge['status'] == 'succeeded') {
             UserSubscription::create([
-                'user_id' => $user_id,
+                'user_id' => $user->id,
                 'subscription_plan_id' => $subscription_plan->id,
                 'payment_id' => $payment->id,
                 'status' => 1,
@@ -62,6 +62,7 @@ class UserSubscriptionController extends Controller
                 'end_date' => Carbon::now()->addMonth(),
                 'amount' => $total_price
             ]);
+            $user->clearSubscriptionDiscountCache();
         }
         Session::flash('success', "Subscription Purchased Successfully");
         return back();
