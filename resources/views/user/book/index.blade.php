@@ -46,19 +46,6 @@
                                     <a href="javascript:void(0);" class="panel-close-btn"><i class="flaticon-close"></i></a>
                                 </div>
                                 <div class="accordion accordion-filter" id="accordionExample">
-                                    {{-- <div class="accordion-item">
-                                         <button class="accordion-button" id="headingFive" type="button"
-                                                 data-bs-toggle="collapse" data-bs-target="#collapseFive"
-                                                 aria-expanded="false" aria-controls="collapseFive">
-                                             Price Range
-                                         </button>
-                                         <div id="collapseFive" class="accordion-collapse collapse accordion-body show"
-                                              aria-labelledby="headingFive" data-bs-parent="#accordionExample">
-                                             <div class="range-slider style-1">
-                                                 <div id="slider-tooltips"></div>
-                                             </div>
-                                         </div>
-                                     </div>--}}
                                     <div class="accordion-item">
                                         <button class="accordion-button" id="headingOne" type="button"
                                                 data-bs-toggle="collapse" data-bs-target="#collapseOne"

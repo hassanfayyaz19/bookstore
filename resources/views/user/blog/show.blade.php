@@ -7,6 +7,40 @@
     <meta property="og:description" content="{{$blog->meta_description}}"/>
     <meta property="og:image" content="{{$blog->image}}"/>
     <meta name="format-detection" content="telephone=no">
+    <style>
+        .list-group-item {
+            border-left: none !important;
+            border-right: none !important;
+            border-top: none !important;
+        }
+
+        .signup__container {
+            position: relative;
+            width: 100%;
+            min-height: 300px;
+            margin-bottom: 32px;
+            background-color: #a5e3b9;
+            overflow: hidden;
+        }
+
+        .one-signup__container-gradient1 {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(194.95deg, #d0f224 28.01%, rgba(161, 223, 123, 0.4) 89.46%);
+            filter: blur(74.2446px);
+            transform: rotate(22.64deg);
+        }
+
+        .one-signup__container-gradient2 {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(180deg, #79dfff 0%, rgba(217, 217, 217, 0) 100%);
+            filter: blur(74.2446px);
+            transform: rotate(-23.97deg);
+        }
+    </style>
 @endpush
 
 @section('content')
@@ -23,6 +57,32 @@
                     </ul>
                 </nav>
             </div>
+        </div>
+        <div class="row">
+            <div class="col-md-2 col-lg-1"></div>
+            <div class="col-md-6 col-lg-7">
+                <nav class="navbar navbar-expand-lg navbar-light bg-light  mt-4">
+                    <div class="container-fluid">
+                        <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+                                data-bs-target="#navbarNav"
+                                aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                            <span class="navbar-toggler-icon"></span>
+                        </button>
+                        <div class="collapse navbar-collapse" id="navbarNav">
+                            <ul class="navbar-nav">
+                                @foreach($blog_categories as $category)
+                                    <li class="nav-item">
+                                        <a class="nav-link"
+                                           href="{{route('blog.index',['category'=>$category->slug])}}">{{$category->name}}</a>
+                                    </li>
+                                @endforeach
+                            </ul>
+                        </div>
+                    </div>
+                </nav>
+            </div>
+            <div class="col-md-3 col-lg-3"></div>
+            <div class="col-md-1 col-lg-1"></div>
         </div>
     </div>
     <!-- inner page banner End-->
@@ -193,7 +253,7 @@
                     <!-- blog END -->
                 </div>
                 <div class="col-xl-4 col-lg-4">
-                    <aside class="side-bar sticky-top">
+                    <aside class="side-bar">
                         <div class="widget">
                             <div class="search-bx">
                                 <form role="search" method="post">
@@ -212,66 +272,75 @@
                                 </form>
                             </div>
                         </div>
-                        <div class="widget widget_categories">
-                            <h4 class="widget-title">Category</h4>
-                            <ul>
-                                @foreach($blog_categories as $category)
-                                    <li class="cat-item cat-item-26"><a
-                                            href="{{route('blog.index',['category'=>$category->slug])}}">{{$category->name}}</a> {{--(3)--}}
-                                    </li>
-                                @endforeach
-                            </ul>
-                        </div>
-                        <div class="widget recent-posts-entry">
-                            <h4 class="widget-title">Recent Posts</h4>
-                            <div class="widget-post-bx">
-                                @foreach($latest_blogs as $latest_blog)
-                                    <div class="widget-post clearfix">
-                                        <div class="dz-media">
-                                            <a href="{{route('blog.show',['blog'=>$latest_blog->slug])}}">
-                                                <img src="{{$latest_blog->image}}"
-                                                     alt=""></a>
-                                        </div>
-                                        <div class="dz-info">
-                                            <h6 class="title"><a
-                                                    href="{{route('blog.show',['blog'=>$latest_blog->slug])}}">{{$latest_blog->title}}</a>
-                                            </h6>
-                                            <div class="dz-meta">
-                                                <ul>
-                                                    <li class="post-date"> {{$latest_blog->published_at}}</li>
-                                                </ul>
-                                            </div>
-                                        </div>
-                                    </div>
-                                @endforeach
+                        <div class="signup__container">
+                            <div class="one-signup__container-gradient1">&nbsp;</div>
+                            <div class="one-signup__container-gradient2">&nbsp;</div>
+                            <section class="one-signup">
+                                <div class="one-signup__content">
+                                    <h3 class="text-center pt-5 text-dark">
+                                        Start your <br>
+                                        online business <br>
+                                        today. For free.</h3>
 
+                                    <div class="row">
+                                        <div class="col-md-2"></div>
+                                        <div class="col-md-8">
+                                            <p class="text-dark mt-4">
+                                                Sign up for Shopify's free trial to access all of the tools and services
+                                                you
+                                                need to start, run, and grow your business.
+                                            </p>
+                                        </div>
+                                        <div class="col-md-2"></div>
+
+                                        <div class="col-md-2"></div>
+                                        <div class="col-md-8">
+                                            <input class="form-control mt-4" placeholder="enter email" type="email"
+                                                   style="border-radius: 20px;">
+                                            <button class="btn btn-dark col-md-12 mt-3" style="border-radius: 20px;">
+                                                Start
+                                                free
+                                                trail
+                                            </button>
+                                        </div>
+                                        <div class="col-md-2"></div>
+
+                                        <div class="col-md-2"></div>
+                                        <div class="col-md-8">
+                                            <p class="text-center mt-3 text-dark" style="font-size: 0.7rem;">Try Shopify
+                                                for
+                                                free, no credit card required. By
+                                                entering your email, you agree to receive marketing emails from
+                                                Shopify.</p>
+                                        </div>
+                                        <div class="col-md-2"></div>
+                                    </div>
+
+                                </div>
+                            </section>
+                        </div>
+                        <div class="card">
+                            <div class="card-header">
+                                <h5 class="card-title"><i class="fas fa-fire"></i> Best Selling</h5>
+                                <button class="btn btn-default" type="button" data-bs-toggle="collapse"
+                                        data-bs-target="#popularContent" aria-expanded="false"
+                                        aria-controls="cardContent">
+                            <span class="icon">
+                                <i class="fas fa-minus"></i>
+                            </span>
+                                </button>
+                            </div>
+                            <div id="popularContent" class="collapse">
+                                <div class="card-body">
+                                    <ul class="list-group border-0">
+                                        @foreach($recommended_books as $book)
+                                            <a href="{{route('book.show',['book'=>$book->id])}}"
+                                               class="list-group-item list-group-item-action pt-2 pb-2">{{$book->title}}</a>
+                                        @endforeach
+                                    </ul>
+                                </div>
                             </div>
                         </div>
-                        {{--<div class="widget widget widget_categories">
-                            <h4 class="widget-title">Archives</h4>
-                            <ul>
-                                <li><a href="javascript:void(0);">January</a>(3)</li>
-                                <li><a href="javascript:void(0);">Fabruary</a>(4)</li>
-                                <li><a href="javascript:void(0);">March</a>(4)</li>
-                                <li><a href="javascript:void(0);">April</a>(3)</li>
-                                <li><a href="javascript:void(0);">May</a>(4)</li>
-                                <li><a href="javascript:void(0);">Jun</a>(1)</li>
-                                <li><a href="javascript:void(0);">July</a>(4)</li>
-                            </ul>
-                        </div>--}}
-                        {{--<div class="widget widget_tag_cloud">
-                            <h4 class="widget-title">Tags</h4>
-                            <div class="tagcloud">
-                                <a href="javascript:void(0);">Business</a>
-                                <a href="javascript:void(0);">News</a>
-                                <a href="javascript:void(0);">Brand</a>
-                                <a href="javascript:void(0);">Website</a>
-                                <a href="javascript:void(0);">Internal</a>
-                                <a href="javascript:void(0);">Strategy</a>
-                                <a href="javascript:void(0);">Brand</a>
-                                <a href="javascript:void(0);">Mission</a>
-                            </div>
-                        </div>--}}
                     </aside>
                 </div>
             </div>

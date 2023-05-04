@@ -5,6 +5,7 @@ namespace App\Http\Controllers\User;
 use App\Http\Controllers\Controller;
 use App\Models\Blog;
 use App\Models\BlogCategory;
+use App\Models\Book;
 use Illuminate\Http\Request;
 
 class BlogController extends Controller
@@ -20,11 +21,13 @@ class BlogController extends Controller
                 ->whereHas('categories', function ($q) use ($category) {
                     $q->where('slug', $category);
                 })
-                ->latest()->paginate(10);
+                ->latest()->paginate(11);
             return view('user.blog.index', get_defined_vars());
         }
 
-        $blogs = Blog::with(['user'])->latest()->paginate(10);
+        $blogs = Blog::with(['user'])->latest()->paginate(11);
+        $blog_categories = BlogCategory::latest()->get();
+        $recommended_books = Book::with('categories', 'book_addons')->recommended()->get();
         return view('user.blog.index', get_defined_vars());
     }
 
@@ -52,6 +55,7 @@ class BlogController extends Controller
         $blog = Blog::with('user', 'categories', 'recommended_books', 'comments', 'comments.replies', 'comments.user')->whereSlug($blog)->first();
         $latest_blogs = Blog::with(['user'])->latest()->limit(5)->get();
         $blog_categories = BlogCategory::latest()->get();
+        $recommended_books = Book::with('categories', 'book_addons')->recommended()->get();
 //        dd($blog);
         return view('user.blog.show', get_defined_vars());
     }
