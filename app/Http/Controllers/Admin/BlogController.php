@@ -65,7 +65,7 @@ class BlogController extends Controller
         $blog->meta_keywords = $request->meta_keywords;
         $blog->status = $request->status;
 
-        $blog->user_id = Auth::guard('admin')->user()->id;
+        $blog->admin_id = Auth::guard('admin')->user()->id;
         $blog->save();
         $blog->categories()->sync($request->category_ids);
         $blog->recommended_books()->sync($request->book_ids);

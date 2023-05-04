@@ -96,6 +96,7 @@ Route::get('/services', function () {
 Route::resource('book', \App\Http\Controllers\User\BookController::class);
 Route::resource('contact_us', \App\Http\Controllers\User\ContactUsController::class);
 Route::resource('blog', \App\Http\Controllers\User\BlogController::class);
+Route::resource('subscription_plans', \App\Http\Controllers\User\SubscriptionPlanController::class);
 
 
 Route::get('cart', [\App\Http\Controllers\User\BookController::class, 'showCartPage'])->name('book.cart');

@@ -58,32 +58,35 @@
                 </nav>
             </div>
         </div>
-        <div class="row">
-            <div class="col-md-2 col-lg-1"></div>
-            <div class="col-md-6 col-lg-7">
-                <nav class="navbar navbar-expand-lg navbar-light bg-light  mt-4">
-                    <div class="container-fluid">
-                        <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
-                                data-bs-target="#navbarNav"
-                                aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-                            <span class="navbar-toggler-icon"></span>
-                        </button>
-                        <div class="collapse navbar-collapse" id="navbarNav">
-                            <ul class="navbar-nav">
-                                @foreach($blog_categories as $category)
-                                    <li class="nav-item">
-                                        <a class="nav-link"
-                                           href="{{route('blog.index',['category'=>$category->slug])}}">{{$category->name}}</a>
-                                    </li>
-                                @endforeach
-                            </ul>
-                        </div>
+        <section class="">
+            <div class="container">
+                <div class="row">
+                    <div class="col-xl-8 col-lg-8">
+                        <nav class="navbar navbar-expand-lg navbar-light bg-light  mt-4 mb-2 ">
+                            <div class="container-fluid">
+                                <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+                                        data-bs-target="#navbarNav"
+                                        aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                                    <span class="navbar-toggler-icon"></span>
+                                </button>
+                                <div class="collapse navbar-collapse" id="navbarNav">
+                                    <ul class="navbar-nav">
+                                        @foreach($blog_categories as $category)
+                                            <li class="nav-item">
+                                                <a class="nav-link"
+                                                   href="{{route('blog.index',['category'=>$category->slug])}}">{{$category->name}}</a>
+                                            </li>
+                                        @endforeach
+                                    </ul>
+                                </div>
+                            </div>
+                        </nav>
                     </div>
-                </nav>
+                    <div class="col-xl-4 col-lg-4"></div>
+                </div>
             </div>
-            <div class="col-md-3 col-lg-3"></div>
-            <div class="col-md-1 col-lg-1"></div>
-        </div>
+        </section>
+
     </div>
     <!-- inner page banner End-->
     <!-- Blog Large -->
@@ -92,9 +95,10 @@
             <div class="row">
                 <div class="col-xl-8 col-lg-8">
                     <!-- blog start -->
-                    <div class="dz-blog blog-single style-1">
+                    <div class="dz-blog blog-single style-1 mt-3">
+                        <h4 class="dz-title mt-2">{{$blog->title}}</h4>
                         <div class="dz-media rounded-md">
-                            <img src="{{$blog->image}}" alt="">
+                            <img src="{{$blog->image}}" alt="" style="height: 250px;object-fit: cover">
                         </div>
                         <div class="dz-info">
                             <div class="dz-meta  border-0 py-0 mb-2">
@@ -106,7 +110,7 @@
                                             href="javascript:void(0);"> {{$blog->user->name}}</a></li>
                                 </ul>
                             </div>
-                            <h4 class="dz-title">{{$blog->title}}</h4>
+
                             <div class="dz-post-text">{!! $blog->body !!}</div>
                             <div class="dz-meta meta-bottom border-top">
                                 <div class="post-tags">
