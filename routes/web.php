@@ -21,7 +21,7 @@ Route::get('/', function () {
     $banner_books = \App\Models\Book::with('categories', 'book_addons')->banner()->get();
     $on_sale_books = \App\Models\Book::with('categories', 'book_addons')->onSale()->get();
     $settings = \App\Models\ProjectSetting::first();
-    $subscription_plans = \App\Models\SubscriptionPlan::orderBy('id', 'ASC')->get();
+//    $subscription_plans = \App\Models\SubscriptionPlan::orderBy('id', 'ASC')->get();
     return view('user.welcome', get_defined_vars());
 })->name('welcome');
 

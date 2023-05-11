@@ -21,14 +21,14 @@
                         <div class="swiper-slide">
                             <div class="dz-card style-2 wow fadeInUp" data-wow-delay="0.1s">
                                 <div class="dz-media">
-                                    <a href="{{route('book.show',['book'=>$book->id])}}">
+                                    <a href="{{route('book.show',['book'=>$book->slug])}}">
                                         <img src="{{ $book->image_url }}"
                                              alt="/">
                                     </a>
                                 </div>
                                 <div class="dz-info">
                                     <h4 class="dz-title"><a
-                                            href="{{route('book.show',['book'=>$book->id])}}">{{ $book->title }}</a>
+                                            href="{{route('book.show',['book'=>$book->slug])}}">{{ $book->title }}</a>
                                     </h4>
                                     <div class="dz-meta">
                                         <ul class="dz-tags">
@@ -37,7 +37,7 @@
                                             @endforeach
                                         </ul>
                                     </div>
-                                    <p>{{str()->words($book->description,15,'....')}}</p>
+                                    <p>{{str()->words(strip_tags($book->description),15,'....')}}</p>
                                     <div class="bookcard-footer">
                                         <a href="javascript:"
                                            class="btn btn-primary m-t15 btnhover btnhover2 buy-btn cart-btn-{{$book->id}}"
@@ -78,7 +78,7 @@
     {{--                        <div class="swiper-slide">--}}
     {{--                            <div class="books-card style-1 wow fadeInUp" data-wow-delay="0.1s">--}}
     {{--                                <div class="dz-media">--}}
-    {{--                                    <a href="{{route('book.show',['book'=>$book->id])}}">--}}
+    {{--                                    <a href="{{route('book.show',['book'=>$book->slug])}}">--}}
     {{--                                        <img class="book-image" src="{{$book->image_url}}" alt="book">--}}
     {{--                                    </a>--}}
     {{--                                </div>--}}
@@ -177,13 +177,13 @@
     {{--                        <div class="swiper-slide">--}}
     {{--                            <div class="books-card style-3 wow fadeInUp" data-wow-delay="0.1s">--}}
     {{--                                <div class="dz-media">--}}
-    {{--                                    <a href="{{route('book.show',['book'=>$book->id])}}">--}}
+    {{--                                    <a href="{{route('book.show',['book'=>$book->slug])}}">--}}
     {{--                                        <img class="book-image" src="{{$book->image_url}}" alt="book">--}}
     {{--                                    </a>--}}
     {{--                                </div>--}}
     {{--                                <div class="dz-content">--}}
     {{--                                    <h5 class="title"><a--}}
-    {{--                                            href="{{route('book.show',['book'=>$book->id])}}">{{$book->title}}</a></h5>--}}
+    {{--                                            href="{{route('book.show',['book'=>$book->slug])}}">{{$book->title}}</a></h5>--}}
     {{--                                    <ul class="dz-tags">--}}
     {{--                                        @foreach($book->categories as $category)--}}
     {{--                                            <li><a href="javascript:">{{$category->name}},</a></li>--}}
@@ -226,14 +226,14 @@
     {{--                        <div class="swiper-slide">--}}
     {{--                            <div class="dz-card style-2 wow fadeInUp" data-wow-delay="0.1s">--}}
     {{--                                <div class="dz-media">--}}
-    {{--                                    <a href="{{route('book.show',['book'=>$book->id])}}">--}}
+    {{--                                    <a href="{{route('book.show',['book'=>$book->slug])}}">--}}
     {{--                                        <img src="{{ $book->image_url }}"--}}
     {{--                                             alt="/">--}}
     {{--                                    </a>--}}
     {{--                                </div>--}}
     {{--                                <div class="dz-info">--}}
     {{--                                    <h4 class="dz-title"><a--}}
-    {{--                                            href="{{route('book.show',['book'=>$book->id])}}">{{ $book->title }}</a>--}}
+    {{--                                            href="{{route('book.show',['book'=>$book->slug])}}">{{ $book->title }}</a>--}}
     {{--                                    </h4>--}}
     {{--                                    <div class="dz-meta">--}}
     {{--                                        <ul class="dz-tags">--}}
@@ -242,7 +242,7 @@
     {{--                                            @endforeach--}}
     {{--                                        </ul>--}}
     {{--                                    </div>--}}
-    {{--                                    <p>{{str()->words($book->description,15,'....')}}</p>--}}
+    {{--                                    <p>{{str()->words(stripe_tags($book->description),15,'....')}}</p>--}}
     {{--                                    <div class="bookcard-footer">--}}
     {{--                                        <a href="javascript:"--}}
     {{--                                           class="btn btn-primary m-t15 btnhover btnhover2 buy-btn cart-btn-{{$book->id}}"--}}

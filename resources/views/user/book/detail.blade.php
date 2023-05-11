@@ -105,7 +105,7 @@
                                             </div>
                                         </div>
                                     @endif
-                                    <p class="text-1">{{$book->description}}</p>
+                                    <p class="text-1">{!! $book->description !!}</p>
                                     <div class="book-footer mb-3 mt-2">
                                         <div class="price">
                                             <h5>$ {{$book->sale_price}}</h5>
@@ -294,13 +294,13 @@
                                     <div class="col-xl-12 col-lg-6">
                                         <div class="dz-shop-card style-5">
                                             <div class="dz-media">
-                                                <a href="{{route('book.show',['book'=>$book->id])}}">
+                                                <a href="{{route('book.show',['book'=>$book->slug])}}">
                                                     <img src="{{$book->image_url}}" alt="">
                                                 </a>
                                             </div>
                                             <div class="dz-content">
                                                 <h5 class="subtitle"><a
-                                                        href="{{route('book.show',['book'=>$book->id])}}">{{$book->title}}</a>
+                                                        href="{{route('book.show',['book'=>$book->slug])}}">{{$book->title}}</a>
                                                 </h5>
                                                 <ul class="dz-tags">
                                                     @foreach($book->categories as $category)

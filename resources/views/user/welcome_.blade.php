@@ -121,7 +121,7 @@
                                         <li>Napoleon Hill</li>
                                         <li>Business & Strategy</li>
                                     </ul>--}}
-                                    <p class="text">{{ str()->words($book->description,15,'....') }}</p>
+                                    <p class="text">{{ str()->words(strip_tags($book->description),15,'....') }}</p>
                                     <div class="price">
                                         <span class="price-num">{{$book->price}}</span>
                                     </div>

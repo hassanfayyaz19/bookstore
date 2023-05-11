@@ -139,15 +139,15 @@
                             <div class="col-lg-6 col-md-6">
                                 <div class="dz-blog style-1 bg-white m-b30">
                                     <div class="dz-media">
-                                        <a href="{{route('book.show',['book'=>$book->id])}}">
+                                        <a href="{{route('book.show',['book'=>$book->slug])}}">
                                             <img src="{{$book->image_url}}"
                                                  alt=""></a>
                                     </div>
                                     <div class="dz-info">
                                         <h5 class="dz-title">
-                                            <a href="{{route('book.show',['book'=>$book->id])}}">{{$book->title}}</a>
+                                            <a href="{{route('book.show',['book'=>$book->slug])}}">{{$book->title}}</a>
                                         </h5>
-                                        <p class="m-b0">{{str()->words($book->description,25,'....')}}</p>
+                                        <p class="m-b0">{{str()->words(strip_tags($book->description),25,'....')}}</p>
                                         <div class="dz-meta meta-bottom">
                                             <ul class="">
                                                 <li class="post-date"><i
@@ -338,7 +338,7 @@
                                 <div class="card-body">
                                     <ul class="list-group border-0">
                                         @foreach($recommended_books as $book)
-                                            <a href="{{route('book.show',['book'=>$book->id])}}"
+                                            <a href="{{route('book.show',['book'=>$book->slug])}}"
                                                class="list-group-item list-group-item-action pt-2 pb-2">{{$book->title}}</a>
                                         @endforeach
                                     </ul>

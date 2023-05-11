@@ -231,7 +231,7 @@
                                 <div class="col-md-12">
                                     <div class="fv-row mb-7">
                                         <label class="required fw-semibold fs-6 mb-2">Description</label>
-                                        <textarea name="description" class="form-control" cols="30"
+                                        <textarea name="description" class="form-control tinymce-editor" cols="30"
                                                   rows="10"></textarea>
                                     </div>
                                 </div>
@@ -477,7 +477,7 @@
                                 <div class="col-md-12">
                                     <div class="fv-row mb-7">
                                         <label class="required fw-semibold fs-6 mb-2">Description</label>
-                                        <textarea name="description" id="description" class="form-control" cols="30"
+                                        <textarea name="description" id="description" class="form-control tinymce-editor" cols="30"
                                                   rows="10"></textarea>
                                     </div>
                                 </div>
@@ -725,7 +725,7 @@
             $('#publisher_id').val(data.publisher_id).trigger('change')
             $('#categories').val(categories).trigger('change')
             $('#title').val(data.title)
-            $('#description').text(data.description)
+            // $('#description').text(data.description)
             $('#page_count').val(data.page_count)
             $('#price').val(data.price)
             $('#publication_date').val(data.publication_date)
@@ -733,7 +733,7 @@
             $('#video_url').val(data.video_url)
             $('#rating').val(data.rating)
             $('#num_ratings').val(data.num_ratings)
-            // tinyMCE.get('description').setContent(data.description)
+            tinyMCE.get('description').setContent(data.description)
             $('#hidden_id').val(data.id)
 
             if (data.is_recommended == 1) {

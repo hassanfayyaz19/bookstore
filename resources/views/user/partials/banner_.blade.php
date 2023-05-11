@@ -16,7 +16,7 @@
                                                     <li><a href="javascript:void(0);">{{$category->name}}</a></li>
                                                 @endforeach
                                             </ul>
-                                            <p class="text mb-0" data-swiper-parallax="-40">{{str()->words($book->description,25,'....')}}</p>
+                                            <p class="text mb-0" data-swiper-parallax="-40">{{str()->words(strip_tags($book->description),25,'....')}}</p>
                                             <div class="price" data-swiper-parallax="-50">
                                                 <span class="price-num">$ {{$book->price}}</span>
                                                 {{--                                                <del>$15.25</del>--}}

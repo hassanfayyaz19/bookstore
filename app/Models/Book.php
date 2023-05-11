@@ -9,6 +9,7 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Str;
 
 class Book extends Model
 {
@@ -24,6 +25,17 @@ class Book extends Model
     ];
 
 //   Mutators
+    protected function title(): Attribute
+    {
+        return Attribute::make(
+            set: function (string $value, array $attributes) {
+                $attributes['title'] = $value;
+                $attributes['slug'] = $this->generateSlug($value);
+                return $attributes;
+            },
+        );
+    }
+
     protected function price(): Attribute
     {
         return Attribute::make(
@@ -84,7 +96,7 @@ class Book extends Model
     {
         return Attribute::make(
             get: function () {
-                $sale_price = round($this->price - ($this->price * ($this->discount_percentage / 100)), 2);
+               return $sale_price = round($this->price - ($this->price * ($this->discount_percentage / 100)), 2);
                 if (!Auth::guard('web')->check()) {
                     return $sale_price;
                 }
@@ -149,6 +161,24 @@ class Book extends Model
     {
         return $query->where('is_on_sale', 1);
     }
+
 // End  Scope
+
+    protected function generateSlug($title, $count = 0)
+    {
+        $slug = Str::slug($title);
+
+        if ($count > 0) {
+            $slug .= '-' . $count;
+        }
+
+        $slugExists = static::where('slug', $slug)->exists();
+
+        if ($slugExists) {
+            return $this->generateSlug($title, $count + 1);
+        }
+
+        return $slug;
+    }
 
 }

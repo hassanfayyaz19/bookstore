@@ -122,8 +122,9 @@ class BookController extends Controller
         return view('user.book.my_books', compact('purchases'));
     }
 
-    public function show(Book $book)
+    public function show($book)
     {
+        $book = Book::where('slug', $book)->firstOrFail();
         $book->load(['author', 'publisher', 'categories', 'book_reviews', 'book_addons']);
         $book->whereHas('book_reviews', function ($q) {
             $q->where('is_active', 1);

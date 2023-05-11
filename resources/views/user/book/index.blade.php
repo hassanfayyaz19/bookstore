@@ -194,7 +194,7 @@
                                 <div class="col-book style-2">
                                     <div class="dz-shop-card style-1">
                                         <div class="dz-media">
-                                            <a href="{{route('book.show',['book'=>$book->id])}}">
+                                            <a href="{{route('book.show',['book'=>$book->slug])}}">
                                                 <img style="height: 357px;object-fit: cover" src="{{$book->image_url}}"
                                                      alt="book">
                                             </a>
@@ -207,7 +207,7 @@
                                         </div>
                                         <div class="dz-content">
                                             <h5 class="title"><a
-                                                    href="{{route('book.show',['book'=>$book->id])}}">{{$book->title}}</a>
+                                                    href="{{route('book.show',['book'=>$book->slug])}}">{{$book->title}}</a>
                                             </h5>
                                             <ul class="dz-tags">
                                                 @foreach($book->categories as $category)

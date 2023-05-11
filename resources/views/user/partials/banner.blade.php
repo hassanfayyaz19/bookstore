@@ -18,7 +18,7 @@
                                             @endforeach
                                         </ul>
                                         <p class="text mb-0"
-                                           data-swiper-parallax="-40">{{str()->words($book->description,25,'....')}}</p>
+                                           data-swiper-parallax="-40">{{str()->words(strip_tags($book->description),25,'....')}}</p>
                                         <div class="price" data-swiper-parallax="-50">
                                             <span class="price-num">$ {{$book->sale_price}}</span>
                                             @if($book->sale_price!=$book->price)
@@ -36,7 +36,7 @@
                                                href="{{route('book.checkout')}}" style="display: none">Checkout</a>
 
                                             <a class="btn btn-outline-secondary btnhover ms-4"
-                                               href="{{route('book.show',['book'=>$book->id])}}">See Details</a>
+                                               href="{{route('book.show',['book'=>$book->slug])}}">See Details</a>
                                         </div>
                                     </div>
                                     <div class="partner">

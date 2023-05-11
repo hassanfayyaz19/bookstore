@@ -244,7 +244,7 @@
                         <div class="card-body">
                             <ul class="list-group border-0">
                                 @foreach($recommended_books as $book)
-                                    <a href="{{route('book.show',['book'=>$book->id])}}"
+                                    <a href="{{route('book.show',['book'=>$book->slug])}}"
                                        class="list-group-item list-group-item-action pt-2 pb-2">{{$book->title}}</a>
                                 @endforeach
                             </ul>
