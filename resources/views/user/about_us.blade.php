@@ -33,7 +33,7 @@
                             <i class="fa-solid fa-users icon-cell"></i>
                         </div>
                         <div class="icon-content">
-                            <h2 class="dz-title counter m-b0">125,663</h2>
+                            <h2 class="dz-title counter m-b0">2,563</h2>
                             <p class="font-20">Happy Customers</p>
                         </div>
                     </div>
@@ -44,7 +44,7 @@
                             <i class="fa-solid fa-book icon-cell"></i>
                         </div>
                         <div class="icon-content">
-                            <h2 class="dz-title counter m-b0">50,672</h2>
+                            <h2 class="dz-title counter m-b0">65</h2>
                             <p class="font-20">Book Collections</p>
                         </div>
                     </div>
@@ -55,8 +55,8 @@
                             <i class="fa-solid fa-store icon-cell"></i>
                         </div>
                         <div class="icon-content">
-                            <h2 class="dz-title counter m-b0">1,562</h2>
-                            <p class="font-20">Our Stores</p>
+                            <h2 class="dz-title counter m-b0">9</h2>
+                            <p class="font-20">Categories</p>
                         </div>
                     </div>
                 </div>
@@ -66,8 +66,8 @@
                             <i class="fa-solid fa-leaf icon-cell"></i>
                         </div>
                         <div class="icon-content">
-                            <h2 class="dz-title counter m-b0">457</h2>
-                            <p class="font-20">Famous Writers</p>
+                            <h2 class="dz-title counter m-b0">120</h2>
+                            <p class="font-20">Pro Writers</p>
                         </div>
                     </div>
                 </div>

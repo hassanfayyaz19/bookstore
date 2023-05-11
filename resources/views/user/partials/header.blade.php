@@ -218,9 +218,8 @@
                     <ul class="nav navbar-nav">
                         <li><a href="{{route('welcome')}}"><span>Home</span></a></li>
                         <li><a href="{{route('about_us')}}"><span>About Us</span></a></li>
-                        <li><a href="{{route('book.index')}}"><span>Books</span></a></li>
+                        <li><a href="{{route('book.index')}}"><span>Shop Books</span></a></li>
                         <li><a href="{{route('blog.index')}}"><span>Blogs</span></a></li>
-                        <li><a href="{{route('subscription_plans.index')}}"><span>Subscription Plans</span></a></li>
                         <li><a href="{{route('contact_us')}}"><span>Contact Us</span></a></li>
                     </ul>
                     <div class="dz-social-icon">

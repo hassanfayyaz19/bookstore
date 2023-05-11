@@ -67,18 +67,18 @@
                         </ul>
                     </div>
                 </div>
-                {{--<div class="col-xl-2 col-lg-3 col-md-4 col-sm-4 col-4 wow fadeInUp" data-wow-delay="0.4s">
+                <div class="col-xl-2 col-lg-3 col-md-4 col-sm-4 col-4 wow fadeInUp" data-wow-delay="0.4s">
                     <div class="widget widget_services">
                         <h5 class="footer-title">Resources</h5>
                         <ul>
-                            <li><a href="services.html">Download</a></li>
-                            <li><a href="help-desk.html">Help Center</a></li>
-                            <li><a href="shop-cart.html">Shop Cart</a></li>
-                            <li><a href="shop-login.html">Login</a></li>
-                            <li><a href="about-us.html">Partner</a></li>
+                            <li><a href="#">Download</a></li>
+                            <li><a href="#">Help Center</a></li>
+                            <li><a href="#">Shop Cart</a></li>
+                            <li><a href="#">Login</a></li>
+                            <li><a href="#">Partner</a></li>
                         </ul>
                     </div>
-                </div>--}}
+                </div>
                 <div class="col-xl-3 col-lg-3 col-md-12 col-sm-12 wow fadeInUp" data-wow-delay="0.5s">
                     <div class="widget widget_getintuch">
                         <h5 class="footer-title">Get in Touch With Us</h5>
@@ -109,10 +109,10 @@
         <div class="container">
             <div class="row fb-inner">
                 <div class="col-lg-6 col-md-12 text-start">
-                    <p class="copyright-text">{{config('app.name')}} - © 2022 All Rights Reserved</p>
+                    <p class="copyright-text">{{config('app.name')}} - © 2023 All Rights Reserved</p>
                 </div>
                 <div class="col-lg-6 col-md-12 text-end">
-                    <p>Made with <span class="heart"></span> by <a href="#">{{$header_project_settings->company_name??''}}</a></p>
+                    <p>Made with <span class="heart"></span> by <a href="#">EBUKIE LLC</a></p>
                 </div>
             </div>
         </div>

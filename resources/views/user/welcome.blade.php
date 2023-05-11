@@ -271,93 +271,53 @@
     {{--    </section>--}}
     <!-- Special Offer End -->
 
-    <!-- Pricing Table -->
-    <section class="content-inner bg-light">
-        <div class="container">
-            <div class="section-head text-center">
-                <h2 class="title">{{$header_project_settings->details->our_price_headline??''}}</h2>
-                <p>{{$header_project_settings->details->our_price_description??''}}</p>
-            </div>
-            <div class="row pricingtable-wraper">
-                <div class="col-md-1">
-                </div>
-                @foreach($subscription_plans as $plan)
-                    <div class="col-lg-5 col-md-5 wow fadeInUp" data-wow-delay="0.1s">
-                        <div class="pricingtable-wrapper mt-0 style-1 m-b30">
-                            <div class="pricingtable-inner">
-                                <div class="pricingtable-title">
-                                    <h3 class="title">{{$plan->name}}</h3>
-                                </div>
-                                <div class="pricingtable-price">
-                                    <h2 class="pricingtable-bx">$ {{$plan->price}}
-                                        <small class="pricingtable-type">/ {{$plan->interval}}</small></h2>
-                                </div>
-                                <p class="text">Features</p>
-                                <ul class="pricingtable-features">.
-                                    @foreach($plan->features as $feature)
-                                        <li>{{$feature}}</li>
-                                    @endforeach
-                                </ul>
-                                <div class="pricingtable-footer">
-                                    <a href="{{route('subscription_plan.show',['subscription_plan'=>$plan->slug])}}"
-                                       class="btn btn-primary btnhover3">Start Now
-                                        <i class="fa fa-angle-right m-l10"></i></a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                @endforeach
-                <div class="col-md-1">
-                </div>
-            </div>
-        </div>
-    </section>
 
-    <!-- Feature Box -->
+
+   <!-- Feature Box -->
     <section class="content-inner">
         <div class="container">
             <div class="row sp15">
-                <div class="col-lg-3 col-md-6 col-sm-6 col-6 wow fadeInUp" data-wow-delay="0.1s">
+                <div class="col-lg-3 col-md-6 col-sm-6 col-6">
                     <div class="icon-bx-wraper style-2 m-b30 text-center">
                         <div class="icon-bx-lg">
                             <i class="fa-solid fa-users icon-cell"></i>
                         </div>
                         <div class="icon-content">
-                            <h2 class="dz-title counter m-b0">125,663</h2>
+                            <h2 class="dz-title counter m-b0">2,563</h2>
                             <p class="font-20">Happy Customers</p>
                         </div>
                     </div>
                 </div>
-                <div class=" col-lg-3 col-md-6 col-sm-6 col-6 wow fadeInUp" data-wow-delay="0.2s">
+                <div class=" col-lg-3 col-md-6 col-sm-6 col-6">
                     <div class="icon-bx-wraper style-2 m-b30 text-center">
                         <div class="icon-bx-lg">
                             <i class="fa-solid fa-book icon-cell"></i>
                         </div>
                         <div class="icon-content">
-                            <h2 class="dz-title counter m-b0">50,672</h2>
+                            <h2 class="dz-title counter m-b0">65</h2>
                             <p class="font-20">Book Collections</p>
                         </div>
                     </div>
                 </div>
-                <div class="col-lg-3 col-md-6 col-sm-6 col-6 wow fadeInUp" data-wow-delay="0.3s">
+                <div class="col-lg-3 col-md-6 col-sm-6 col-6">
                     <div class="icon-bx-wraper style-2 m-b30 text-center">
                         <div class="icon-bx-lg">
                             <i class="fa-solid fa-store icon-cell"></i>
                         </div>
                         <div class="icon-content">
-                            <h2 class="dz-title counter m-b0">1,562</h2>
-                            <p class="font-20">Our Stores</p>
+                            <h2 class="dz-title counter m-b0">9</h2>
+                            <p class="font-20">Categories</p>
                         </div>
                     </div>
                 </div>
-                <div class="col-lg-3 col-md-6 col-sm-6 col-6 wow fadeInUp" data-wow-delay="0.4s">
+                <div class="col-lg-3 col-md-6 col-sm-6 col-6">
                     <div class="icon-bx-wraper style-2 m-b30 text-center">
                         <div class="icon-bx-lg">
                             <i class="fa-solid fa-leaf icon-cell"></i>
                         </div>
                         <div class="icon-content">
-                            <h2 class="dz-title counter m-b0">457</h2>
-                            <p class="font-20">Famous Writers</p>
+                            <h2 class="dz-title counter m-b0">120</h2>
+                            <p class="font-20">Pro Writers</p>
                         </div>
                     </div>
                 </div>

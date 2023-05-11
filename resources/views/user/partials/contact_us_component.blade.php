@@ -19,16 +19,17 @@
                         <div class="exp-bx aos-item">
                             <div class="exp-head">
                                 <div class="counter-num">
-                                    <h2><span class="counter">50</span><small>+</small></h2>
+                                    <h2><span class="counter">65</span><small>+</small></h2>
                                 </div>
-                                <h6 class="title">Years of Experience</h6>
+                                <h6 class="title">Problem Solving Books</h6>
                             </div>
                             <div class="exp-info">
                                 <ul class="list-check primary">
-                                    <li>Comics & Graphics</li>
-                                    <li>Biography</li>
-                                    <li>Literary Collections</li>
-                                    <li>Children Fiction</li>
+                                    <li>Health</li>
+                                    <li>Fitness & Weight Loss</li>
+                                    <li>Self Development</li>
+                                    <li>Love & Relationship</li>
+                                    <li>And Lots More</li>
                                 </ul>
                             </div>
                         </div>
@@ -41,7 +42,7 @@
                         <h2 class="title">{{$header_project_settings->details->contact_us_headline ?? ''}}</h2>
                         <p>{{$header_project_settings->details->contact_us_description ?? ''}}</p>
                     </div>
-                    <a href="{{route('contact_us')}}" class="btn btn-primary shadow-primary btnhover">Contact Us</a>
+                    <a href="/book" class="btn btn-primary shadow-primary btnhover">Shop Now</a>
                 </div>
             </div>
         </div>
