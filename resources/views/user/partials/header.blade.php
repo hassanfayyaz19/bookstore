@@ -55,14 +55,14 @@
                     @else
                         <ul class="navbar-nav header-right">
                             <li class="nav-item">
-                                <a class="nav-link" href="javascript:">
+                                <a class="nav-link" href="{{route('favourite_book.index')}}">
                                     <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 0 24 24"
                                          width="24px" fill="#000000">
                                         <path d="M0 0h24v24H0V0z" fill="none"/>
                                         <path
                                             d="M16.5 3c-1.74 0-3.41.81-4.5 2.09C10.91 3.81 9.24 3 7.5 3 4.42 3 2 5.42 2 8.5c0 3.78 3.4 6.86 8.55 11.54L12 21.35l1.45-1.32C18.6 15.36 22 12.28 22 8.5 22 5.42 19.58 3 16.5 3zm-4.4 15.55l-.1.1-.1-.1C7.14 14.24 4 11.39 4 8.5 4 6.5 5.5 5 7.5 5c1.54 0 3.04.99 3.57 2.36h1.87C13.46 5.99 14.96 5 16.5 5c2 0 3.5 1.5 3.5 3.5 0 2.89-3.14 5.74-7.9 10.05z"/>
                                     </svg>
-                                    <span class="badge">21</span>
+                                    {{--                                    <span class="badge">21</span>--}}
                                 </a>
                             </li>
                             <li class="nav-item">
@@ -117,19 +117,7 @@
                                                 <span class="ms-2">My Books</span>
                                             </div>
                                         </a>
-                                        <a href="javascript:"
-                                           class="dropdown-item d-flex justify-content-between align-items-center ai-icon">
-                                            <div>
-                                                <svg xmlns="http://www.w3.org/2000/svg" height="20px"
-                                                     viewBox="0 0 24 24" width="20px" fill="#000000">
-                                                    <path d="M0 0h24v24H0V0z" fill="none"/>
-                                                    <path
-                                                        d="M15.55 13c.75 0 1.41-.41 1.75-1.03l3.58-6.49c.37-.66-.11-1.48-.87-1.48H5.21l-.94-2H1v2h2l3.6 7.59-1.35 2.44C4.52 15.37 5.48 17 7 17h12v-2H7l1.1-2h7.45zM6.16 6h12.15l-2.76 5H8.53L6.16 6zM7 18c-1.1 0-1.99.9-1.99 2S5.9 22 7 22s2-.9 2-2-.9-2-2-2zm10 0c-1.1 0-1.99.9-1.99 2s.89 2 1.99 2 2-.9 2-2-.9-2-2-2z"/>
-                                                </svg>
-                                                <span class="ms-2">My Order</span>
-                                            </div>
-                                        </a>
-                                        <a href="javascript:"
+                                        <a href="{{route('favourite_book.index')}}"
                                            class="dropdown-item d-flex justify-content-between align-items-center ai-icon">
                                             <div>
                                                 <svg xmlns="http://www.w3.org/2000/svg" height="20px"
@@ -138,7 +126,7 @@
                                                     <path
                                                         d="M16.5 3c-1.74 0-3.41.81-4.5 2.09C10.91 3.81 9.24 3 7.5 3 4.42 3 2 5.42 2 8.5c0 3.78 3.4 6.86 8.55 11.54L12 21.35l1.45-1.32C18.6 15.36 22 12.28 22 8.5 22 5.42 19.58 3 16.5 3zm-4.4 15.55l-.1.1-.1-.1C7.14 14.24 4 11.39 4 8.5 4 6.5 5.5 5 7.5 5c1.54 0 3.04.99 3.57 2.36h1.87C13.46 5.99 14.96 5 16.5 5c2 0 3.5 1.5 3.5 3.5 0 2.89-3.14 5.74-7.9 10.05z"/>
                                                 </svg>
-                                                <span class="ms-2">Wishlist</span>
+                                                <span class="ms-2">Favourite Books</span>
                                             </div>
                                         </a>
                                     </div>
@@ -161,16 +149,19 @@
 
             <!-- header search nav -->
             <div class="header-search-nav">
-                <form class="header-item-search">
+                <form class="header-item-search" action="{{route('search.index')}}" method="GET">
                     <div class="input-group search-input">
-                        <select class="default-select">
+                        <select class="default-select" name="category">
+                            <option value="" selected disabled>Category</option>
                             @foreach($header_categories as $category)
-                                <option value="{{$category->slug}}">{{$category->name}}</option>
+                                <option value="{{$category->slug}}"
+                                        @if(request()->get('category') !== null && request()->get('category')==$category->slug ) selected @endif
+                                >{{$category->name}}</option>
                             @endforeach
                         </select>
                         <input type="text" class="form-control" aria-label="Text input with dropdown button"
-                               placeholder="Search Books Here">
-                        <button class="btn" type="button"><i class="flaticon-loupe"></i></button>
+                               placeholder="Search Books Here" name="search" required>
+                        <button class="btn" type="submit"><i class="flaticon-loupe"></i></button>
                     </div>
                 </form>
             </div>

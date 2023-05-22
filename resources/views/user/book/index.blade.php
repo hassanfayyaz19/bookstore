@@ -190,6 +190,13 @@
                             </div>
                         </div>
                         <div class="row book-grid-row">
+                            @php
+                                $favourite=[];
+                                    if(auth()->guard('web')->check()){
+                                       $user= auth()->guard('web')->user();
+                                      $favourite= $user->favourite_books->pluck('pivot.book_id')->toArray();
+                                    }
+                            @endphp
                             @foreach($books as $book)
                                 <div class="col-book style-2">
                                     <div class="dz-shop-card style-1">
@@ -200,10 +207,15 @@
                                             </a>
                                         </div>
                                         <div class="bookmark-btn style-2">
-                                            <input class="form-check-input" type="checkbox" id="flexCheckDefault1">
-                                            <label class="form-check-label" for="flexCheckDefault1">
-                                                <i class="flaticon-heart"></i>
-                                            </label>
+                                            @if(auth()->guard('web')->check())
+
+                                                <input class="form-check-input favourite-book-btn" type="checkbox"
+                                                       id="favourite-{{$book->id}}" data-book-id="{{$book->id}}"
+                                                       @if(in_array($book->id,$favourite)) checked @endif>
+                                                <label class="form-check-label" for="favourite-{{$book->id}}">
+                                                    <i class="flaticon-heart"></i>
+                                                </label>
+                                            @endif
                                         </div>
                                         <div class="dz-content">
                                             <h5 class="title"><a
@@ -264,58 +276,58 @@
         </div>
 
 
-    <!-- Feature Box -->
-    <section class="content-inner">
-        <div class="container">
-            <div class="row sp15">
-                <div class="col-lg-3 col-md-6 col-sm-6 col-6">
-                    <div class="icon-bx-wraper style-2 m-b30 text-center">
-                        <div class="icon-bx-lg">
-                            <i class="fa-solid fa-users icon-cell"></i>
-                        </div>
-                        <div class="icon-content">
-                            <h2 class="dz-title counter m-b0">2,563</h2>
-                            <p class="font-20">Happy Customers</p>
-                        </div>
-                    </div>
-                </div>
-                <div class=" col-lg-3 col-md-6 col-sm-6 col-6">
-                    <div class="icon-bx-wraper style-2 m-b30 text-center">
-                        <div class="icon-bx-lg">
-                            <i class="fa-solid fa-book icon-cell"></i>
-                        </div>
-                        <div class="icon-content">
-                            <h2 class="dz-title counter m-b0">65</h2>
-                            <p class="font-20">Book Collections</p>
+        <!-- Feature Box -->
+        <section class="content-inner">
+            <div class="container">
+                <div class="row sp15">
+                    <div class="col-lg-3 col-md-6 col-sm-6 col-6">
+                        <div class="icon-bx-wraper style-2 m-b30 text-center">
+                            <div class="icon-bx-lg">
+                                <i class="fa-solid fa-users icon-cell"></i>
+                            </div>
+                            <div class="icon-content">
+                                <h2 class="dz-title counter m-b0">2,563</h2>
+                                <p class="font-20">Happy Customers</p>
+                            </div>
                         </div>
                     </div>
-                </div>
-                <div class="col-lg-3 col-md-6 col-sm-6 col-6">
-                    <div class="icon-bx-wraper style-2 m-b30 text-center">
-                        <div class="icon-bx-lg">
-                            <i class="fa-solid fa-store icon-cell"></i>
-                        </div>
-                        <div class="icon-content">
-                            <h2 class="dz-title counter m-b0">9</h2>
-                            <p class="font-20">Categories</p>
+                    <div class=" col-lg-3 col-md-6 col-sm-6 col-6">
+                        <div class="icon-bx-wraper style-2 m-b30 text-center">
+                            <div class="icon-bx-lg">
+                                <i class="fa-solid fa-book icon-cell"></i>
+                            </div>
+                            <div class="icon-content">
+                                <h2 class="dz-title counter m-b0">65</h2>
+                                <p class="font-20">Book Collections</p>
+                            </div>
                         </div>
                     </div>
-                </div>
-                <div class="col-lg-3 col-md-6 col-sm-6 col-6">
-                    <div class="icon-bx-wraper style-2 m-b30 text-center">
-                        <div class="icon-bx-lg">
-                            <i class="fa-solid fa-leaf icon-cell"></i>
+                    <div class="col-lg-3 col-md-6 col-sm-6 col-6">
+                        <div class="icon-bx-wraper style-2 m-b30 text-center">
+                            <div class="icon-bx-lg">
+                                <i class="fa-solid fa-store icon-cell"></i>
+                            </div>
+                            <div class="icon-content">
+                                <h2 class="dz-title counter m-b0">9</h2>
+                                <p class="font-20">Categories</p>
+                            </div>
                         </div>
-                        <div class="icon-content">
-                            <h2 class="dz-title counter m-b0">120</h2>
-                            <p class="font-20">Pro Writers</p>
+                    </div>
+                    <div class="col-lg-3 col-md-6 col-sm-6 col-6">
+                        <div class="icon-bx-wraper style-2 m-b30 text-center">
+                            <div class="icon-bx-lg">
+                                <i class="fa-solid fa-leaf icon-cell"></i>
+                            </div>
+                            <div class="icon-content">
+                                <h2 class="dz-title counter m-b0">120</h2>
+                                <p class="font-20">Pro Writers</p>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
-        </div>
-    </section>
-    <!-- Feature Box End -->
+        </section>
+        <!-- Feature Box End -->
 
         <!-- Newsletter -->
         <section class="py-5 newsletter-wrapper"
@@ -377,7 +389,19 @@
 <script src="{{asset('user/js/custom.js')}}"></script><!-- CUSTOM JS -->
 <script>
     $(document).ready(function () {
-
+        $('.favourite-book-btn').on('change', function () {
+            var book_id = $(this).data('book-id')
+            var status = !!$(this).is(':checked')
+            $.ajax({
+                type: 'POST',
+                url: "{{route('favourite_book.store')}}",
+                data: {
+                    _token: "{{csrf_token()}}",
+                    book_id: book_id,
+                    status: status,
+                },
+            })
+        })
     })
 </script>
 </body>

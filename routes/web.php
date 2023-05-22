@@ -70,7 +70,7 @@ Route::middleware(['auth:web', 'verified'])->group(function () {
 
     Route::get('subscribe/{subscription_plan:slug}', [\App\Http\Controllers\User\UserSubscriptionController::class, 'showSubscriptionPage'])->name('subscription_plan.show');
     Route::post('subscribe/{subscription_plan:slug}', [\App\Http\Controllers\User\UserSubscriptionController::class, 'saveUserSubscription'])->name('subscription_plan.save');
-
+    Route::resource('favourite_book', \App\Http\Controllers\User\FavouriteBookController::class);
 });
 
 Route::get('/about-us', function () {
@@ -97,6 +97,7 @@ Route::resource('book', \App\Http\Controllers\User\BookController::class);
 Route::resource('contact_us', \App\Http\Controllers\User\ContactUsController::class);
 Route::resource('blog', \App\Http\Controllers\User\BlogController::class);
 Route::resource('subscription_plans', \App\Http\Controllers\User\SubscriptionPlanController::class);
+Route::resource('search', \App\Http\Controllers\User\SearchController::class);
 
 
 Route::get('cart', [\App\Http\Controllers\User\BookController::class, 'showCartPage'])->name('book.cart');
